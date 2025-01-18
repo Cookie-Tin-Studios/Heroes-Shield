@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmrllruow0jvo"]
+
+[ext_resource type="Texture2D" uid="uid://dd7txxotnxl2a" path="res://assets/sprites/bad background.jpeg" id="1_11egs"]
+
+[node name="Sprite2D" type="Sprite2D"]
+texture_repeat = 3
+position = Vector2(-7, 2)
+scale = Vector2(5, 5)
+texture = ExtResource("1_11egs")

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bumwv0mx5w6aq"]
+
+[ext_resource type="Texture2D" uid="uid://dtumenqgkxig" path="res://assets/sprites/bad shield.webp" id="1_1ilqa"]
+[ext_resource type="Script" path="res://assets/scripts/shield/movement.gd" id="2_vfa65"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3sjvr"]
+radius = 115.0
+
+[node name="Shield" type="CharacterBody2D"]
+z_index = 10
+position = Vector2(6, 0)
+script = ExtResource("2_vfa65")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2, -1)
+scale = Vector2(0.313477, 0.300293)
+texture = ExtResource("1_1ilqa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5, -2)
+shape = SubResource("CircleShape2D_3sjvr")
