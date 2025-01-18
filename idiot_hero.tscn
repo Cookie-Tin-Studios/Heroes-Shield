@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://bq4i1iy8l587n"]
+
+[ext_resource type="Texture2D" uid="uid://dlnhv62cgw1sr" path="res://assets/sprites/placeholder_idiot_walk_1.png" id="1_8yu7l"]
+[ext_resource type="Script" path="res://idiot.gd" id="1_cdcv3"]
+[ext_resource type="Texture2D" uid="uid://hearydvci51k" path="res://assets/sprites/placeholder_idiot_walk_2.png" id="2_w3scq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ar3yn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_8yu7l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_w3scq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_icwmm"]
+radius = 16.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+position = Vector2(0, -26)
+script = ExtResource("1_cdcv3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 5)
+scale = Vector2(0.257461, 0.229038)
+sprite_frames = SubResource("SpriteFrames_ar3yn")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.889135
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_icwmm")
