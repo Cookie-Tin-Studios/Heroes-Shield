@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bq4i1iy8l587n"]
+[gd_scene load_steps=6 format=3 uid="uid://dk41cisdtdonq"]
 
 [ext_resource type="Texture2D" uid="uid://dlnhv62cgw1sr" path="res://assets/sprites/placeholder_idiot_walk_1.png" id="1_8yu7l"]
-[ext_resource type="Script" path="res://idiot.gd" id="1_cdcv3"]
+[ext_resource type="Script" path="res://assets/scripts/idiot/idiot.gd" id="1_cdcv3"]
 [ext_resource type="Texture2D" uid="uid://hearydvci51k" path="res://assets/sprites/placeholder_idiot_walk_2.png" id="2_w3scq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ar3yn"]
@@ -21,7 +21,8 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_icwmm"]
 radius = 16.0
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="Idiot_hero" type="CharacterBody2D"]
+z_index = 10
 position = Vector2(0, -26)
 script = ExtResource("1_cdcv3")
 
