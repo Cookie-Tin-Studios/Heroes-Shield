@@ -1,57 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://ca3rytbyuxw8h"]
+[gd_scene load_steps=2 format=3 uid="uid://ca3rytbyuxw8h"]
 
-[ext_resource type="Script" path="res://assets/scripts/mobs/mob_base/mob_base.gd" id="1_cnjmn"]
-[ext_resource type="Texture2D" uid="uid://baod2sjds1ecc" path="res://assets/sprites/mobs/simplemob/walk.png" id="2_eut0y"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gvxqa"]
-atlas = ExtResource("2_eut0y")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jhi35"]
-atlas = ExtResource("2_eut0y")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fxn25"]
-atlas = ExtResource("2_eut0y")
-region = Rect2(0, 128, 128, 128)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_fqqsg"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gvxqa")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jhi35")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fxn25")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 3.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"walk left",
-"speed": 5.0
-}]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3ej1i"]
-radius = 38.0
-height = 120.0
+[ext_resource type="Script" path="res://scripts/mobs/mob_base/mob_base.gd" id="1_cnjmn"]
 
 [node name="Mob_base" type="RigidBody2D"]
 gravity_scale = 0.0
 script = ExtResource("1_cnjmn")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_fqqsg")
-animation = &"idle"
-frame_progress = 0.171363
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 3)
-shape = SubResource("CapsuleShape2D_3ej1i")
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
