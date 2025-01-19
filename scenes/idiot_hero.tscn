@@ -28,7 +28,6 @@ motion_mode = 1
 script = ExtResource("1_cdcv3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, 5)
 scale = Vector2(1.122, 1)
 sprite_frames = SubResource("SpriteFrames_ar3yn")
 animation = &"idle"
@@ -36,5 +35,4 @@ autoplay = "idle"
 frame_progress = 0.889135
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_74d3d")
