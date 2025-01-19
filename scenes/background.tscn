@@ -1,9 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmrllruow0jvo"]
+[gd_scene load_steps=2 format=3 uid="uid://cn3lii7exa78k"]
 
-[ext_resource type="Texture2D" uid="uid://dd7txxotnxl2a" path="res://assets/sprites/bad background.jpeg" id="1_11egs"]
+[ext_resource type="Texture2D" uid="uid://dd7txxotnxl2a" path="res://assets/sprites/bad background.jpeg" id="1_42gn5"]
 
-[node name="Sprite2D" type="Sprite2D"]
-texture_repeat = 3
-position = Vector2(-7, 2)
-scale = Vector2(5, 5)
-texture = ExtResource("1_11egs")
+[node name="Background" type="ParallaxBackground"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+position = Vector2(1, 0)
+scale = Vector2(3, 3)
+motion_mirroring = Vector2(367, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
+texture_repeat = 2
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxLayer/Sprite2D"]
+offset_left = -0.666667
+offset_right = 366.333
+offset_bottom = 137.0
+texture = ExtResource("1_42gn5")
