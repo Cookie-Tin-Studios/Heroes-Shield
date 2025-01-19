@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bumwv0mx5w6aq"]
+[gd_scene load_steps=5 format=3 uid="uid://bumwv0mx5w6aq"]
 
 [ext_resource type="Texture2D" uid="uid://dtumenqgkxig" path="res://assets/sprites/bad shield.webp" id="1_1ilqa"]
 [ext_resource type="Script" path="res://scripts/shield/shield_health.gd" id="1_xflaf"]
-[ext_resource type="Script" path="res://scripts/shield/collision.gd" id="3_fju2c"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3sjvr"]
 radius = 115.0
@@ -22,7 +21,6 @@ texture = ExtResource("1_1ilqa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_3sjvr")
-script = ExtResource("3_fju2c")
 
 [node name="Area2D" type="Area2D" parent="."]
 
