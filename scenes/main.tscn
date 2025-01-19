@@ -1,5 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://i70ovs7ns5pg"]
 
+[ext_resource type="PackedScene" uid="uid://dceq5uql5ktf4" path="res://scenes/menu/pause_menu.tscn" id="1_5op0d"]
 [ext_resource type="PackedScene" uid="uid://dk41cisdtdonq" path="res://scenes/idiot_hero.tscn" id="2_jn0l8"]
 [ext_resource type="PackedScene" uid="uid://bumwv0mx5w6aq" path="res://scenes/shield.tscn" id="2_w3671"]
 [ext_resource type="PackedScene" uid="uid://cn3lii7exa78k" path="res://scenes/background.tscn" id="3_3s816"]
@@ -21,6 +22,8 @@ func _process(delta: float) -> void:
 
 [node name="Node2D" type="Node2D"]
 script = SubResource("GDScript_81rl6")
+
+[node name="pause_menu" parent="." instance=ExtResource("1_5op0d")]
 
 [node name="Idiot_hero" parent="." instance=ExtResource("2_jn0l8")]
 z_as_relative = false

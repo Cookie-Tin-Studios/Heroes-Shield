@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://ceebcmcnelnx4"]
+[gd_scene load_steps=5 format=3 uid="uid://ceebcmcnelnx4"]
 
 [ext_resource type="Script" path="res://scripts/menu/main_menu.gd" id="1_j6ytl"]
+[ext_resource type="Texture2D" uid="uid://cl6ehwb6fxrs7" path="res://assets/sprites/menu/shield.PNG" id="2_oec8k"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lffdr"]
 font_size = 48
@@ -24,6 +25,7 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
 
 [node name="GameTitle" type="Label" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -54,19 +56,15 @@ text = "Exit"
 layout_mode = 2
 text = "ver 0.0.1"
 
-[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
+[node name="spacer" type="CenterContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="CenterContainer2" type="CenterContainer" parent="HBoxContainer"]
+[node name="shield" type="TextureRect" parent="HBoxContainer"]
 layout_mode = 2
-
-[node name="Right Text" type="Label" parent="HBoxContainer/CenterContainer2"]
-layout_mode = 2
-text = "Some Image here...
-
-Even more image here
-"
+texture = ExtResource("2_oec8k")
+expand_mode = 3
+stretch_mode = 5
 
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/VBoxContainer/New Game" to="." method="_on_new_game_pressed"]
