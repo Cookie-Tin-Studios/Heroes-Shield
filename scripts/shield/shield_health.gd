@@ -1,4 +1,25 @@
-extends CharacterBody2D
+extends CharacterBody2D 
+
+# Health variable
+@export var max_health: int = 3
+var current_health: int
+
+func _ready():
+	# Initialize health
+	current_health = max_health
+
+# Function to take damage
+func take_damage(amount: int):
+	current_health -= amount
+
+	if current_health <= 0:
+		die()
+
+# Function called when health reaches 0
+func die():
+	print("Character has died!")
+	queue_free()  # Remove the character from the scene
+
 
 # Speed of movement
 @export var speed: float = 400
@@ -35,3 +56,8 @@ func restrict_to_camera() -> void:
 	# Clamp the character's position within the camera's visible area
 	position.x = clamp(position.x, camera_rect.position.x, camera_rect.position.x + camera_rect.size.x)
 	position.y = clamp(position.y, camera_rect.position.y, camera_rect.position.y + camera_rect.size.y)
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.is_in_group("projectiles"):  # Check if the body is in the 'projectiles' group
+		take_damage(1)  # Assume the projectile has a `damage` property
+		body.queue_free()  # Remove the projectile after collision

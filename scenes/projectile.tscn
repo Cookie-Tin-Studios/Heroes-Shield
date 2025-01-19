@@ -25,7 +25,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_3b7u6"]
 radius = 50.04
 
-[node name="Projectile" type="RigidBody2D"]
+[node name="Projectile" type="RigidBody2D" groups=["projectiles"]]
 gravity_scale = 0.0
 contact_monitor = true
 max_contacts_reported = 1
