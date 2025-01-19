@@ -28,7 +28,7 @@ script = ExtResource("1_cdcv3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 5)
-scale = Vector2(0.257461, 0.229038)
+scale = Vector2(1.122, 1)
 sprite_frames = SubResource("SpriteFrames_ar3yn")
 animation = &"idle"
 autoplay = "idle"
