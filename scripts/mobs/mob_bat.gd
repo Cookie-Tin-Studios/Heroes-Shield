@@ -48,3 +48,19 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	# Move the NPC to the right at 'speed' pixels per second
 	position.x += movement_speed * delta
+
+# Collision detection logic.
+# Only handles collisions with the idiot. Will need to be updated later to handle sheild collision.
+func _on_body_entered(body: Node) -> void:
+	if body is CharacterBody2D:
+		# Both the sheild and the idiot are CharachterBody2D.
+		# This makes it so the game over only happens for idiot hits.
+		if body.name == "Idiot_hero":
+			# Game over. Just goes to the main menu for now.
+			get_tree().change_scene_to_file("res://scenes/menu/main_menu.tscn")
+			# queue_free would remove the projectile if needed.
+			# I don't THINK we need this, since a hit is instant death. But if we
+			# decided against that later maybe with a powerup or something, it's here lol.
+			#queue_free()
+
+	pass # Replace with function body.
