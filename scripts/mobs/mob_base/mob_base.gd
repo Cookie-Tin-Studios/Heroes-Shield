@@ -16,11 +16,11 @@ func update_health_bar():
 		$CanvasLayer/TextureProgressBar.value = health
 		$CanvasLayer.visible = health < mob_health
 	else:
-		debug_print("Error: Health bar nodes are missing!")
+		print_debug("Error: Health bar nodes are missing!")
 
 func die():
 	# Logic for when the mob dies
-	debug_print("Mob has died!")  # Debug message for testing
+	print_debug("Mob has died!")  # Debug message for testing
 	if $CanvasLayer:
 		$CanvasLayer.queue_free()  # Optional: Remove the health bar
 	queue_free()  # Remove the mob from the scene
