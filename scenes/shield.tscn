@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bumwv0mx5w6aq"]
 
 [ext_resource type="Texture2D" uid="uid://dtumenqgkxig" path="res://assets/sprites/bad shield.webp" id="1_1ilqa"]
-[ext_resource type="Script" path="res://assets/scripts/shield/movement.gd" id="2_vfa65"]
+[ext_resource type="Script" path="res://scripts/shield/movement.gd" id="2_vfa65"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3sjvr"]
 radius = 115.0
