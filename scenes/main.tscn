@@ -1,10 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://i70ovs7ns5pg"]
 
-[ext_resource type="PackedScene" uid="uid://dceq5uql5ktf4" path="res://scenes/menu/pause_menu.tscn" id="1_5op0d"]
+[ext_resource type="PackedScene" path="res://scenes/menu/pause_menu.tscn" id="1_5op0d"]
 [ext_resource type="PackedScene" uid="uid://dk41cisdtdonq" path="res://scenes/idiot_hero.tscn" id="2_jn0l8"]
 [ext_resource type="PackedScene" uid="uid://bumwv0mx5w6aq" path="res://scenes/shield.tscn" id="2_w3671"]
 [ext_resource type="PackedScene" uid="uid://cn3lii7exa78k" path="res://scenes/background.tscn" id="3_3s816"]
-[ext_resource type="PackedScene" uid="uid://cagf0iwwh4c62" path="res://scenes/mob_bat.tscn" id="4_q6ttw"]
 
 [sub_resource type="GDScript" id="GDScript_81rl6"]
 script/source = "extends Node2D
@@ -23,28 +22,26 @@ func _process(delta: float) -> void:
 [node name="Node2D" type="Node2D"]
 script = SubResource("GDScript_81rl6")
 
-[node name="pause_menu" parent="." instance=ExtResource("1_5op0d")]
+[node name="pause_canvas" type="CanvasLayer" parent="."]
+
+[node name="pause_menu" parent="pause_canvas" instance=ExtResource("1_5op0d")]
+visible = false
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(337, 344)
 
 [node name="Idiot_hero" parent="." instance=ExtResource("2_jn0l8")]
 z_as_relative = false
-position = Vector2(130, 639)
+position = Vector2(337, 344)
 
-[node name="Camera2D" type="Camera2D" parent="Idiot_hero"]
-position = Vector2(1021, 12)
-scale = Vector2(1, 8.72)
-zoom = Vector2(0.5, 0.5)
-
-[node name="Background" parent="Idiot_hero/Camera2D" instance=ExtResource("3_3s816")]
-scale = Vector2(10, 10)
-transform = Transform2D(10, 0, 0, 10, 0, 0)
+[node name="CameraRemoteTransform" type="RemoteTransform2D" parent="Idiot_hero"]
+remote_path = NodePath("../../Camera2D")
 
 [node name="Shield" parent="." instance=ExtResource("2_w3671")]
-position = Vector2(629, 578)
+position = Vector2(1031, 363)
 
-[node name="Mob_bat" parent="." instance=ExtResource("4_q6ttw")]
-position = Vector2(1640, 270)
-shooting_speed = null
-health_bar_offset = null
-health_bar_follow_collision = null
-max_health = null
-movement_speed = null
+[node name="Background" parent="." instance=ExtResource("3_3s816")]
+scale = Vector2(5, 5)
+transform = Transform2D(5, 0, 0, 5, 0, 0)
