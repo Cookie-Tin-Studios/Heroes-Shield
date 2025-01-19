@@ -1,35 +1,26 @@
 extends RigidBody2D
 
-
+@onready var global_tick = get_node("/root/Tick")
 @export var projectile_scene: PackedScene
 @export var shooting_speed: float = 1000.0
 @export var target: CharacterBody2D
 
 func shoot_projectile() -> void:
+	# If there is no target, don't shoot anything.
 	if not target:
-		return  # No target assigned
-
-	# 1. Instantiate the projectile
+		return
+	# If there is a target, proceed with the rest of the function.
+	
+	# Take the Projectile scene and bring it into 
 	var projectile = projectile_scene.instantiate()
 
-	# 2. Position the projectile at the shooter's position (or a "muzzle" offset)
-	#    If you have a specific node like a "Muzzle" Node2D, use muzzle.global_position instead.
+	# Give the projectile the inital 
 	projectile.global_position = global_position  
 
 	# 3. Calculate the direction toward the target
 	var direction = (target.global_position - global_position).normalized()
 
 	# 4. Assign velocity or force depending on projectile type
-
-	## If the projectile is an Area2D (moved by code):
-	#if projectile is Area2D:
-		## We'll store or set a velocity variable and move it in the projectile's _physics_process.
-		## e.g., projectile.velocity = direction * shooting_speed 
-		## This depends on how you code the projectile scene.  
-#
-		## Alternatively, you can add a script to the projectile for immediate impulse:
-		#if projectile.has_method("init_projectile"):
-			#projectile.init_projectile(direction * shooting_speed)
 	
 	# If the projectile is a RigidBody2D:
 	if projectile is RigidBody2D:
@@ -40,11 +31,13 @@ func shoot_projectile() -> void:
 
 
 
-
+func _on_tick():
+	shoot_projectile()
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	global_tick.timeout.connect(_on_tick)
 	pass # Replace with function body.
 
 
@@ -52,8 +45,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	# Example: shoot a projectile every second
 	# (simple logic, you could use a Timer node, or more advanced AI conditions)
-	shoot_projectile()
-	#pass
+	pass
 	
 @export var movement_speed: float = -100.0
 

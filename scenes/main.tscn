@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dk41cisdtdonq" path="res://scenes/idiot_hero.tscn" id="2_jn0l8"]
 [ext_resource type="PackedScene" uid="uid://bumwv0mx5w6aq" path="res://scenes/shield.tscn" id="2_w3671"]
 [ext_resource type="PackedScene" uid="uid://cn3lii7exa78k" path="res://scenes/background.tscn" id="3_3s816"]
-[ext_resource type="PackedScene" uid="uid://ck3yn0l4vl7hd" path="res://scenes/mob_bat.tscn" id="4_q6ttw"]
+[ext_resource type="PackedScene" path="res://scenes/mob_bat.tscn" id="4_q6ttw"]
 
 [sub_resource type="GDScript" id="GDScript_81rl6"]
 script/source = "extends Node2D
