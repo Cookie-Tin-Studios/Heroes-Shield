@@ -7,6 +7,8 @@ var current_health: int
 func _ready():
 	# Initialize health
 	current_health = max_health
+	$ParryArea.body_entered.connect(_on_parry_area_body_entered) # parrymech
+	$ParryArea.body_exited.connect(_on_parry_area_body_exited) # parrymech
 
 # Function to take damage
 func take_damage(amount: int):
@@ -43,6 +45,10 @@ func _process(delta: float) -> void:
 
 	# Restrict the character to stay within the camera's visible bounds
 	restrict_to_camera()
+	
+	# Parry attempt parry if input pressed. parrymech
+	if Input.is_action_just_pressed("parry"):
+		attempt_parry()
 
 func restrict_to_camera() -> void:
 	# Get the active Camera2D
@@ -61,3 +67,36 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("projectiles"):  # Check if the body is in the 'projectiles' group
 		take_damage(1)  # Assume the projectile has a `damage` property
 		body.queue_free()  # Remove the projectile after collision
+
+
+
+########### FOR PARRYING MECHANICS ###########
+# When we need to move this into it's own script, search for parrymech in this file to find all
+# the shit you need to make this work.
+var projectiles_in_range: Array[RigidBody2D] = []
+
+# Add to array if projectile in range.
+func _on_parry_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("projectiles") and body is RigidBody2D:
+		projectiles_in_range.append(body)
+
+# Remove from array after leaving range.
+func _on_parry_area_body_exited(body: Node2D) -> void:
+	if body in projectiles_in_range:
+		projectiles_in_range.erase(body)
+
+func attempt_parry() -> void:
+	if projectiles_in_range.size() == 0:
+		# No projectile in range, don't bother parrying.
+		return
+
+	# Reflect every projectile in range.
+	for projectile in projectiles_in_range:
+		deflect_projectile(projectile)
+		
+func deflect_projectile(projectile: RigidBody2D) -> void:
+	# Just reverse velocity for now. 
+	# Eventually, we should make it such that parried projectiles fly straight away from the center of the sheild.
+	projectile.linear_velocity = -projectile.linear_velocity
+	# Make it fast as fuck, for the fans. 
+	projectile.linear_velocity *= 10  

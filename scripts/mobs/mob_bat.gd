@@ -36,7 +36,6 @@ func _on_tick():
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	global_tick.timeout.connect(_on_tick)
-	pass # Replace with function body.
 
 # Not required, we're using physics process instead.
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -62,5 +61,3 @@ func _on_body_entered(body: Node) -> void:
 			# I don't THINK we need this, since a hit is instant death. But if we
 			# decided against that later maybe with a powerup or something, it's here lol.
 			#queue_free()
-
-	pass # Replace with function body.

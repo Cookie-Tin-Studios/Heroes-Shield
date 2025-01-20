@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bumwv0mx5w6aq"]
+[gd_scene load_steps=6 format=3 uid="uid://bumwv0mx5w6aq"]
 
 [ext_resource type="Texture2D" uid="uid://dtumenqgkxig" path="res://assets/sprites/bad shield.webp" id="1_1ilqa"]
 [ext_resource type="Script" path="res://scripts/shield/shield_health.gd" id="1_xflaf"]
@@ -6,26 +6,33 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_3sjvr"]
 radius = 115.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_4icvd"]
+radius = 400.005
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_ey6sh"]
 radius = 141.089
 
 [node name="Shield" type="CharacterBody2D"]
 z_index = 10
-position = Vector2(6, 0)
 script = ExtResource("1_xflaf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-2, -1)
 scale = Vector2(0.313477, 0.300293)
 texture = ExtResource("1_1ilqa")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Physical CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_3sjvr")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="ParryArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-4, 3)
+[node name="ParryZoneCollision" type="CollisionShape2D" parent="ParryArea"]
+shape = SubResource("CircleShape2D_4icvd")
+
+[node name="DamageArea" type="Area2D" parent="."]
+
+[node name="DamageZoneCollision" type="CollisionShape2D" parent="DamageArea"]
 shape = SubResource("CircleShape2D_ey6sh")
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="ParryArea" to="." method="_on_parry_area_body_entered"]
+[connection signal="body_exited" from="ParryArea" to="." method="_on_parry_area_body_exited"]
+[connection signal="body_entered" from="DamageArea" to="." method="_on_area_2d_body_entered"]
