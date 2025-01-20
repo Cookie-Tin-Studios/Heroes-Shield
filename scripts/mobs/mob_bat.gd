@@ -1,63 +1,62 @@
-extends RigidBody2D
+extends "res://scripts/mobs/mob_base.gd"
 
-@onready var global_tick = get_node("/root/Tick")
+@onready var global_tick = get_node("/root/Tick") 
+# This node emits a timeout signal at regular intervals, used for shooting projectiles.
+
 @export var projectile_scene: PackedScene
+# The PackedScene reference for the projectile (e.g., a bullet or energy bolt).
+
 @export var shooting_speed: float = 500.0
+# Controls how fast the projectile moves when fired.
+
 @export var target: CharacterBody2D
+# The intended target (e.g., the player's CharacterBody2D). If not assigned, the bat tries to find "Idiot_hero" automatically.
+
+@export var health_bar_offset: Vector2 = Vector2(0, -20)
+# Determines how far above (or below) the collision shape the health bar should appear.
+
+@export var health_bar_follow_collision: bool = true
+# If true, the health bar repositions itself to follow the collision shape each frame.
+
+func _ready() -> void:
+	super._ready()
+
+	# Connect the global tick signal so the bat shoots projectiles periodically.
+	global_tick.timeout.connect(_on_tick)
+
+func _on_tick() -> void:
+	# Trigger a projectile shot every time the global tick fires.
+	shoot_projectile()
 
 func shoot_projectile() -> void:
-	# If there is no target, don't shoot anything.
+	# If no target is explicitly assigned, attempt to find a node named "Idiot_hero" in the current scene.
 	if not target:
-		return
-	# If there is a target, proceed with the rest of the function.
-	
-	# Take the Projectile scene and bring it into 
-	var projectile = projectile_scene.instantiate()
+		var idiot = get_tree().get_current_scene().get_node("Idiot_hero")
+		if idiot and idiot is CharacterBody2D:
+			target = idiot
+		else:
+			print("No valid 'Idiot_hero' node found in the scene.")
 
-	# Give the projectile the inital position (same as bat)
+	# Create a new instance of the projectile scene.
+	var projectile = projectile_scene.instantiate()
+	# Position the projectile where the bat currently is.
 	projectile.global_position = global_position
 
-	# Make projectile target NPC Hero
+	# Determine the direction from the bat to the target.
 	var direction = (target.global_position - global_position).normalized()
 
-	
-	# Assign velocity to projectile
+	# If the projectile is a RigidBody2D, give it a velocity in the calculated direction.
 	if projectile is RigidBody2D:
 		projectile.linear_velocity = direction * shooting_speed
 
-	# Add projectile to scene.
+	# Add the new projectile to the active scene so it appears in the game.
 	get_tree().get_current_scene().add_child(projectile)
-
-
-
-func _on_tick():
-	shoot_projectile()
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	global_tick.timeout.connect(_on_tick)
-
-# Not required, we're using physics process instead.
-## Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-	#pass
-	
-@export var movement_speed: float = -100.0
+	print("Projectile shot at target!")
 
 func _physics_process(delta: float) -> void:
-	# Move the NPC to the right at 'speed' pixels per second
-	position.x += movement_speed * delta
+	super._physics_process(delta)
 
-# Collision detection logic.
-# Only handles collisions with the idiot. Will need to be updated later to handle sheild collision.
-func _on_body_entered(body: Node) -> void:
-	if body is CharacterBody2D:
-		# Both the sheild and the idiot are CharachterBody2D.
-		# This makes it so the game over only happens for idiot hits.
-		if body.name == "Idiot_hero":
-			# Game over. Just goes to the main menu for now.
-			get_tree().change_scene_to_file("res://scenes/menu/game_over.tscn")
-			# queue_free would remove the projectile if needed.
-			# I don't THINK we need this, since a hit is instant death. But if we
-			# decided against that later maybe with a powerup or something, it's here lol.
-			#queue_free()
+	# If enabled, place the health bar above the collision shape by the specified offset.
+	if health_bar_follow_collision and $CollisionShape2D and $Node2D:
+		var collision_pos = $CollisionShape2D.position
+		$Node2D.position = collision_pos + health_bar_offset
