@@ -38,5 +38,10 @@ transform = Transform2D(10, 0, 0, 10, 0, 0)
 [node name="Shield" parent="." instance=ExtResource("2_w3671")]
 position = Vector2(629, 578)
 
-[node name="Mob_base" parent="." instance=ExtResource("4_q6ttw")]
-position = Vector2(1925, 308)
+[node name="Mob_bat" parent="." instance=ExtResource("4_q6ttw")]
+position = Vector2(1640, 270)
+shooting_speed = null
+health_bar_offset = null
+health_bar_follow_collision = null
+max_health = null
+movement_speed = null
