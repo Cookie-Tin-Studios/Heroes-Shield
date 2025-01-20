@@ -56,7 +56,7 @@ func _on_body_entered(body: Node) -> void:
 		# This makes it so the game over only happens for idiot hits.
 		if body.name == "Idiot_hero":
 			# Game over. Just goes to the main menu for now.
-			get_tree().change_scene_to_file("res://scenes/menu/main_menu.tscn")
+			get_tree().change_scene_to_file("res://scenes/menu/game_over.tscn")
 			# queue_free would remove the projectile if needed.
 			# I don't THINK we need this, since a hit is instant death. But if we
 			# decided against that later maybe with a powerup or something, it's here lol.
