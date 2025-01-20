@@ -1,16 +1,10 @@
 extends "res://scripts/mobs/mob_base.gd"
 
-@onready var global_tick = get_node("/root/Tick") 
-# This node emits a timeout signal at regular intervals, used for shooting projectiles.
-
-@export var projectile_scene: PackedScene
-# The PackedScene reference for the projectile (e.g., a bullet or energy bolt).
-
-@export var shooting_speed: float = 500.0
-# Controls how fast the projectile moves when fired.
-
-@export var target: CharacterBody2D
-# The intended target (e.g., the player's CharacterBody2D). If not assigned, the bat tries to find "Idiot_hero" automatically.
+# When spawned, bring in global tick for timing shots.
+@onready var global_tick = get_node("/root/Tick")
+@export var projectile_scene: PackedScene	# The scene we're using for the projectile.
+@export var shooting_speed: float = 500.0	# The speed of the projectile.
+@export var target: CharacterBody2D			# The target, must be CharachterBody2D type.
 
 @export var health_bar_offset: Vector2 = Vector2(0, -20)
 # Determines how far above (or below) the collision shape the health bar should appear.
