@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dmxf6gcphgjg5"]
 
-[ext_resource type="Script" path="res://scripts/mobs/mob_bat.gd" id="1_d3cd1"]
+[ext_resource type="Script" path="res://scripts/projectile.gd" id="1_wf0ix"]
 [ext_resource type="Texture2D" uid="uid://dkft7ngvvftf7" path="res://assets/sprites/projectile_1.png" id="2_tkcaq"]
 [ext_resource type="Texture2D" uid="uid://bfy4iyh5k85tm" path="res://assets/sprites/projectile_2.png" id="3_t46ee"]
 [ext_resource type="Texture2D" uid="uid://c4nm7vmrf5dbs" path="res://assets/sprites/projectile_3.png" id="4_21qjv"]
@@ -29,7 +29,7 @@ radius = 50.04
 gravity_scale = 0.0
 contact_monitor = true
 max_contacts_reported = 1
-script = ExtResource("1_d3cd1")
+script = ExtResource("1_wf0ix")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_1hryt")

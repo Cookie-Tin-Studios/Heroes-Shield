@@ -27,24 +27,24 @@ size = Vector2(204, 58)
 position = Vector2(-1, -37)
 script = ExtResource("1_5ymdd")
 projectile_scene = ExtResource("2_3rjrx")
-shooting_speed = null
-health_bar_offset = null
-health_bar_follow_collision = null
-max_health = null
-movement_speed = null
+shooting_speed = 500.0
+health_bar_offset = Vector2(0, -20)
+health_bar_follow_collision = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
 position = Vector2(4, 38.5)
 sprite_frames = SubResource("SpriteFrames_lquxh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+light_mask = 4
+visibility_layer = 4
 position = Vector2(0, 38.5)
 shape = SubResource("RectangleShape2D_7xpap")
 
 [node name="TextureProgressBar" parent="Node2D" index="0"]
 offset_left = -97.0
-offset_top = -10.0
+offset_top = -19.0
 offset_right = 103.0
-offset_bottom = 20.0
+offset_bottom = 11.0
 value = 100.0
 metadata/_edit_use_anchors_ = true
