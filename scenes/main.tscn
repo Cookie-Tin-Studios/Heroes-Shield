@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dk41cisdtdonq" path="res://scenes/idiot_hero.tscn" id="2_jn0l8"]
 [ext_resource type="PackedScene" uid="uid://bumwv0mx5w6aq" path="res://scenes/shield.tscn" id="2_w3671"]
 [ext_resource type="PackedScene" uid="uid://cn3lii7exa78k" path="res://scenes/background.tscn" id="3_3s816"]
-[ext_resource type="PackedScene" path="res://scenes/mob_bat.tscn" id="4_q6ttw"]
+[ext_resource type="PackedScene" uid="uid://cagf0iwwh4c62" path="res://scenes/mob_bat.tscn" id="4_q6ttw"]
 
 [sub_resource type="GDScript" id="GDScript_81rl6"]
 script/source = "extends Node2D
@@ -38,6 +38,5 @@ transform = Transform2D(10, 0, 0, 10, 0, 0)
 [node name="Shield" parent="." instance=ExtResource("2_w3671")]
 position = Vector2(629, 578)
 
-[node name="MobBat" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_q6ttw")]
-position = Vector2(2013, 637)
-target = NodePath("../Idiot_hero")
+[node name="Mob_base" parent="." instance=ExtResource("4_q6ttw")]
+position = Vector2(1925, 308)
