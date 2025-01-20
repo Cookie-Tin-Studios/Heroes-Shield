@@ -1,18 +1,25 @@
 extends CharacterBody2D 
 
 # Health variable
-@export var max_health: int = 3
-var current_health: int
+@export var max_health: int = 3  # Default max health
+var current_health: int = max_health
+
+@onready var health_bar = $HealthBar
 
 func _ready():
 	# Initialize health
 	current_health = max_health
 	$ParryArea.body_entered.connect(_on_parry_area_body_entered) # parrymech
 	$ParryArea.body_exited.connect(_on_parry_area_body_exited) # parrymech
+	call_deferred("create_health_sections")
+
+func update_health_bar():
+	health_bar.update_health(current_health)
 
 # Function to take damage
 func take_damage(amount: int):
 	current_health -= amount
+	update_health_bar()
 
 	if current_health <= 0:
 		die()
@@ -26,7 +33,7 @@ func die():
 # Speed of movement
 @export var speed: float = 400
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var direction = Vector2.ZERO
 
 	# Up and Down movement

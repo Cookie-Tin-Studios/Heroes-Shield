@@ -1,7 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bumwv0mx5w6aq"]
+[gd_scene load_steps=8 format=3 uid="uid://bumwv0mx5w6aq"]
 
 [ext_resource type="Texture2D" uid="uid://dtumenqgkxig" path="res://assets/sprites/bad shield.webp" id="1_1ilqa"]
 [ext_resource type="Script" path="res://scripts/shield/shield_health.gd" id="1_xflaf"]
+[ext_resource type="Script" path="res://scripts/shield/health.gd" id="3_y2w1u"]
+[ext_resource type="Texture2D" uid="uid://5niwyw3ix51d" path="res://assets/sprites/shield_health/full_shield.png" id="4_1bor1"]
+[ext_resource type="Texture2D" uid="uid://dwpkqpico3ci5" path="res://assets/sprites/shield_health/empty_shield.png" id="5_hynbo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3sjvr"]
 radius = 115.0
@@ -14,6 +17,7 @@ radius = 141.089
 
 [node name="Shield" type="CharacterBody2D"]
 z_index = 10
+position = Vector2(10, 2)
 script = ExtResource("1_xflaf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -36,3 +40,10 @@ shape = SubResource("CircleShape2D_ey6sh")
 [connection signal="body_entered" from="ParryArea" to="." method="_on_parry_area_body_entered"]
 [connection signal="body_exited" from="ParryArea" to="." method="_on_parry_area_body_exited"]
 [connection signal="body_entered" from="DamageArea" to="." method="_on_area_2d_body_entered"]
+[node name="HealthBar" type="Node2D" parent="."]
+position = Vector2(-11, -172)
+script = ExtResource("3_y2w1u")
+section_texture = ExtResource("4_1bor1")
+empty_section_texture = ExtResource("5_hynbo")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
