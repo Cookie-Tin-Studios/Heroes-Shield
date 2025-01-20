@@ -1,4 +1,4 @@
-extends "res://scripts/mobs/mob_base.gd"
+extends RigidBody2D
 
 @onready var global_tick = get_node("/root/Tick")  # Timer or global tick for periodic shooting
 
@@ -14,8 +14,6 @@ func _ready() -> void:
 	# Connect global tick to projectile shooting
 	global_tick.timeout.connect(_on_tick)
 
-	# Call parent class's _ready()
-	super._ready()
 
 func _on_tick() -> void:
 	# Shoot a projectile on each tick
@@ -23,7 +21,10 @@ func _on_tick() -> void:
 
 func shoot_projectile() -> void:
 	if not target:
-		print("Error: Missing target or projectile scene!")
+		print("Error: Target is not assigned!")
+		return
+	if not projectile_scene:
+		print("Error: Projectile scene is not assigned!")
 		return
 
 	# Instantiate the projectile scene

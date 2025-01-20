@@ -27,9 +27,11 @@ size = Vector2(204, 58)
 position = Vector2(-1, -37)
 script = ExtResource("1_5ymdd")
 projectile_scene = ExtResource("2_3rjrx")
-shooting_speed = 500.0
-health_bar_offset = Vector2(0, -20)
-health_bar_follow_collision = true
+shooting_speed = null
+health_bar_offset = null
+health_bar_follow_collision = null
+max_health = null
+movement_speed = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
 position = Vector2(4, 38.5)
