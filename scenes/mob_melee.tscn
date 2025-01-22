@@ -28,7 +28,7 @@ animations = [{
 "texture": ExtResource("5_bus3n")
 }],
 "loop": true,
-"name": &"melee",
+"name": &"attack",
 "speed": 5.0
 }, {
 "frames": [{
@@ -39,10 +39,10 @@ animations = [{
 "texture": ExtResource("7_gy72l")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_d51on")
+"texture": ExtResource("9_p1h8l")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_p1h8l")
+"texture": ExtResource("8_d51on")
 }, {
 "duration": 1.0,
 "texture": ExtResource("10_5yidq")
@@ -52,35 +52,43 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk",
-"speed": 5.0
+"speed": 4.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gxrgf"]
-size = Vector2(124, 137)
+size = Vector2(259.5, 278.25)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bk8i5"]
 radius = 46.0
-height = 122.0
+height = 162.0
 
-[node name="Mob_base" instance=ExtResource("1_0eyf7")]
+[node name="Mob_base" groups=["mobs"] instance=ExtResource("1_0eyf7")]
 script = ExtResource("2_lds8s")
-chase_speed = 400.0
-melee_range = 600.0
+chase_speed = 250.0
 shield_range = 500.0
+melee_range = 100.0
+attack_damage = 1
+attack_cooldown = 1.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
-position = Vector2(94, 108)
+position = Vector2(0.99968, 5.00031)
 scale = Vector2(2.35937, 2.51563)
 sprite_frames = SubResource("SpriteFrames_ns1xs")
-animation = &"walk"
+animation = &"attack"
 
 [node name="mob_hitbox" type="CollisionShape2D" parent="." index="1"]
 light_mask = 4
 visibility_layer = 4
-position = Vector2(92, 104)
+position = Vector2(1.74968, -0.87468)
 shape = SubResource("RectangleShape2D_gxrgf")
 disabled = true
 
 [node name="mob_attackbox" type="CollisionShape2D" parent="." index="2"]
-position = Vector2(51, 104)
+position = Vector2(-97.0003, -31.9997)
 shape = SubResource("CapsuleShape2D_bk8i5")
+
+[node name="TextureProgressBar" parent="Node2D" index="0"]
+offset_left = -95.0
+offset_top = -159.0
+offset_right = 105.0
+offset_bottom = -119.0
