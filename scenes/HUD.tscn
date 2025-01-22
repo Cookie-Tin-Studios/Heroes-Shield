@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtj2jcj8eeq22"]
+
+[ext_resource type="Script" path="res://scripts/hud.gd" id="1_3epnk"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_3epnk")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 62.0
+offset_top = 26.0
+offset_right = 137.0
+offset_bottom = 74.0
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 2
+
+[node name="CoinsLabel" type="Label" parent="Control/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Coins: "
