@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://dtj2jcj8eeq22"]
+[gd_scene load_steps=5 format=3 uid="uid://dtj2jcj8eeq22"]
 
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_3epnk"]
+[ext_resource type="Texture2D" uid="uid://dd0euume4akhp" path="res://assets/sprites/shield/Shield_V04.PNG" id="2_pkao8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aoc6w"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8d5m"]
+bg_color = Color(0.529757, 0.00676883, 0.160879, 1)
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_3epnk")
@@ -21,3 +28,18 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Coins: "
+
+[node name="ProgressBar" type="ProgressBar" parent="Control"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 574.0
+offset_right = 987.0
+offset_bottom = 601.0
+theme_override_styles/background = SubResource("StyleBoxFlat_aoc6w")
+theme_override_styles/fill = SubResource("StyleBoxFlat_a8d5m")
+show_percentage = false
+
+[node name="ProgressIcon" type="Sprite2D" parent="Control/ProgressBar"]
+position = Vector2(-5, 14)
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("2_pkao8")

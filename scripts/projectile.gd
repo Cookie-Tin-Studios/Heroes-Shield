@@ -3,7 +3,7 @@ extends RigidBody2D
 func _ready() -> void:
 	pass
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# Optionally, you can control velocity here if not set externally:
 	# linear_velocity = Vector2(projectile_speed, 0) 
 	# or you might have already assigned linear_velocity in another script method
@@ -22,5 +22,3 @@ func _on_body_entered(body: Node) -> void:
 			# I don't THINK we need this, since a hit is instant death. But if we
 			# decided against that later maybe with a powerup or something, it's here lol.
 			#queue_free()
-
-	
