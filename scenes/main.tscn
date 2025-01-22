@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://i70ovs7ns5pg"]
+[gd_scene load_steps=8 format=3 uid="uid://i70ovs7ns5pg"]
 
 [ext_resource type="PackedScene" uid="uid://dk41cisdtdonq" path="res://scenes/idiot_hero.tscn" id="2_jn0l8"]
 [ext_resource type="PackedScene" uid="uid://bumwv0mx5w6aq" path="res://scenes/shield.tscn" id="2_w3671"]
 [ext_resource type="PackedScene" uid="uid://cn3lii7exa78k" path="res://scenes/background.tscn" id="3_3s816"]
 [ext_resource type="PackedScene" uid="uid://cagf0iwwh4c62" path="res://scenes/mob_bat.tscn" id="4_q6ttw"]
 [ext_resource type="PackedScene" uid="uid://dtj2jcj8eeq22" path="res://scenes/HUD.tscn" id="5_scp5s"]
+[ext_resource type="PackedScene" uid="uid://ei3etn0w5se4" path="res://scenes/menu/pause_menu.tscn" id="5_yooe3"]
 
 [sub_resource type="GDScript" id="GDScript_81rl6"]
 script/source = "extends Node2D
@@ -22,6 +23,8 @@ func _process(delta: float) -> void:
 
 [node name="Node2D" type="Node2D"]
 script = SubResource("GDScript_81rl6")
+
+[node name="pause_menu" parent="." instance=ExtResource("5_yooe3")]
 
 [node name="Idiot_hero" parent="." instance=ExtResource("2_jn0l8")]
 z_as_relative = false
