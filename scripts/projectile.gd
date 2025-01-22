@@ -1,24 +1,25 @@
 extends RigidBody2D
 
+@export var damage: int = 1  # Damage dealt by the projectile
+
 func _ready() -> void:
-	pass
-	
-func _physics_process(_delta: float) -> void:
-	# Optionally, you can control velocity here if not set externally:
-	# linear_velocity = Vector2(projectile_speed, 0) 
-	# or you might have already assigned linear_velocity in another script method
+	# Called when the projectile is added to the scene.
+	# Currently, no specific initialization is needed.
 	pass
 
-# Collision detection logic.
-# Only handles collisions with the idiot. Will need to be updated later to handle sheild collision.
+func _physics_process(_delta: float) -> void:
+	# This function runs every frame. If movement is not handled externally,
+	# you can set the projectile's velocity here (e.g., linear_velocity).
+	pass
+
+# Handles collision detection and damage application.
 func _on_body_entered(body: Node) -> void:
+	# Check if the collided body is a CharacterBody2D (e.g., Idiot_hero or Shield).
 	if body is CharacterBody2D:
-		# Both the sheild and the idiot are CharachterBody2D.
-		# This makes it so the game over only happens for idiot hits.
-		if body.name == "Idiot_hero":
-			# Game over. Just goes to the main menu for now.
-			get_tree().change_scene_to_file("res://scenes/menu/game_over.tscn")
-			# queue_free would remove the projectile if needed.
-			# I don't THINK we need this, since a hit is instant death. But if we
-			# decided against that later maybe with a powerup or something, it's here lol.
-			#queue_free()
+		# If the collided body has a take_damage method, deal damage to it.
+		if body.has_method("take_damage"):
+			body.take_damage(damage)  # Apply damage to the target.
+			print("Projectile hit ", body.name, " for ", damage, " damage.")
+		
+		# Remove the projectile after it hits any target.
+		queue_free()

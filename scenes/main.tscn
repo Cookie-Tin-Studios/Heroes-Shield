@@ -54,13 +54,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Mob_bat" parent="." instance=ExtResource("6_cpf26")]
-position = Vector2(3592, 163)
+position = Vector2(3656, 408)
 
 [node name="Mob_melee" parent="." instance=ExtResource("7_4h8ak")]
-position = Vector2(3542, 1418)
-chase_speed = null
-shield_range = null
-attack_damage = null
-attack_cooldown = null
-max_health = null
-movement_speed = null
+position = Vector2(2569, 1696)
