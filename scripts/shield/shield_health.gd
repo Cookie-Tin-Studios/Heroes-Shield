@@ -91,6 +91,12 @@ func _on_parry_area_body_entered(body: Node2D) -> void:
 func _on_parry_area_body_exited(body: Node2D) -> void:
 	if body in projectiles_in_range:
 		projectiles_in_range.erase(body)
+	
+	if body.is_in_group("mobs"):  # Ensure the goblin is in the "mobs" group
+		if body.has_method("take_damage"):
+			body.take_damage(1)  # Adjust the parry damage
+			print("Parried! Dealt 1 damage to ", body.name)	
+	
 
 func attempt_parry() -> void:
 	if projectiles_in_range.size() == 0:
