@@ -23,3 +23,9 @@ func _physics_process(delta: float) -> void:
 
 	# Update the global progress to reflect the traveled distance
 	Globals.level_progress = int(distance_traveled)
+
+# Function to take damage
+func take_damage(_amount: int) -> void:
+	print("Idiot_hero took damage! Game Over!")
+	# Change to the game over scene
+	get_tree().change_scene_to_file("res://scenes/menu/game_over.tscn")
