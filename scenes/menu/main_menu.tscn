@@ -66,6 +66,9 @@ texture = ExtResource("2_oec8k")
 expand_mode = 3
 stretch_mode = 5
 
+[connection signal="focus_entered" from="HBoxContainer/VBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_focus_entered"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="focus_entered" from="HBoxContainer/VBoxContainer/VBoxContainer/New Game" to="." method="_on_new_game_focus_entered"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/VBoxContainer/New Game" to="." method="_on_new_game_pressed"]
+[connection signal="focus_entered" from="HBoxContainer/VBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_focus_entered"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
