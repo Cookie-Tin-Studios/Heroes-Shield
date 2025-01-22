@@ -6,7 +6,7 @@ signal max_level_progress_changed(new_amount)
 
 var _coins: int = 0
 var _level_progress: int = 0
-var _max_level_progress: int = 1000
+var _max_level_progress: int = 10000
 
 var coins: int:
 	get:

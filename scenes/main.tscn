@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cn3lii7exa78k" path="res://scenes/background.tscn" id="3_3s816"]
 [ext_resource type="PackedScene" uid="uid://dtj2jcj8eeq22" path="res://scenes/HUD.tscn" id="5_scp5s"]
 [ext_resource type="PackedScene" uid="uid://ei3etn0w5se4" path="res://scenes/menu/pause_menu.tscn" id="5_yooe3"]
+[ext_resource type="PackedScene" uid="uid://cagf0iwwh4c62" path="res://scenes/mob_bat.tscn" id="6_cpf26"]
 
 [sub_resource type="GDScript" id="GDScript_81rl6"]
 script/source = "extends Node2D
@@ -27,24 +28,29 @@ script = SubResource("GDScript_81rl6")
 
 [node name="Idiot_hero" parent="." instance=ExtResource("2_jn0l8")]
 z_as_relative = false
-position = Vector2(130, 639)
+position = Vector2(319, 1761)
 
 [node name="Camera2D" type="Camera2D" parent="Idiot_hero"]
-position = Vector2(1021, 12)
+position = Vector2(1590, -669)
 scale = Vector2(1, 8.72)
 zoom = Vector2(0.5, 0.5)
 
 [node name="Background" parent="Idiot_hero/Camera2D" instance=ExtResource("3_3s816")]
-scale = Vector2(10, 10)
-transform = Transform2D(10, 0, 0, 10, 0, 0)
+scale = Vector2(1.15, 1.15)
+transform = Transform2D(1.15, 0, 0, 1.15, 0, 0)
 
 [node name="Shield" parent="." instance=ExtResource("2_w3671")]
-position = Vector2(629, 578)
+position = Vector2(1271, 1112)
 
 [node name="HUD" parent="." instance=ExtResource("5_scp5s")]
+scale = Vector2(0.5, 0.5)
+transform = Transform2D(0.5, 0, 0, 0.5, 0, 0)
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="Mob_bat" parent="." instance=ExtResource("6_cpf26")]
+position = Vector2(3467, 705)
