@@ -49,8 +49,10 @@ func _on_node_added(node:Node) -> void:
 
 
 func _play_hover() -> void:
-	playback.play_stream(preload('res://assets/audio/menu.ogg'), 0, 0, randf_range(0.9, 1.1))
+	if not playback.is_stream_playing(0):
+		playback.play_stream(preload('res://assets/audio/menu.ogg'), 0, 0, randf_range(0.9, 1.1))
 
 
 func _play_pressed() -> void:
-	playback.play_stream(preload('res://assets/audio/menu.ogg'), 0, 0, randf_range(0.9, 1.1))
+	if not playback.is_stream_playing(0):
+		playback.play_stream(preload('res://assets/audio/menu.ogg'), 0, 0, randf_range(0.9, 1.1))
