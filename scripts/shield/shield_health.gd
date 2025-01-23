@@ -1,10 +1,19 @@
 extends CharacterBody2D 
 
-# Health variable
+# Health variables
 @export var max_health: int = 3  # Default max health
+@onready var health_bar = $HealthBar
 var current_health: int = max_health
 
-@onready var health_bar = $HealthBar
+
+# Movement Variables:
+@export var acceleration: float = 4000
+@export var deceleration: float = 4000
+@export var friction: float = 0.8
+@export var speed: float = 800
+
+# Reference to the hero node
+@export var idiot_hero: Node
 
 func _ready():
 	# Initialize health
@@ -12,6 +21,11 @@ func _ready():
 	$ParryArea.body_entered.connect(_on_parry_area_body_entered) # parrymech
 	$ParryArea.body_exited.connect(_on_parry_area_body_exited) # parrymech
 	call_deferred("create_health_sections")
+	
+	idiot_hero = get_node("../Idiot_hero")
+	if idiot_hero == null:
+		print("Shield: Hero path is not set!")
+		return
 
 func update_health_bar():
 	health_bar.update_health(current_health)
@@ -31,31 +45,64 @@ func die():
 
 
 # Speed of movement
-@export var speed: float = 400
-
 func _process(_delta: float) -> void:
-	var direction = Vector2.ZERO
+	var input_dir = Vector2.ZERO
+	idiot_hero = get_node("../Idiot_hero")
+	# Ensure the hero node exists
+	if idiot_hero == null:
+		print("Shield: Cannot find the hero node!")
+		return
+	
 
-	# Up and Down movement
 	if Input.is_action_pressed("ui_up"):
-		direction.y -= 1
+		input_dir.y -= 1
 	if Input.is_action_pressed("ui_down"):
-		direction.y += 1
+		input_dir.y += 1
 	if Input.is_action_pressed("ui_left"):
-		direction.x -= 1
+		input_dir.x -= 1
 	if Input.is_action_pressed("ui_right"):
-		direction.x += 1
+		input_dir.x += 1
+	
+	
+	# Normalize direction for consistent movement
+	input_dir = input_dir.normalized()
 
-	# Apply movement
-	velocity = direction.normalized() * speed
+	print(idiot_hero.velocity)
+	var target_velocity
+	if input_dir == Vector2.ZERO:
+		target_velocity = idiot_hero.velocity
+	else:
+		target_velocity = input_dir * speed
+	
+	# Accelerate towards desired velocity
+	velocity = velocity.move_toward(target_velocity, acceleration * _delta)
+
+	# Apply friction when no input
+	if input_dir == Vector2.ZERO:
+		velocity = velocity * pow(friction, _delta) 
+	
+	# Move the character
 	move_and_slide()
-
 	# Restrict the character to stay within the camera's visible bounds
 	restrict_to_camera()
 	
 	# Parry attempt parry if input pressed. parrymech
 	if Input.is_action_just_pressed("parry"):
 		attempt_parry()
+	
+
+		# Flip the shield based on the x position
+	if global_position.x > idiot_hero.global_position.x:
+		scale.y = 1  # Flip horizontally
+	else:
+		scale.y = -1   # Reset to normal
+		
+	# Calculate direction from hero to the shield
+	var direction_to_hero = global_position - idiot_hero.global_position
+	
+	# Make the shield face away from the hero
+	rotation = direction_to_hero.angle()
+#	
 
 func restrict_to_camera() -> void:
 	# Get the active Camera2D
