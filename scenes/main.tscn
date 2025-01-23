@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://i70ovs7ns5pg"]
+[gd_scene load_steps=8 format=3 uid="uid://i70ovs7ns5pg"]
 
 [ext_resource type="PackedScene" uid="uid://dk41cisdtdonq" path="res://scenes/idiot_hero.tscn" id="2_jn0l8"]
 [ext_resource type="PackedScene" uid="uid://bumwv0mx5w6aq" path="res://scenes/shield.tscn" id="2_w3671"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://dtj2jcj8eeq22" path="res://scenes/HUD.tscn" id="5_scp5s"]
 [ext_resource type="PackedScene" uid="uid://ei3etn0w5se4" path="res://scenes/menu/pause_menu.tscn" id="5_yooe3"]
 [ext_resource type="PackedScene" uid="uid://cagf0iwwh4c62" path="res://scenes/mob_bat.tscn" id="6_cpf26"]
-[ext_resource type="PackedScene" uid="uid://dtcvtr24mkkft" path="res://scenes/mob_melee.tscn" id="7_4h8ak"]
 
 [sub_resource type="GDScript" id="GDScript_81rl6"]
 script/source = "extends Node2D
@@ -25,23 +24,24 @@ func _process(_delta: float) -> void:
 [node name="Node2D" type="Node2D"]
 script = SubResource("GDScript_81rl6")
 
+[node name="Shield" parent="." instance=ExtResource("2_w3671")]
+position = Vector2(2123, 1077)
+
 [node name="pause_menu" parent="." instance=ExtResource("5_yooe3")]
 
 [node name="Idiot_hero" parent="." instance=ExtResource("2_jn0l8")]
 z_as_relative = false
-position = Vector2(319, 1761)
+position = Vector2(1343, 1669)
+scale = Vector2(1.4, 1.4)
 
 [node name="Camera2D" type="Camera2D" parent="Idiot_hero"]
-position = Vector2(1590, -669)
-scale = Vector2(1, 8.72)
+position = Vector2(404.285, -412.143)
+scale = Vector2(0.714286, 6.22857)
 zoom = Vector2(0.5, 0.5)
 
 [node name="Background" parent="Idiot_hero/Camera2D" instance=ExtResource("3_3s816")]
 scale = Vector2(1.15, 1.15)
 transform = Transform2D(1.15, 0, 0, 1.15, 0, 0)
-
-[node name="Shield" parent="." instance=ExtResource("2_w3671")]
-position = Vector2(1321, 1701)
 
 [node name="HUD" parent="." instance=ExtResource("5_scp5s")]
 scale = Vector2(0.5, 0.5)
@@ -55,6 +55,3 @@ offset_bottom = 40.0
 
 [node name="Mob_bat" parent="." instance=ExtResource("6_cpf26")]
 position = Vector2(3656, 408)
-
-[node name="Mob_melee" parent="." instance=ExtResource("7_4h8ak")]
-position = Vector2(2569, 1696)
