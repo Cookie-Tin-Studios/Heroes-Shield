@@ -1,6 +1,6 @@
 extends "res://scripts/mobs/mob_base.gd"
 
-@onready var global_tick = get_node("/root/Tick") 
+@onready var global_tick = get_node("/root/Tick")
 @export var projectile_scene: PackedScene
 @export var shooting_speed: float = 500.0
 @export var target: CharacterBody2D
@@ -11,7 +11,6 @@ extends "res://scripts/mobs/mob_base.gd"
 
 func _ready() -> void:
 	super._ready()
-
 	# Connect the global tick signal so the bat shoots projectiles periodically.
 	global_tick.timeout.connect(_on_tick)
 

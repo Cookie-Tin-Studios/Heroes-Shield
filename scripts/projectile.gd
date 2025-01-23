@@ -17,7 +17,7 @@ func _physics_process(_delta: float) -> void:
 # Handles collision detection and damage application.
 func _on_body_entered(body: Node) -> void:
 	# Check if the collided body is a CharacterBody2D (e.g., Idiot_hero or Shield).
-	if body is CharacterBody2D:
+	if body is CharacterBody2D or body is RigidBody2D:
 		# If the collided body has a take_damage method, deal damage to it.
 		if body.has_method("take_damage"):
 			body.take_damage(damage)  # Apply damage to the target.
