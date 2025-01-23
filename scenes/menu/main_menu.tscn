@@ -47,6 +47,11 @@ layout_mode = 2
 theme = SubResource("Theme_wxyta")
 text = "New Game"
 
+[node name="Upgrades" type="Button" parent="HBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_wxyta")
+text = "Upgrades"
+
 [node name="Exit" type="Button" parent="HBoxContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_wxyta")
@@ -70,5 +75,7 @@ stretch_mode = 5
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
 [connection signal="focus_entered" from="HBoxContainer/VBoxContainer/VBoxContainer/New Game" to="." method="_on_new_game_focus_entered"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/VBoxContainer/New Game" to="." method="_on_new_game_pressed"]
+[connection signal="focus_entered" from="HBoxContainer/VBoxContainer/VBoxContainer/Upgrades" to="." method="_on_new_game_focus_entered"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/VBoxContainer/Upgrades" to="." method="_on_upgrades_pressed"]
 [connection signal="focus_entered" from="HBoxContainer/VBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_focus_entered"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
