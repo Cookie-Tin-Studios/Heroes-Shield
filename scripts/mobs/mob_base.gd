@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-@export var max_health: float = 3
+@export var max_health: float = 1
 @export var movement_speed: float = -100.0
 
 var health: float = max_health  # Current health
