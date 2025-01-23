@@ -37,3 +37,18 @@ func add_coins(amount: int) -> void:
 
 func add_progress(amount: int) -> void:
 	level_progress += amount
+	
+var upgrades = [
+	UpgradeCategory.new("Category 1", [
+		Upgrade.new("Upgrade 1", "Yeah it's an upgrade", 1),
+		Upgrade.new("Upgrade 2", "Yeah it's an upgrade", 2)
+	]),
+	UpgradeCategory.new("Category 2", [
+		Upgrade.new("Upgrade 1", "Yeah it's an upgrade", 1),
+		Upgrade.new("Upgrade 2", "Yeah it's an upgrade", 2)
+	]),
+	UpgradeCategory.new("Category 3", [
+		Upgrade.new("Upgrade 1", "Yeah it's an upgrade", 1),
+		Upgrade.new("Upgrade 2", "Yeah it's an upgrade", 2)
+	])
+]
