@@ -1,6 +1,8 @@
 extends RigidBody2D
 
 @export var damage: int = 1  # Damage dealt by the projectile
+@export var parried: bool = false
+@export var shooter: RigidBody2D # This has to be defined here so we can assign a shooter for homing in other scripts.
 
 func _ready() -> void:
 	# Called when the projectile is added to the scene.

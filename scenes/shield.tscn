@@ -10,10 +10,10 @@
 radius = 115.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4icvd"]
-radius = 196.163
+radius = 219.002
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ey6sh"]
-radius = 141.089
+radius = 124.004
 
 [node name="Shield" type="CharacterBody2D"]
 z_index = 10

@@ -109,8 +109,9 @@ func attempt_parry() -> void:
 		Globals.add_coins(1) # This is temporary for testing the coin additonal mechanics.
 		
 func deflect_projectile(projectile: RigidBody2D) -> void:
-	# Just reverse velocity for now. 
-	# Eventually, we should make it such that parried projectiles fly straight away from the center of the sheild.
+	# Set the parry variable to true, so we know it's been parried.
+	projectile.parried = true
+	# Eventually, we should make it such that parried projectiles fly straight away from the center of the shield.
 	projectile.linear_velocity = -projectile.linear_velocity
-	# Make it fast as fuck, for the fans. 
-	projectile.linear_velocity *= 10  
+	# Make it fast as fuck, for the fans.
+	projectile.linear_velocity *= 10

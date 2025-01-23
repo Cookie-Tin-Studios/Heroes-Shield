@@ -1,22 +1,13 @@
 extends "res://scripts/mobs/mob_base.gd"
 
 @onready var global_tick = get_node("/root/Tick") 
-# This node emits a timeout signal at regular intervals, used for shooting projectiles.
-
 @export var projectile_scene: PackedScene
-# The PackedScene reference for the projectile (e.g., a bullet or energy bolt).
-
 @export var shooting_speed: float = 500.0
-# Controls how fast the projectile moves when fired.
-
 @export var target: CharacterBody2D
-# The intended target (e.g., the player's CharacterBody2D). If not assigned, the bat tries to find "Idiot_hero" automatically.
 
-@export var health_bar_offset: Vector2 = Vector2(0, -20)
 # Determines how far above (or below) the collision shape the health bar should appear.
-
+@export var health_bar_offset: Vector2 = Vector2(0, -20)
 @export var health_bar_follow_collision: bool = true
-# If true, the health bar repositions itself to follow the collision shape each frame.
 
 func _ready() -> void:
 	super._ready()
@@ -37,8 +28,12 @@ func shoot_projectile() -> void:
 		else:
 			print("No valid 'Idiot_hero' node found in the scene.")
 
-	# Create a new instance of the projectile scene.
+	# Create a new instance of the projectile
 	var projectile = projectile_scene.instantiate()
+	
+	# Keep track of the shooter (bat)
+	projectile.shooter = self
+	
 	# Position the projectile where the bat currently is.
 	projectile.global_position = global_position
 
