@@ -6,36 +6,38 @@
 [ext_resource type="Texture2D" uid="uid://5niwyw3ix51d" path="res://assets/sprites/shield_health/full_shield.png" id="4_1bor1"]
 [ext_resource type="Texture2D" uid="uid://dwpkqpico3ci5" path="res://assets/sprites/shield_health/empty_shield.png" id="5_hynbo"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3sjvr"]
-radius = 115.0
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_4icvd"]
 radius = 310.002
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ey6sh"]
 radius = 141.089
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_3sjvr"]
+radius = 115.0
+
 [node name="Shield" type="CharacterBody2D"]
 z_index = 10
 position = Vector2(10, 2)
 script = ExtResource("1_xflaf")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="FlipContainer" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="FlipContainer"]
 scale = Vector2(0.313477, 0.300293)
 texture = ExtResource("2_guw5v")
 
-[node name="Physical CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_3sjvr")
+[node name="ParryArea" type="Area2D" parent="FlipContainer"]
 
-[node name="ParryArea" type="Area2D" parent="."]
-
-[node name="ParryZoneCollision" type="CollisionShape2D" parent="ParryArea"]
+[node name="ParryZoneCollision" type="CollisionShape2D" parent="FlipContainer/ParryArea"]
 shape = SubResource("CircleShape2D_4icvd")
 
-[node name="DamageArea" type="Area2D" parent="."]
+[node name="DamageArea" type="Area2D" parent="FlipContainer"]
 
-[node name="DamageZoneCollision" type="CollisionShape2D" parent="DamageArea"]
+[node name="DamageZoneCollision" type="CollisionShape2D" parent="FlipContainer/DamageArea"]
 shape = SubResource("CircleShape2D_ey6sh")
+
+[node name="Physical CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3sjvr")
 
 [node name="HealthBar" type="Node2D" parent="."]
 position = Vector2(-11, -172)
@@ -43,6 +45,6 @@ script = ExtResource("3_y2w1u")
 section_texture = ExtResource("4_1bor1")
 empty_section_texture = ExtResource("5_hynbo")
 
-[connection signal="body_entered" from="ParryArea" to="." method="_on_parry_area_body_entered"]
-[connection signal="body_exited" from="ParryArea" to="." method="_on_parry_area_body_exited"]
-[connection signal="body_entered" from="DamageArea" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="FlipContainer/ParryArea" to="." method="_on_parry_area_body_entered"]
+[connection signal="body_exited" from="FlipContainer/ParryArea" to="." method="_on_parry_area_body_exited"]
+[connection signal="body_entered" from="FlipContainer/DamageArea" to="." method="_on_area_2d_body_entered"]

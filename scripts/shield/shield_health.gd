@@ -15,11 +15,15 @@ var current_health: int = max_health
 # Reference to the hero node
 @export var idiot_hero: Node
 
+# Container for orientation
+@onready var flip_container = $FlipContainer
+@onready var health_bar_starting_position = health_bar.position
+
 func _ready():
 	# Initialize health
 	current_health = max_health
-	$ParryArea.body_entered.connect(_on_parry_area_body_entered) # parrymech
-	$ParryArea.body_exited.connect(_on_parry_area_body_exited) # parrymech
+	$FlipContainer/ParryArea.body_entered.connect(_on_parry_area_body_entered) # parrymech
+	$FlipContainer/ParryArea.body_exited.connect(_on_parry_area_body_exited) # parrymech
 	call_deferred("create_health_sections")
 	
 	idiot_hero = get_node("../Idiot_hero")
@@ -67,7 +71,6 @@ func _process(_delta: float) -> void:
 	# Normalize direction for consistent movement
 	input_dir = input_dir.normalized()
 
-	print(idiot_hero.velocity)
 	var target_velocity
 	if input_dir == Vector2.ZERO:
 		target_velocity = idiot_hero.velocity
@@ -90,13 +93,13 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("parry"):
 		attempt_parry()
 	
-
-		# Flip the shield based on the x position
+	# Flip the FlipContainer based on position
 	if global_position.x > idiot_hero.global_position.x:
-		scale.y = 1  # Flip horizontally
+		flip_container.scale.y = 1  # Flip horizontally
 	else:
-		scale.y = -1   # Reset to normal
-		
+		flip_container.scale.y = -1 # Reset to normal
+	
+	health_bar.scale = Vector2(1, 1)
 	# Calculate direction from hero to the shield
 	var direction_to_hero = global_position - idiot_hero.global_position
 	
