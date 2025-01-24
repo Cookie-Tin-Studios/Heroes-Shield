@@ -39,9 +39,9 @@ func add_progress(amount: int) -> void:
 	level_progress += amount
 	
 var upgrades = [
-	UpgradeCategory.new("Category 1", [
-		Upgrade.new("Upgrade 1", "Yeah it's an upgrade", 1),
-		Upgrade.new("Upgrade 2", "Yeah it's an upgrade", 2)
+	UpgradeCategory.new("Movement", [
+		MovementUpgrade.new("Speed 1", "You move faster, what did you expect", 1, 0.1),
+		MovementUpgrade.new("Speed 2", "You move faster, electric boogaloo", 2, 0.1)
 	]),
 	UpgradeCategory.new("Category 2", [
 		Upgrade.new("Upgrade 1", "Yeah it's an upgrade", 1),
@@ -52,3 +52,4 @@ var upgrades = [
 		Upgrade.new("Upgrade 2", "Yeah it's an upgrade", 2)
 	])
 ]
+var active_upgrades: Array[Upgrade] = []
