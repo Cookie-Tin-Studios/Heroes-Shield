@@ -64,7 +64,7 @@ func coin_explosion() -> void:
 		add_sibling(coin_sprite)
 
 		var random_direction := Vector2(1, 0).rotated(randf_range(0.0, TAU))
-		var random_distance := randf_range(75.0, 150.0)
+		var random_distance := randf_range(75.0, 500.0)
 		var final_position := coin_sprite.position + random_direction * random_distance
 
 		var tween := get_tree().create_tween()
