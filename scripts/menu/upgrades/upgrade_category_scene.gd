@@ -1,15 +1,18 @@
 extends Control
 
-var category: UpgradeCategory
-@onready var category_name: Label = $"Category Name"
-@onready var upgrade_list: VBoxContainer = $HBoxContainer/upgrade_list
-const upgrade_scene = preload("res://scenes/menu/upgrades/upgrade.tscn")
+var category: UpgradeCategory = UpgradeCategory.new("test", [])
+const upgrade_scene: PackedScene = preload("res://scenes/menu/upgrades/upgrade.tscn")
+
+signal purchased(Upgrade)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	category_name.text = category.Name
+	$"Category Name".text = category.Name
 	for upgrade in category.Upgrades:
 		var newUpgrade = upgrade_scene.instantiate()
 		newUpgrade.upgrade = upgrade
-		upgrade_list.add_child(newUpgrade)
-		pass
+		newUpgrade.purchased.connect(_on_upgrade_purchased)
+		$HBoxContainer/upgrade_list.add_child(newUpgrade)
+
+func _on_upgrade_purchased(upgrade: Upgrade) -> void:
+	purchased.emit(upgrade)
