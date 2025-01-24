@@ -19,6 +19,7 @@ func _input(_event):
 			timePaused = Time.get_ticks_msec()
 			pause_game()
 		elif check_time_delay(Time.get_ticks_msec()):
+			timePaused = Time.get_ticks_msec()
 			resume_game()
 
 func _on_resume_pressed() -> void:
