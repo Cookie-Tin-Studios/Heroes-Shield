@@ -7,7 +7,6 @@ var health: float = max_health  # Current health
 
 @onready var health_bar = $Node2D/TextureProgressBar
 @onready var collision_shape = get_node_or_null("CollisionShape2D")  # Adjusted to reference CollisionShape2D directly
-
 func _ready() -> void:
 	# Initialize the health bar if it exists
 	if health_bar:
@@ -46,3 +45,18 @@ func _physics_process(delta: float) -> void:
 
 	# Update position based on movement speed
 	position.x += movement_speed * delta
+	remon_on_camera_exit()
+
+
+func remon_on_camera_exit() -> void:
+	# Get the active Camera2D
+	var camera = get_viewport().get_camera_2d()
+	if not camera:
+		return
+	
+	# Calculate the camera's visible area in world coordinates
+	var camera_rect = Rect2(camera.global_position - (get_viewport_rect().size / 2) / camera.zoom, get_viewport_rect().size / camera.zoom)
+
+	# Clamp the character's position within the camera's visible area
+	if position.x < camera_rect.position.x:
+		queue_free()

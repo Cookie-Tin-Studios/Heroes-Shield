@@ -54,4 +54,4 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Mob_bat" parent="." instance=ExtResource("6_cpf26")]
-position = Vector2(3656, 408)
+position = Vector2(954, 465)
