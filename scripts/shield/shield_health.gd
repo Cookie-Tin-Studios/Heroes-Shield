@@ -156,7 +156,6 @@ func attempt_parry() -> void:
 	# Reflect every projectile in range.
 	for projectile in projectiles_in_range:
 		deflect_projectile(projectile)
-		Globals.add_coins(1) # This is temporary for testing the coin additonal mechanics.
 		
 func deflect_projectile(projectile: RigidBody2D) -> void:
 	# Set the parry variable to true, so we know it's been parried.

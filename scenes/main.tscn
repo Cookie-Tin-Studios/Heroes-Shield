@@ -25,7 +25,7 @@ func _process(_delta: float) -> void:
 script = SubResource("GDScript_81rl6")
 
 [node name="Shield" parent="." instance=ExtResource("2_w3671")]
-position = Vector2(2123, 1077)
+position = Vector2(1552, 1299)
 
 [node name="pause_menu" parent="." instance=ExtResource("5_yooe3")]
 
@@ -54,4 +54,4 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Mob_bat" parent="." instance=ExtResource("6_cpf26")]
-position = Vector2(3656, 408)
+position = Vector2(2314, 791)
