@@ -1,19 +1,21 @@
 [gd_scene load_steps=9 format=3 uid="uid://bumwv0mx5w6aq"]
 
-[ext_resource type="Script" path="res://scripts/shield/shield_health.gd" id="1_xflaf"]
+[ext_resource type="Script" path="res://scripts/shield/shield.gd" id="1_xflaf"]
 [ext_resource type="Texture2D" uid="uid://p5ced0yg4xrt" path="res://assets/sprites/shield/shield_Hero_main.png" id="2_guw5v"]
 [ext_resource type="Script" path="res://scripts/shield/health.gd" id="3_y2w1u"]
 [ext_resource type="Texture2D" uid="uid://5niwyw3ix51d" path="res://assets/sprites/shield_health/full_shield.png" id="4_1bor1"]
 [ext_resource type="Texture2D" uid="uid://dwpkqpico3ci5" path="res://assets/sprites/shield_health/empty_shield.png" id="5_hynbo"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_4icvd"]
-radius = 310.002
+[sub_resource type="CircleShape2D" id="CircleShape2D_awwms"]
+radius = 241.002
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ey6sh"]
-radius = 124.004
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1kshu"]
+radius = 74.0
+height = 270.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3sjvr"]
-radius = 115.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6ih55"]
+radius = 60.0
+height = 250.0
 
 [node name="Shield" type="CharacterBody2D"]
 z_index = 10
@@ -27,17 +29,21 @@ scale = Vector2(0.313477, 0.300293)
 texture = ExtResource("2_guw5v")
 
 [node name="ParryArea" type="Area2D" parent="FlipContainer"]
+position = Vector2(176, -7)
 
 [node name="ParryZoneCollision" type="CollisionShape2D" parent="FlipContainer/ParryArea"]
-shape = SubResource("CircleShape2D_4icvd")
+position = Vector2(-133, 10)
+shape = SubResource("CircleShape2D_awwms")
 
 [node name="DamageArea" type="Area2D" parent="FlipContainer"]
 
 [node name="DamageZoneCollision" type="CollisionShape2D" parent="FlipContainer/DamageArea"]
-shape = SubResource("CircleShape2D_ey6sh")
+position = Vector2(4, 7)
+shape = SubResource("CapsuleShape2D_1kshu")
 
 [node name="Physical CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_3sjvr")
+position = Vector2(8, 8)
+shape = SubResource("CapsuleShape2D_6ih55")
 
 [node name="HealthBar" type="Node2D" parent="."]
 position = Vector2(-11, -172)
