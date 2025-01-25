@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c5k61upu1w732"]
 
-[ext_resource type="Script" path="res://scripts/menu/upgrade_menu2.gd" id="1_p3ykw"]
+[ext_resource type="Script" path="res://scripts/menu/upgrade_menu.gd" id="1_p3ykw"]
 
 [node name="UpgradesMenu" type="Control"]
 layout_direction = 1
@@ -23,5 +23,8 @@ grow_vertical = 2
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="CategoriesContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
+[node name="CategoriesContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1

@@ -3,7 +3,8 @@ extends Control
 var all_upgrades = Globals.all_upgrades
 var unlocked_upgrades = Globals.unlocked_upgrades
 
-@onready var categories_container: VBoxContainer = $MarginContainer/ScrollContainer/CategoriesContainer
+# IMPORTANT: Change the type of `CategoriesContainer` to HBoxContainer in the Editor
+@onready var categories_container: HBoxContainer = $MarginContainer/ScrollContainer/CategoriesContainer
 
 func _ready():
 	generate_upgrades_menu()
@@ -19,54 +20,51 @@ func generate_upgrades_menu():
 		var category_name = category_data.category_name
 		var category_upgrades = category_data.category_upgrades
 		
-		# --- Create a category container ---
+		# --- Create a VERTICAL container for each category (a "column") ---
 		var cat_container = VBoxContainer.new()
 		cat_container.name = category_name
+		cat_container.set_alignment(BoxContainer.ALIGNMENT_CENTER)
 		
-		# --- Category label ---
+		# Optional: Expand so each column tries to use space more evenly
+		cat_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		cat_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		
+		# --- Category label at the top of the column ---
 		var cat_label = Label.new()
 		cat_label.text = category_name
-		cat_label.add_theme_color_override("font_color", Color.YELLOW)  # example customization
+		cat_label.add_theme_color_override("font_color", Color.YELLOW)
+		cat_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+
 		cat_container.add_child(cat_label)
 		
-		# For each upgrade in this category
+		# For each upgrade in this category, add a row (HBox)
 		for upgrade_data in category_upgrades:
 			var upgrade_name = upgrade_data.upgrade_name
 			var desc = upgrade_data.desc
 			var cost = upgrade_data.cost
 			
-			# --- Create a container for the upgrade itself ---
+			# --- Create a row container for each upgrade ---
 			var upgrade_container = HBoxContainer.new()
+			upgrade_container.set_alignment(BoxContainer.ALIGNMENT_CENTER)
 			
-			# --- Upgrade name label ---
-			var upgrade_label = Label.new()
-			upgrade_label.text = "%s (Cost: %d)".format([upgrade_name, cost])
-			upgrade_container.add_child(upgrade_label)
-			
-			# --- Button for purchasing ---
+			# 2) Buy Button
 			var buy_button = Button.new()
-			buy_button.text = "Buy"
+			buy_button.text =  "%s (Cost: %d)" % [upgrade_name, cost]
 			buy_button.connect("pressed", Callable(self, "_on_buy_pressed").bind(category_name, upgrade_name))
+			buy_button.tooltip_text = desc
+
 			upgrade_container.add_child(buy_button)
 			
-			# --- Optional description label ---
-			var desc_label = Label.new()
-			desc_label.text = desc
-			upgrade_container.add_child(desc_label)
 			
-			# Add this upgrade_container to the category container
+			
+			# Add this row to the category column
 			cat_container.add_child(upgrade_container)
 		
-		# Finally, add the category container to the main container
+		# Finally, add the entire category column to the main HBox container
 		categories_container.add_child(cat_container)
 
-
 func _on_buy_pressed(category_name: String, upgrade_name: String) -> void:
-	# This function is called when the user clicks the "Buy" button for a certain upgrade.
-	# Check if it’s already unlocked or if the player can afford it, etc.
-	# For example, check currency, etc. Then mark it as unlocked.
-
-	var can_afford = true  # logic to see if the player has enough currency
+	var can_afford = true  # your logic here
 	if can_afford:
 		if upgrade_name not in unlocked_upgrades[category_name]:
 			unlocked_upgrades[category_name].append(upgrade_name)
