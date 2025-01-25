@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://c5k61upu1w732"]
+[gd_scene load_steps=2 format=3 uid="uid://doe5vvgxitcme"]
 
 [ext_resource type="Script" path="res://scripts/menu/upgrade_menu.gd" id="1_p3ykw"]
 
@@ -28,3 +28,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
+
+[node name="MainMenuButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1712.0
+offset_top = 1017.0
+offset_right = 1897.0
+offset_bottom = 1060.0
+text = "Main Menu"

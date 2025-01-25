@@ -5,9 +5,11 @@ var unlocked_upgrades = Globals.unlocked_upgrades
 
 # IMPORTANT: Change the type of `CategoriesContainer` to HBoxContainer in the Editor
 @onready var categories_container: HBoxContainer = $MarginContainer/ScrollContainer/CategoriesContainer
+@onready var main_menu_button: Button = $MainMenuButton
 
 func _ready():
 	generate_upgrades_menu()
+	main_menu_button.pressed.connect(go_to_main_menu)
 
 func clear_container(container: Control) -> void:
 	for child in container.get_children():
@@ -71,3 +73,6 @@ func _on_buy_pressed(category_name: String, upgrade_name: String) -> void:
 			print("Unlocked upgrade: ", upgrade_name, " in category: ", category_name)
 		else:
 			print("Already unlocked!")
+
+func go_to_main_menu() -> void:
+	get_tree().change_scene_to_file("res://scenes/menu/main_menu.tscn")
