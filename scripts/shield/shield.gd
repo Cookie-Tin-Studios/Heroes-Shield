@@ -5,7 +5,6 @@ extends CharacterBody2D
 @onready var health_bar = $HealthBar
 var current_health: int = max_health
 
-
 # Movement Variables:
 @export var acceleration: float = 4000
 @export var deceleration: float = 4000
@@ -22,8 +21,6 @@ var current_health: int = max_health
 func _ready():
 	# Initialize health
 	current_health = max_health
-	$FlipContainer/ParryArea.body_entered.connect(_on_parry_area_body_entered) # parrymech
-	$FlipContainer/ParryArea.body_exited.connect(_on_parry_area_body_exited) # parrymech
 	call_deferred("create_health_sections")
 	
 	idiot_hero = get_node("../Idiot_hero")
@@ -48,7 +45,6 @@ func die():
 	queue_free()  # Remove the character from the scene
 
 
-# Speed of movement
 func _process(_delta: float) -> void:
 	var input_dir = Vector2.ZERO
 	idiot_hero = get_node("../Idiot_hero")
@@ -57,7 +53,6 @@ func _process(_delta: float) -> void:
 		print("Shield: Cannot find the hero node!")
 		return
 	
-
 	if Input.is_action_pressed("ui_up"):
 		input_dir.y -= 1
 	if Input.is_action_pressed("ui_down"):
@@ -66,7 +61,6 @@ func _process(_delta: float) -> void:
 		input_dir.x -= 1
 	if Input.is_action_pressed("ui_right"):
 		input_dir.x += 1
-	
 	
 	# Normalize direction for consistent movement
 	input_dir = input_dir.normalized()
@@ -82,30 +76,30 @@ func _process(_delta: float) -> void:
 
 	# Apply friction when no input
 	if input_dir == Vector2.ZERO:
-		velocity = velocity * pow(friction, _delta) 
+		velocity = velocity * pow(friction, _delta)
 	
 	# Move the character
 	move_and_slide()
+
 	# Restrict the character to stay within the camera's visible bounds
 	restrict_to_camera()
 
-	# Parry attempt parry if input pressed. parrymech
+	# Attempt parry if input pressed
 	if Input.is_action_just_pressed("parry"):
 		attempt_parry()
 	
-	# Flip the FlipContainer based on position
+	# Flip the FlipContainer based on X position relative to hero
 	if global_position.x > idiot_hero.global_position.x:
-		flip_container.scale.y = 1  # Flip horizontally
+		flip_container.scale.y = 1
 	else:
-		flip_container.scale.y = -1 # Reset to normal
+		flip_container.scale.y = -1
 	
+	# Ensure health bar retains scale
 	health_bar.scale = Vector2(1, 1)
-	# Calculate direction from hero to the shield
-	var direction_to_hero = global_position - idiot_hero.global_position
 	
 	# Make the shield face away from the hero
+	var direction_to_hero = global_position - idiot_hero.global_position
 	rotation = direction_to_hero.angle()
-#	
 
 func restrict_to_camera() -> void:
 	# Get the active Camera2D
@@ -114,59 +108,65 @@ func restrict_to_camera() -> void:
 		return
 	
 	# Calculate the camera's visible area in world coordinates
-	var camera_rect = Rect2(camera.global_position - (get_viewport_rect().size / 2) / camera.zoom, get_viewport_rect().size / camera.zoom)
+	var camera_rect = Rect2(
+		camera.global_position - (get_viewport_rect().size / 2) / camera.zoom,
+		get_viewport_rect().size / camera.zoom
+	)
 
 	# Clamp the character's position within the camera's visible area
 	position.x = clamp(position.x, camera_rect.position.x, camera_rect.position.x + camera_rect.size.x)
 	position.y = clamp(position.y, camera_rect.position.y, camera_rect.position.y + camera_rect.size.y)
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("projectiles"):  # Check if the body is in the 'projectiles' group
-		take_damage(1)  # Assume the projectile has a `damage` property
-		body.queue_free()  # Remove the projectile after collision
-
-
+	# If the body is a projectile, damage the shield and remove the projectile
+	if body.is_in_group("projectiles"): 
+		take_damage(1)  
+		body.queue_free()  
 
 ########### FOR PARRYING MECHANICS ###########
-# When we need to move this into it's own script, search for parrymech in this file to find all
-# the shit you need to make this work.
 var projectiles_in_range: Array[RigidBody2D] = []
 
-# Add to array if projectile in range.
 func _on_parry_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("projectiles") and body is RigidBody2D:
 		projectiles_in_range.append(body)
 
-# Remove from array after leaving range.
 func _on_parry_area_body_exited(body: Node2D) -> void:
 	if body in projectiles_in_range:
 		projectiles_in_range.erase(body)
-	
-	if body.is_in_group("mobs"):  # Ensure the goblin is in the "mobs" group
+
+	if body.is_in_group("mobs"):  # For example, if we parry a mob?
 		if body.has_method("take_damage"):
-			body.take_damage(1)  # Adjust the parry damage
-			print("Parried! Dealt 1 damage to ", body.name)	
-	
+			body.take_damage(1)
+			print("Parried! Dealt 1 damage to ", body.name)
 
 func attempt_parry() -> void:
 	if projectiles_in_range.size() == 0:
-		# No projectile in range, don't bother parrying.
+		# No projectile in range, skip
 		return
 
-	# Reflect every projectile in range.
 	for projectile in projectiles_in_range:
 		deflect_projectile(projectile)
-		
+
 func deflect_projectile(projectile: RigidBody2D) -> void:
-	# Set the parry variable to true, so we know it's been parried.
+	# Mark projectile as parried if you have that logic in your projectile script
 	projectile.parried = true
-	# Disable layers for player collisions
+
+	# Adjust collision layers to avoid colliding with the player
+	# Turn OFF player layer/mask (assuming layer/mask 1 is the player)
 	projectile.set_collision_layer_value(1, false)
 	projectile.set_collision_mask_value(1, false)
-	# Change layer to match mobs (3)
+	
+	# Turn ON mob layer/mask (assuming layer/mask 3 is the mobs)
 	projectile.set_collision_layer_value(3, true)
 	projectile.set_collision_mask_value(3, true)
-	# Eventually, we should make it such that parried projectiles fly straight away from the center of the shield.
-	projectile.linear_velocity = -projectile.linear_velocity
-	# Make it fast as fuck, for the fans.
-	projectile.linear_velocity *= 10
+
+	# Calculate the shield's facing direction:
+	# In local space, "facing right" is Vector2.RIGHT. 
+	# We rotate it by the shield's current rotation to get the global forward direction.
+	var shield_facing_direction = Vector2.RIGHT.rotated(rotation)
+
+	var original_speed = projectile.linear_velocity.length()
+	var new_speed = original_speed * 10.0  
+
+	# Assign new velocity so the projectile flies in the shield's forward direction
+	projectile.linear_velocity = shield_facing_direction * new_speed

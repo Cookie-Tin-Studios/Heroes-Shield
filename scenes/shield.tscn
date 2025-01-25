@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bumwv0mx5w6aq"]
 
-[ext_resource type="Script" path="res://scripts/shield/shield_health.gd" id="1_xflaf"]
+[ext_resource type="Script" path="res://scripts/shield/shield.gd" id="1_xflaf"]
 [ext_resource type="Texture2D" uid="uid://p5ced0yg4xrt" path="res://assets/sprites/shield/shield_Hero_main.png" id="2_guw5v"]
 [ext_resource type="Script" path="res://scripts/shield/health.gd" id="3_y2w1u"]
 [ext_resource type="Texture2D" uid="uid://5niwyw3ix51d" path="res://assets/sprites/shield_health/full_shield.png" id="4_1bor1"]
