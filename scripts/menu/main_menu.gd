@@ -8,17 +8,20 @@ func _ready() -> void:
 	version.text = "Your Mother v1.1"
 	$HBoxContainer/VBoxContainer/VBoxContainer/Continue.grab_focus()
 	
-func _process(delta: float) -> void:
+func _process(_delta) -> void:
+	#TODO: figure out how to do this without exiting straight from upgrade_menu
+	#if Input.is_action_pressed("ui_previous_menu"):
+		#_on_exit_pressed()
 	pass
-
 
 func _on_continue_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
 
-
 func _on_new_game_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
 
+func _on_upgrades_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/menu/upgrade_menu.tscn")
 
 func _on_exit_pressed() -> void:
 	get_tree().quit()

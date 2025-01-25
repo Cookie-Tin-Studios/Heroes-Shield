@@ -88,7 +88,7 @@ func _process(_delta: float) -> void:
 	move_and_slide()
 	# Restrict the character to stay within the camera's visible bounds
 	restrict_to_camera()
-	
+
 	# Parry attempt parry if input pressed. parrymech
 	if Input.is_action_just_pressed("parry"):
 		attempt_parry()
