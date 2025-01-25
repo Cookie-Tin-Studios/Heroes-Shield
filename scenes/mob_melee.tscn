@@ -1,31 +1,34 @@
-[gd_scene load_steps=15 format=3 uid="uid://dtcvtr24mkkft"]
+[gd_scene load_steps=19 format=3 uid="uid://dtcvtr24mkkft"]
 
 [ext_resource type="PackedScene" uid="uid://ca3rytbyuxw8h" path="res://scenes/mob_base.tscn" id="1_0eyf7"]
 [ext_resource type="Script" path="res://scripts/mobs/mob_melee.gd" id="2_lds8s"]
-[ext_resource type="Texture2D" uid="uid://dkbkla1kcfdhl" path="res://assets/sprites/mobs/simple melee_0007.png" id="3_63l2r"]
-[ext_resource type="Texture2D" uid="uid://dd0xckcj107ho" path="res://assets/sprites/mobs/simple melee_0008.png" id="4_kfjq2"]
-[ext_resource type="Texture2D" uid="uid://s2mv1p6gln3m" path="res://assets/sprites/mobs/simple melee_0009.png" id="5_bus3n"]
-[ext_resource type="Texture2D" uid="uid://dm6txt0d5j7ee" path="res://assets/sprites/mobs/simple melee_0001.png" id="6_vtuyw"]
-[ext_resource type="Texture2D" uid="uid://dhhs04j7gs54d" path="res://assets/sprites/mobs/simple melee_0002.png" id="7_gy72l"]
-[ext_resource type="Texture2D" uid="uid://dhjbfm3c6trve" path="res://assets/sprites/mobs/simple melee_0003.png" id="8_d51on"]
-[ext_resource type="Texture2D" uid="uid://bv6i8b04kowq2" path="res://assets/sprites/mobs/simple melee_0004.png" id="9_p1h8l"]
-[ext_resource type="Texture2D" uid="uid://bxhjyc3n6b3o0" path="res://assets/sprites/mobs/simple melee_0005.png" id="10_5yidq"]
-[ext_resource type="Texture2D" uid="uid://ccpriy5aqd06l" path="res://assets/sprites/mobs/simple melee_0006.png" id="11_52fw1"]
+[ext_resource type="Texture2D" uid="uid://dm6txt0d5j7ee" path="res://assets/sprites/mobs/melee/simple melee_0001.png" id="3_fp1jq"]
+[ext_resource type="Texture2D" uid="uid://d31k0cx5jvaxo" path="res://assets/sprites/mobs/parry/parry-flare_0001.png" id="3_x63qp"]
+[ext_resource type="Texture2D" uid="uid://cadmk3jdtoaby" path="res://assets/sprites/mobs/parry/parry-flare_0002.png" id="4_gem5s"]
+[ext_resource type="Texture2D" uid="uid://dhhs04j7gs54d" path="res://assets/sprites/mobs/melee/simple melee_0002.png" id="4_nfkv8"]
+[ext_resource type="Texture2D" uid="uid://dhjbfm3c6trve" path="res://assets/sprites/mobs/melee/simple melee_0003.png" id="5_ld7sh"]
+[ext_resource type="Texture2D" uid="uid://sd87c68gy5k4" path="res://assets/sprites/mobs/parry/parry-flare_0003.png" id="5_v81ch"]
+[ext_resource type="Texture2D" uid="uid://bv6i8b04kowq2" path="res://assets/sprites/mobs/melee/simple melee_0004.png" id="6_giq7k"]
+[ext_resource type="Texture2D" uid="uid://bxhjyc3n6b3o0" path="res://assets/sprites/mobs/melee/simple melee_0005.png" id="7_unj7n"]
+[ext_resource type="Texture2D" uid="uid://ccpriy5aqd06l" path="res://assets/sprites/mobs/melee/simple melee_0006.png" id="8_efd2k"]
+[ext_resource type="Texture2D" uid="uid://dkbkla1kcfdhl" path="res://assets/sprites/mobs/melee/simple melee_0007.png" id="9_nrlto"]
+[ext_resource type="Texture2D" uid="uid://dd0xckcj107ho" path="res://assets/sprites/mobs/melee/simple melee_0008.png" id="10_p3mfb"]
+[ext_resource type="Texture2D" uid="uid://s2mv1p6gln3m" path="res://assets/sprites/mobs/melee/simple melee_0009.png" id="11_ghw38"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ns1xs"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("11_52fw1")
+"texture": ExtResource("8_efd2k")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_63l2r")
+"texture": ExtResource("9_nrlto")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_kfjq2")
+"texture": ExtResource("10_p3mfb")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_bus3n")
+"texture": ExtResource("11_ghw38")
 }],
 "loop": true,
 "name": &"attack",
@@ -33,22 +36,22 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_vtuyw")
+"texture": ExtResource("3_fp1jq")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_gy72l")
+"texture": ExtResource("4_nfkv8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_p1h8l")
+"texture": ExtResource("5_ld7sh")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_d51on")
+"texture": ExtResource("6_giq7k")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_5yidq")
+"texture": ExtResource("7_unj7n")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_52fw1")
+"texture": ExtResource("8_efd2k")
 }],
 "loop": true,
 "name": &"walk",
@@ -62,6 +65,23 @@ size = Vector2(259.5, 278.25)
 radius = 46.0
 height = 162.0
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_gijdg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_x63qp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_gem5s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_v81ch")
+}],
+"loop": true,
+"name": &"parry flare",
+"speed": 10.0
+}]
+
 [node name="Mob_base" groups=["mobs"] instance=ExtResource("1_0eyf7")]
 script = ExtResource("2_lds8s")
 chase_speed = 250.0
@@ -69,6 +89,8 @@ shield_range = 500.0
 melee_range = 100.0
 attack_damage = 1
 attack_cooldown = 1.0
+parry_window_duration = 1.0
+attack_animation_delay = 0.5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
 position = Vector2(0.99968, 5.00031)
@@ -76,16 +98,21 @@ scale = Vector2(2.35937, 2.51563)
 sprite_frames = SubResource("SpriteFrames_ns1xs")
 animation = &"attack"
 
-[node name="mob_hitbox" type="CollisionShape2D" parent="." index="1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 light_mask = 4
 visibility_layer = 4
 position = Vector2(1.74968, -0.87468)
 shape = SubResource("RectangleShape2D_gxrgf")
 disabled = true
 
-[node name="mob_attackbox" type="CollisionShape2D" parent="." index="2"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." index="2"]
 position = Vector2(-97.0003, -31.9997)
 shape = SubResource("CapsuleShape2D_bk8i5")
+one_way_collision = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D2" index="0"]
+sprite_frames = SubResource("SpriteFrames_gijdg")
+animation = &"parry flare"
 
 [node name="TextureProgressBar" parent="Node2D" index="0"]
 offset_left = -95.0
