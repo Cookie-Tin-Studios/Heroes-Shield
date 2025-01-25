@@ -14,6 +14,7 @@ func _ready() -> void:
 
 	# Initialize label text
 	coins_label.text = "Coins: " + str(Globals.coins)
+	Globals.coins_label_position = coins_label.position
 
 	# Initialize progress bar with current values
 	progress_bar.max_value = Globals.max_level_progress
@@ -29,6 +30,7 @@ func _on_level_progress_changed(new_progress: int) -> void:
 	progress_bar.value = new_progress
 	_update_progress_icon()
 	
+	Globals.coins_label_position = coins_label.position
 	# Check if we've reached or exceeded max progress
 	if new_progress >= Globals.max_level_progress:
 		# Switch to another scene. Modify path as needed.

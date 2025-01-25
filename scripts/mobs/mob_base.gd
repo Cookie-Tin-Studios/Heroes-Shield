@@ -58,28 +58,29 @@ func _physics_process(delta: float) -> void:
 
 func coin_explosion() -> void:
 	for i in range(coins_dropped):
-		var coin_sprite := Sprite2D.new()
-		coin_sprite.texture = coin_texture
+		var coin_sprite := preload("res://scenes/coin.tscn").instantiate()
 		coin_sprite.global_position = $Node2D.global_position
 		
 		add_sibling(coin_sprite)
 
 		var random_direction := Vector2(1, 0).rotated(randf_range(0.0, TAU))
 		var random_distance := randf_range(75.0, 500.0)
-		var final_position := coin_sprite.position + random_direction * random_distance
+		var final_position: Vector2 = coin_sprite.position + random_direction * random_distance
 
-		var tween := get_tree().create_tween()
-
+		var tween := get_tree().create_tween().set_parallel(true)
+		# tween.chain() makes all tweens prior to it run before anything after it
 		# Move from current position to final_position over 0.5s
 		tween.tween_property(coin_sprite, "position", final_position, 0.1)
-
+		tween.chain()
+		# hold the coin in place for a bit, then move it to the label position
+		tween.tween_property(coin_sprite, "position", final_position, 0.3)
+		tween.chain()
+		# Move coin to the coin label
+		tween.tween_property(coin_sprite, "position", Globals.coins_label_position, 3.5)
 		# Fade alpha from 1.0 to 0.0 over 0.5s
-		tween.tween_property(coin_sprite, "modulate:a", 0.0, 0.5).from(1.0)
-
-		# Connect the finished signal with an inline function
-		tween.finished.connect(func():
-			coin_sprite.queue_free()
-		)
+		tween.tween_property(coin_sprite, "modulate:a", 0.0, 3.5).from(1.0)
+		tween.chain()
+		tween.tween_callback(coin_sprite.queue_free)
 	
 
 func remon_on_camera_exit() -> void:

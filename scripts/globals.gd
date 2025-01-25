@@ -8,6 +8,7 @@ var _coins: int = 0
 var _level_progress: int = 0
 var _max_level_progress: int = 10000
 
+var coins_label_position: Vector2 = Vector2(0, 0)
 var coins: int:
 	get:
 		return _coins
