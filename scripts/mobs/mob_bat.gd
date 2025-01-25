@@ -1,9 +1,6 @@
 extends "res://scripts/mobs/mob_base.gd"
 
 @onready var global_tick = get_node("/root/Tick")
-@export var projectile_scene: PackedScene
-@export var shooting_speed: float = 500.0
-@export var target: CharacterBody2D
 
 # Determines how far above (or below) the collision shape the health bar should appear.
 @export var health_bar_offset: Vector2 = Vector2(0, -20)
