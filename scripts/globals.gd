@@ -37,19 +37,58 @@ func add_coins(amount: int) -> void:
 
 func add_progress(amount: int) -> void:
 	level_progress += amount
-	
-var upgrades = [
-	UpgradeCategory.new_upgrade_category_scene("Movement", [
-		Upgrade.new_upgrade_scene("Speed 1", "You move faster, what did you expect", 1),
-		Upgrade.new_upgrade_scene("Speed 2", "You move faster, electric boogaloo", 2)
-	]),
-	UpgradeCategory.new_upgrade_category_scene("Category 2", [
-		Upgrade.new_upgrade_scene("Upgrade 1", "Yeah it's an upgrade", 1),
-		Upgrade.new_upgrade_scene("Upgrade 2", "Yeah it's an upgrade", 2)
-	]),
-	UpgradeCategory.new_upgrade_category_scene("Category 3", [
-		Upgrade.new_upgrade_scene("Upgrade 1", "Yeah it's an upgrade", 1),
-		Upgrade.new_upgrade_scene("Upgrade 2", "Yeah it's an upgrade", 2)
-	])
+
+
+var all_upgrades = [
+	{
+		"category_name": "Movement", 
+		"category_upgrades": [
+			{
+				"upgrade_name": "Speed 1",
+				"desc": "You move faster, what did you expect",
+				"cost": 1,
+			},
+			{
+				"upgrade_name": "Speed 2",
+				"desc": "You move faster, electric boogaloo",
+				"cost": 2,
+			},
+		],	
+	},
+	{
+		"category_name": "Category 2",
+		"category_upgrades": [
+			{
+				"upgrade_name": "Upgrade 1",
+				"desc": "Yeah it's an upgrade",
+				"cost": 1,
+			},
+			{
+				"upgrade_name": "Upgrade 2",
+				"desc": "Yeah it's an upgrade",
+				"cost": 2,
+			},
+		],
+	},
+	{
+		"category_name": "Category 3",
+		"category_upgrades": [
+			{
+				"upgrade_name": "Upgrade 3",
+				"desc": "Yeah it's an upgrade",
+				"cost": 1,
+			},
+			{
+				"upgrade_name": "Upgrade 4",
+				"desc": "Yeah it's an upgrade",
+				"cost": 2,
+			},
+		],
+	}
 ]
-var active_upgrades: Array[Upgrade] = []
+
+var unlocked_upgrades = {
+	"Movement": [],
+	"Category 2": [],
+	"Category 3": []
+}
