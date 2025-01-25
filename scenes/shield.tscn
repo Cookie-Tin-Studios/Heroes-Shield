@@ -7,15 +7,15 @@
 [ext_resource type="Texture2D" uid="uid://dwpkqpico3ci5" path="res://assets/sprites/shield_health/empty_shield.png" id="5_hynbo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_awwms"]
-radius = 213.009
+radius = 241.002
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1kshu"]
 radius = 74.0
 height = 270.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6ih55"]
-radius = 68.0
-height = 278.0
+radius = 60.0
+height = 250.0
 
 [node name="Shield" type="CharacterBody2D"]
 z_index = 10
@@ -42,7 +42,7 @@ position = Vector2(4, 7)
 shape = SubResource("CapsuleShape2D_1kshu")
 
 [node name="Physical CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(6, 2)
+position = Vector2(8, 8)
 shape = SubResource("CapsuleShape2D_6ih55")
 
 [node name="HealthBar" type="Node2D" parent="."]

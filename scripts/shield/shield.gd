@@ -140,23 +140,24 @@ func attempt_parry() -> void:
 		deflect_projectile(projectile)
 
 func deflect_projectile(projectile: RigidBody2D) -> void:
-	# Mark the projectile as parried
 	projectile.parried = true
 
-	# Switch collision layers: remove from player collisions (layer 1), add to mob collisions (layer 3)
+	# Collision layers
 	projectile.set_collision_layer_value(1, false)
 	projectile.set_collision_mask_value(1, false)
 	projectile.set_collision_layer_value(3, true)
 	projectile.set_collision_mask_value(3, true)
 
-	# Compute reflection from the *shield’s center* to the projectile’s position
-	# so it bounces "away" from the shield.
 	var normal = (projectile.global_position - global_position).normalized()
+	var bounced_vel = projectile.linear_velocity.bounce(normal)
 
-	# Reflect the projectile’s velocity around that normal
-	var new_velocity = projectile.linear_velocity.bounce(normal)
+	# Weighted blend: e.g. 70% real reflection, 30% guaranteed radial outward
+	var radial_out = normal * 1000.0
+	var alpha = 0.7  # 70% reflection, 30% radial
 
-	# Dramatic speed boost for satisfying parry
-	new_velocity *= 10.0
+	var new_velocity = bounced_vel.lerp(radial_out, 1.0 - alpha)
+
+	# 5) Multiply the final velocity by 10 for that big "ping"
+	new_velocity *= 5.0
 
 	projectile.linear_velocity = new_velocity
