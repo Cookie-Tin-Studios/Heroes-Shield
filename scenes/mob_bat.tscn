@@ -3,25 +3,26 @@
 [ext_resource type="Script" path="res://scripts/mobs/mob_bat.gd" id="1_5ymdd"]
 [ext_resource type="PackedScene" uid="uid://ca3rytbyuxw8h" path="res://scenes/mob_base.tscn" id="1_dlxn0"]
 [ext_resource type="PackedScene" uid="uid://dmxf6gcphgjg5" path="res://scenes/projectile.tscn" id="2_3rjrx"]
-[ext_resource type="Texture2D" uid="uid://bn7cuqlpvwfru" path="res://assets/sprites/placeholder_bat_flap_1.png" id="2_kvs0a"]
-[ext_resource type="Texture2D" uid="uid://be6apdufjv4cr" path="res://assets/sprites/placeholder_bat_flap_2.png" id="3_60812"]
+[ext_resource type="Texture2D" uid="uid://dvigrst8u4tt3" path="res://assets/sprites/mobs/BAT_K1.svg" id="4_g1qx1"]
+[ext_resource type="Texture2D" uid="uid://cokvm4rvctqw6" path="res://assets/sprites/mobs/bat/BAT_K2.svg" id="5_g2iha"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_lquxh"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_7md1s"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_kvs0a")
+"texture": ExtResource("4_g1qx1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_60812")
+"texture": ExtResource("5_g2iha")
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 1.5
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7xpap"]
-size = Vector2(204, 58)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ttcby"]
+radius = 38.0
+height = 179.927
 
 [node name="Mob_bat" groups=["mobs"] instance=ExtResource("1_dlxn0")]
 position = Vector2(-1, -37)
@@ -34,14 +35,17 @@ health_bar_offset = Vector2(0, -20)
 health_bar_follow_collision = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
-position = Vector2(4, 38.5)
-sprite_frames = SubResource("SpriteFrames_lquxh")
+position = Vector2(31, 21)
+scale = Vector2(0.75, 0.628434)
+sprite_frames = SubResource("SpriteFrames_7md1s")
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 light_mask = 4
 visibility_layer = 4
-position = Vector2(0, 38.5)
-shape = SubResource("RectangleShape2D_7xpap")
+position = Vector2(-21, 51)
+rotation = -0.581329
+shape = SubResource("CapsuleShape2D_ttcby")
 
 [node name="TextureProgressBar" parent="Node2D" index="0"]
 offset_left = -97.0
