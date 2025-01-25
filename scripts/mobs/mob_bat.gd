@@ -41,7 +41,7 @@ func shoot_projectile() -> void:
 
 	# If the projectile is a RigidBody2D, give it a velocity in the calculated direction.
 	if projectile is RigidBody2D:
-		projectile.linear_velocity = direction * shooting_speed
+		projectile.linear_velocity = direction * shooting_speed + target.velocity
 
 	# Add the new projectile to the active scene so it appears in the game.
 	get_tree().get_current_scene().add_child(projectile)
