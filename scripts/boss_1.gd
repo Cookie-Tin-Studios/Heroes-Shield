@@ -65,7 +65,7 @@ func spawn_rails() -> void:
 	var top_rail = rail_scene.instantiate()
 	top_rail.start_pos = Vector2(0,200)
 	top_rail.end_pos = Vector2(10000, 1000)
-	get_tree().get_current_scene().add_child(top_rail)
+	add_child(top_rail)
 	print("Top rail added")
 
 	#var bottom_rail = rail_scene.instantiate()
