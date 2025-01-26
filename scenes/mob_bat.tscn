@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cagf0iwwh4c62"]
+[gd_scene load_steps=9 format=3 uid="uid://cagf0iwwh4c62"]
 
 [ext_resource type="Script" path="res://scripts/mobs/mob_bat.gd" id="1_5ymdd"]
 [ext_resource type="PackedScene" uid="uid://ca3rytbyuxw8h" path="res://scenes/mob_base.tscn" id="1_dlxn0"]
 [ext_resource type="PackedScene" uid="uid://dmxf6gcphgjg5" path="res://scenes/projectile.tscn" id="2_3rjrx"]
 [ext_resource type="Texture2D" uid="uid://dvigrst8u4tt3" path="res://assets/sprites/mobs/BAT_K1.svg" id="4_g1qx1"]
 [ext_resource type="Texture2D" uid="uid://cokvm4rvctqw6" path="res://assets/sprites/mobs/bat/BAT_K2.svg" id="5_g2iha"]
+[ext_resource type="AudioStream" uid="uid://b26gmdnym02l2" path="res://assets/audio/bat_projectile.wav" id="6_70gwb"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7md1s"]
 animations = [{
@@ -53,3 +54,6 @@ offset_top = -19.0
 offset_right = 103.0
 offset_bottom = 11.0
 metadata/_edit_use_anchors_ = true
+
+[node name="AttackPlayer" type="AudioStreamPlayer2D" parent="." index="3"]
+stream = ExtResource("6_70gwb")

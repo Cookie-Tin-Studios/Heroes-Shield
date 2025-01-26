@@ -9,8 +9,11 @@ extends "res://scripts/mobs/mob_base.gd"
 @export var health_bar_offset: Vector2 = Vector2(0, -20)
 @export var health_bar_follow_collision: bool = true
 
+
+@onready var attacks_sound_player = $AttackPlayer  
 func _ready() -> void:
 	super._ready()
+	movement_speed = -300
 	# Connect the global tick signal so the bat shoots projectiles periodically.
 	global_tick.timeout.connect(_on_tick)
 
@@ -43,6 +46,8 @@ func shoot_projectile() -> void:
 	if projectile is RigidBody2D:
 		projectile.linear_velocity = direction * shooting_speed + target.velocity
 
+	if attacks_sound_player and attacks_sound_player.stream:
+		attacks_sound_player.play()
 	# Add the new projectile to the active scene so it appears in the game.
 	get_tree().get_current_scene().add_child(projectile)
 	print("Projectile shot at target!")

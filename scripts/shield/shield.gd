@@ -20,8 +20,9 @@ var current_health: int = max_health
 @onready var flip_container = $FlipContainer
 @onready var health_bar_starting_position = health_bar.position
 
-# Track projectiles in parry range
+# parry variables
 var projectiles_in_range: Array[RigidBody2D] = []
+@onready var parry_sound_player = $ParrySoundPlayer  
 
 func _ready() -> void:
 	# Initialize health
@@ -225,3 +226,7 @@ func deflect_projectile(projectile: RigidBody2D) -> void:
 	new_velocity *= 5.0
 
 	projectile.linear_velocity = new_velocity
+	
+	# Play the parry sound effect
+	if parry_sound_player and parry_sound_player.stream:
+		parry_sound_player.play()

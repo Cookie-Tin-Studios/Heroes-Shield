@@ -6,8 +6,7 @@ extends RigidBody2D
 var health: float = max_health  # Current health
 
 # Coin stuff.
-@export var coins_dropped: int = 3000 # Variable for coins, can be overloaded in child scripts.
-# End coin stuff.
+@export var coins_dropped: int = 10
 
 @onready var health_bar = $Node2D/TextureProgressBar
 @onready var collision_shape = get_node_or_null("CollisionShape2D")  # Adjusted to reference CollisionShape2D directly
@@ -59,7 +58,7 @@ func coin_explosion() -> void:
 	for i in range(coins_dropped):
 		var coin_sprite := preload("res://scenes/coin.tscn").instantiate()
 		coin_sprite.global_position = $Node2D.global_position
-		
+				
 		add_sibling(coin_sprite)
 		# give some initial velocity in a random direction to make it "explode"
 		coin_sprite.linear_velocity = Vector2(8000, 0).rotated(randf_range(0.0, TAU))
