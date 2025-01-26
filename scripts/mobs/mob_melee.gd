@@ -1,11 +1,16 @@
 extends "res://scripts/mobs/mob_base.gd"
 
+# Determines how far above (or below) the collision shape the health bar should appear.
+@export var health_bar_offset: Vector2 = Vector2(0, -20)
+@export var health_bar_follow_collision: bool = true
+
 @onready var global_tick = get_node("/root/Tick")  # For attack cooldowns
-@onready var attackbox = $mob_attackbox  # Area2D for detecting attack range
+@onready var attackbox = $attackbox  # Area2D for detecting attack range
 @onready var animated_sprite = $AnimatedSprite2D  # Reference to the AnimatedSprite2D node
+@onready var parry_sprite = $attackbox/parry_sprite  # Reference to the AnimatedSprite2D node
 
 @export var chase_speed: float = 250.0
-@export var shield_range: float = 500.0  # Distance to prioritize the shield
+@export var shield_range: float = 400.0  # Distance to prioritize the shield
 @export var melee_range: float = 1.0  # Attack range (update if needed)
 @export var attack_damage: int = 1  # Damage dealt per attack
 @export var attack_cooldown: float = 1.0  # Time between attacks
@@ -21,12 +26,6 @@ var is_in_parry_window: bool = false  # Tracks if the mob is vulnerable to parry
 func _ready() -> void:
 	super._ready()
 	_update_target_priority()
-
-	# Connect signals
-	if attackbox:
-		attackbox.connect("body_entered", Callable(self, "_on_attackbox_body_entered"))
-	else:
-		print("Warning: mob_attackbox not found!")
 
 	# Connect to shield parry signal
 	if is_instance_valid(shield):
@@ -59,16 +58,19 @@ func _physics_process(delta: float) -> void:
 	# Handle states
 	match current_state:
 		"CHASE":
-			if is_instance_valid(target):
-				_move_toward(target.global_position, delta)
+			_move_toward(target.global_position, delta)
 
 		"ENGAGE_TARGET":
-			if is_instance_valid(target):
-				perform_attack(target)
+			perform_attack(target)
 
 		"ENGAGE_SHIELD":
-			if is_instance_valid(shield):
-				perform_attack(shield)
+			perform_attack(shield)
+			
+	# Ensure the health bar follows the collision shape's position if available
+	if collision_shape:
+		$Node2D.position = collision_shape.global_position + Vector2(0, -20)  # Adjust offset as needed
+	else:
+		print("CollisionShape2D not found!")
 
 func _move_toward(point: Vector2, delta: float) -> void:
 	if is_attacking:
@@ -95,7 +97,9 @@ func perform_attack(victim: Node) -> void:
 	# Step 2: Activate the parry window
 	is_in_parry_window = true
 	print("Parry window started.")
+	parry_sprite.play("parryable")
 	await get_tree().create_timer(parry_window_duration).timeout
+	parry_sprite.stop()
 	is_in_parry_window = false
 	print("Parry window ended.")
 
@@ -113,7 +117,7 @@ func _on_parry_attempted(mob: Node) -> void:
 		return  # Ignore parry attempts for other mobs
 
 	print("Parry attempt detected for: ", name)
-	if is_in_parry_window:
+	if is_in_parry_window == true:
 		parry(attack_damage)  # Pass the attack damage to the parry function
 	else:
 		print("Parry failed! Mob is not in the parry window.")
@@ -121,12 +125,13 @@ func _on_parry_attempted(mob: Node) -> void:
 # 
 func parry(damage: float) -> void:
 	print("Mob parried! Taking ", damage, " damage.")
-	if has_method("take_damage"):
+	if has_method("take_damage") and is_in_parry_window == true:
 		take_damage(damage)  # Apply damage to the mob with the provided damage value
 	else:
-		print("No 'take_damage()' method found on mob.")
+		print("Mob not parryable or missing take_damage method.")
 	is_attacking = false
 	is_in_parry_window = false
+
 
 func _deal_damage(victim: Node) -> void:
 	if victim.has_method("take_damage"):

@@ -78,14 +78,16 @@ animations = [{
 "texture": ExtResource("5_v81ch")
 }],
 "loop": true,
-"name": &"parry flare",
+"name": &"parryable",
 "speed": 10.0
 }]
 
 [node name="Mob_base" groups=["mobs"] instance=ExtResource("1_0eyf7")]
 script = ExtResource("2_lds8s")
+health_bar_offset = Vector2(0, -20)
+health_bar_follow_collision = true
 chase_speed = 250.0
-shield_range = 500.0
+shield_range = 400.0
 melee_range = 1.0
 attack_damage = 1
 attack_cooldown = 1.0
@@ -113,11 +115,11 @@ position = Vector2(-97.0003, -31.9997)
 shape = SubResource("CapsuleShape2D_bk8i5")
 one_way_collision = true
 
-[node name="parry_flare" type="AnimatedSprite2D" parent="attackbox" index="0"]
+[node name="parry_sprite" type="AnimatedSprite2D" parent="attackbox" index="0"]
 light_mask = 4
 visibility_layer = 4
 sprite_frames = SubResource("SpriteFrames_gijdg")
-animation = &"parry flare"
+animation = &"parryable"
 
 [node name="TextureProgressBar" parent="Node2D" index="0"]
 offset_left = -95.0
