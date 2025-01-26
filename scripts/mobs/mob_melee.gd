@@ -95,7 +95,6 @@ func perform_attack(victim: Node) -> void:
 	# Step 2: Activate the parry window
 	is_in_parry_window = true
 	print("Parry window started.")
-	
 	await get_tree().create_timer(parry_window_duration).timeout
 	is_in_parry_window = false
 	print("Parry window ended.")
@@ -115,12 +114,17 @@ func _on_parry_attempted(mob: Node) -> void:
 
 	print("Parry attempt detected for: ", name)
 	if is_in_parry_window:
-		parry()
+		parry(attack_damage)  # Pass the attack damage to the parry function
 	else:
 		print("Parry failed! Mob is not in the parry window.")
 
-func parry() -> void:
-	print("Parry successful! Mob stunned.")
+# 
+func parry(damage: float) -> void:
+	print("Mob parried! Taking ", damage, " damage.")
+	if has_method("take_damage"):
+		take_damage(damage)  # Apply damage to the mob with the provided damage value
+	else:
+		print("No 'take_damage()' method found on mob.")
 	is_attacking = false
 	is_in_parry_window = false
 
