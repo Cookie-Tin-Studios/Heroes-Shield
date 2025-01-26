@@ -38,57 +38,29 @@ func add_coins(amount: int) -> void:
 func add_progress(amount: int) -> void:
 	level_progress += amount
 
+const movementCategory = "Movement"
+const movementSpeed1 = "Speed 1"
+const movementSpeed2 = "Speed 2"
 
-var all_upgrades = [
-	{
-		"category_name": "Movement", 
-		"category_upgrades": [
-			{
-				"upgrade_name": "Speed 1",
-				"desc": "You move faster, what did you expect",
-				"cost": 1,
-			},
-			{
-				"upgrade_name": "Speed 2",
-				"desc": "You move faster, electric boogaloo",
-				"cost": 2,
-			},
-		],	
-	},
-	{
-		"category_name": "Category 2",
-		"category_upgrades": [
-			{
-				"upgrade_name": "Upgrade 1",
-				"desc": "Yeah it's an upgrade",
-				"cost": 1,
-			},
-			{
-				"upgrade_name": "Upgrade 2",
-				"desc": "Yeah it's an upgrade",
-				"cost": 2,
-			},
-		],
-	},
-	{
-		"category_name": "Category 3",
-		"category_upgrades": [
-			{
-				"upgrade_name": "Upgrade 3",
-				"desc": "Yeah it's an upgrade",
-				"cost": 1,
-			},
-			{
-				"upgrade_name": "Upgrade 4",
-				"desc": "Yeah it's an upgrade",
-				"cost": 2,
-			},
-		],
-	}
+
+# Define the upgrade categories and their upgrades
+var all_upgrades: Array = [
+	UpgradeCategory.new(movementCategory, [
+		Upgrade.new(movementSpeed1, "You move faster, what did you expect", 1),
+		Upgrade.new(movementSpeed2, "You move faster, electric boogaloo", 2),
+	]),
+	UpgradeCategory.new("Category 2", [
+		Upgrade.new("Upgrade 1", "Yeah it's an upgrade", 1),
+		Upgrade.new("Upgrade 2", "Yeah it's an upgrade", 2),
+	]),
+	UpgradeCategory.new("Category 3", [
+		Upgrade.new("Upgrade 3", "Yeah it's an upgrade", 1),
+		Upgrade.new("Upgrade 4", "Yeah it's an upgrade", 2),
+	]),
 ]
 
-var unlocked_upgrades = {
-	"Movement": [],
+var unlocked_upgrades: Dictionary = {
+	movementCategory: [],
 	"Category 2": [],
 	"Category 3": []
 }

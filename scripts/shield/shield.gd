@@ -49,8 +49,15 @@ func _process(delta: float) -> void:
 
 	input_dir = input_dir.normalized()
 
+	# Movement Upgrades
+	var final_speed = speed
+	if Globals.movementSpeed1 in Globals.unlocked_upgrades[Globals.movementCategory]:
+		final_speed *= 1.1
+	if Globals.movementSpeed2 in Globals.unlocked_upgrades[Globals.movementCategory]:
+		final_speed *= 1.2
+		
 	# Use speed_multiplier
-	var final_speed = speed * speed_multiplier
+	final_speed = final_speed * speed_multiplier
 	var target_velocity: Vector2
 	if input_dir == Vector2.ZERO:
 		target_velocity = idiot_hero.velocity
