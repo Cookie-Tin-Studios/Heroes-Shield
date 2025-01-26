@@ -216,17 +216,38 @@ func restrict_to_camera() -> void:
 ########################################################################
 
 func _on_parry_area_body_entered(body: Node2D) -> void:
-	if body.is_in_group("projectiles") and body is RigidBody2D:
-		projectiles_in_range.append(body)
+	# If we are currently dashing:
+	if is_dashing:
+		if body.is_in_group("projectiles") and body is RigidBody2D:
+			# Immediately parry the projectile (instead of waiting for user to press parry).
+			deflect_projectile(body)
+		elif body.is_in_group("mobs"):
+			# OPTIONAL: Deal 1 damage if you want dash to also hurt mobs.
+			if body.has_method("take_damage"):
+				body.take_damage(1)
+				print("Dash hit! Dealt 1 damage to", body.name)
+			
+			# Apply a knockback impulse if the mob is a RigidBody2D:
+			if body is RigidBody2D:
+				var knockback_dir = (body.global_position - global_position).normalized()
+				# Tweak the strength as needed:
+				body.apply_central_impulse(knockback_dir * 1000)
+	
+	else:
+		# If we are NOT dashing, fall back to normal parry behavior
+		# (append projectiles to projectiles_in_range if they are in group "projectiles")
+		if body.is_in_group("projectiles") and body is RigidBody2D:
+			projectiles_in_range.append(body)
 
 func _on_parry_area_body_exited(body: Node2D) -> void:
 	if body in projectiles_in_range:
 		projectiles_in_range.erase(body)
 
-	if body.is_in_group("mobs"):  # e.g. if you also want parry to affect mobs
+	if body.is_in_group("mobs"):
 		if body.has_method("take_damage"):
 			body.take_damage(1)
 			print("Parried! Dealt 1 damage to ", body.name)
+
 
 func attempt_parry() -> void:
 	if projectiles_in_range.size() == 0:
@@ -270,10 +291,10 @@ func dash() -> void:
 	is_dashing = true
 	can_dash = false
 	dash_timer = dash_duration
-
+	
 	if velocity.length() < 10.0:
-		pass
-
+		pass  # Optional: Decide how to handle near-zero velocity
+	
 	velocity = velocity.normalized() * dash_speed
 	
 func _on_dash_cooldown_finished() -> void:

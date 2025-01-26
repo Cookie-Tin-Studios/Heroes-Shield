@@ -30,6 +30,7 @@ scale = Vector2(0.313477, 0.300293)
 texture = ExtResource("2_guw5v")
 
 [node name="ParryArea" type="Area2D" parent="FlipContainer"]
+visible = false
 position = Vector2(176, -7)
 
 [node name="ParryZoneCollision" type="CollisionShape2D" parent="FlipContainer/ParryArea"]
