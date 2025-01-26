@@ -10,8 +10,8 @@ extends "res://scripts/mobs/mob_base.gd"
 @onready var parry_sprite = $attackbox/parry_sprite  # Reference to the AnimatedSprite2D node
 
 @export var chase_speed: float = 250.0
-@export var shield_range: float = 400.0  # Distance to prioritize the shield
-@export var melee_range: float = 1.0  # Attack range (update if needed)
+@export var shield_range: float = 300.0  # Distance to prioritize the shield
+@export var melee_range: float = 0.5  # Attack range (update if needed)
 @export var attack_damage: int = 1  # Damage dealt per attack
 @export var attack_cooldown: float = 1.0  # Time between attacks
 @export var parry_window_duration: float = 0.5  # Time window for parry
@@ -26,12 +26,6 @@ var is_in_parry_window: bool = false  # Tracks if the mob is vulnerable to parry
 func _ready() -> void:
 	super._ready()
 	_update_target_priority()
-
-	# Connect to shield parry signal
-	if is_instance_valid(shield):
-		shield.connect("attempt_parry", Callable(self, "_on_parry_attempted"))
-	else:
-		print("Shield not found in the scene!")
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
@@ -67,10 +61,9 @@ func _physics_process(delta: float) -> void:
 			perform_attack(shield)
 			
 	# Ensure the health bar follows the collision shape's position if available
-	if collision_shape:
-		$Node2D.position = collision_shape.global_position + Vector2(0, -20)  # Adjust offset as needed
-	else:
-		print("CollisionShape2D not found!")
+	if health_bar_follow_collision and $CollisionShape2D and $Node2D:
+		var collision_pos = $CollisionShape2D.position
+		$Node2D.position = collision_pos + health_bar_offset
 
 func _move_toward(point: Vector2, delta: float) -> void:
 	if is_attacking:

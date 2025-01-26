@@ -83,12 +83,14 @@ animations = [{
 }]
 
 [node name="Mob_base" groups=["mobs"] instance=ExtResource("1_0eyf7")]
+light_mask = 4
+visibility_layer = 4
 script = ExtResource("2_lds8s")
 health_bar_offset = Vector2(0, -20)
 health_bar_follow_collision = true
 chase_speed = 250.0
-shield_range = 400.0
-melee_range = 1.0
+shield_range = 300.0
+melee_range = 0.5
 attack_damage = 1
 attack_cooldown = 1.0
 parry_window_duration = 0.5
@@ -126,3 +128,4 @@ offset_left = -95.0
 offset_top = -159.0
 offset_right = 105.0
 offset_bottom = -119.0
+metadata/_edit_use_anchors_ = true

@@ -193,18 +193,15 @@ func restrict_to_camera() -> void:
 func _on_parry_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("projectiles") and body is RigidBody2D:
 		projectiles_in_range.append(body)
-	
-	if body.is_in_group("mobs") and body is RigidBody2D:
+	elif body.is_in_group("mobs") and body is RigidBody2D:
 		mobs_in_range.append(body)
-		print("Mob in parry range, Mob Name:", body)
+
 
 func _on_parry_area_body_exited(body: Node2D) -> void:
 	if body in projectiles_in_range:
 		projectiles_in_range.erase(body)
-	
-	if body in mobs_in_range:
+	elif body in mobs_in_range:
 		mobs_in_range.erase(body)
-		print("Mob leaving parry range, Mob Name:", body) 
 
 func attempt_parry() -> void:
 	if projectiles_in_range.size() == 0:
@@ -221,9 +218,6 @@ func attempt_melee_parry() -> void:
 	for mob in mobs_in_range:
 		if mob and mob.has_method("parry"):
 			mob.parry(attack_damage)
-			print("Parry ", mob.name, " for ", attack_damage, " damage!")
-		else:
-			print("No 'parry()' method found on: ", mob)
 
 func deflect_projectile(projectile: RigidBody2D) -> void:
 	projectile.parried = true

@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://i70ovs7ns5pg"]
+[gd_scene load_steps=9 format=3 uid="uid://i70ovs7ns5pg"]
 
 [ext_resource type="PackedScene" uid="uid://dk41cisdtdonq" path="res://scenes/idiot_hero.tscn" id="2_jn0l8"]
 [ext_resource type="PackedScene" uid="uid://bumwv0mx5w6aq" path="res://scenes/shield.tscn" id="2_w3671"]
 [ext_resource type="PackedScene" uid="uid://cn3lii7exa78k" path="res://scenes/background.tscn" id="3_3s816"]
-[ext_resource type="Script" path="res://scripts/spawners/melee_spawner.gd" id="5_attrf"]
-[ext_resource type="PackedScene" uid="uid://dtj2jcj8eeq22" path="res://scenes/HUD.tscn" id="5_scp5s"]
+[ext_resource type="PackedScene" path="res://scenes/HUD.tscn" id="5_scp5s"]
 [ext_resource type="PackedScene" uid="uid://ei3etn0w5se4" path="res://scenes/menu/pause_menu.tscn" id="5_yooe3"]
 [ext_resource type="PackedScene" uid="uid://dtcvtr24mkkft" path="res://scenes/mob_melee.tscn" id="6_v37hx"]
 [ext_resource type="PackedScene" uid="uid://xsfmwuuxbm3h" path="res://scenes/spawners/bat_spawner.tscn" id="6_xgrp2"]
@@ -42,17 +41,17 @@ position = Vector2(1878.57, -650)
 scale = Vector2(0.714286, 1.42857)
 
 [node name="MeleeSpawningZone" parent="Idiot_hero" instance=ExtResource("6_xgrp2")]
-position = Vector2(2077.86, 137.143)
+position = Vector2(2129.29, 31.4285)
 scale = Vector2(0.510205, 0.510205)
-script = ExtResource("5_attrf")
 mob_scene = ExtResource("6_v37hx")
-max_mobs = 1
+spawn_interval = 1.0
+max_mobs = 5
 
 [node name="BatSpawningZone" parent="Idiot_hero" instance=ExtResource("6_xgrp2")]
 position = Vector2(2208.57, -680)
 scale = Vector2(0.714286, 0.714286)
-spawn_interval = 2000.0
-max_mobs = 1
+spawn_interval = 1.0
+max_mobs = 5
 
 [node name="Camera2D" type="Camera2D" parent="Idiot_hero"]
 position = Vector2(404.285, -412.143)
