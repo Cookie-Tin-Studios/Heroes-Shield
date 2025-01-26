@@ -12,6 +12,19 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_p3ykw")
 
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+offset_left = 62.0
+offset_top = 26.0
+offset_right = 62.0
+offset_bottom = 26.0
+
+[node name="CoinsLabel" type="Label" parent="Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Coins: "
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
