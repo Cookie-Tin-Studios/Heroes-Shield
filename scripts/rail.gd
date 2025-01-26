@@ -23,7 +23,8 @@ var end_pos: Vector2:
 	set(position):
 		_end_pos = Vector2(position)
 		update_points()
-		
+
+
 func update_points() -> void:
 	var line_2d: Line2D = $Line2D
 	line_2d.clear_points()
