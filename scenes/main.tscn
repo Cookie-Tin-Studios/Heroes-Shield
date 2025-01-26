@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://i70ovs7ns5pg"]
+[gd_scene load_steps=9 format=3 uid="uid://i70ovs7ns5pg"]
 
 [ext_resource type="PackedScene" uid="uid://dk41cisdtdonq" path="res://scenes/idiot_hero.tscn" id="2_jn0l8"]
 [ext_resource type="PackedScene" uid="uid://bumwv0mx5w6aq" path="res://scenes/shield.tscn" id="2_w3671"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dtj2jcj8eeq22" path="res://scenes/HUD.tscn" id="5_scp5s"]
 [ext_resource type="PackedScene" uid="uid://ei3etn0w5se4" path="res://scenes/menu/pause_menu.tscn" id="5_yooe3"]
 [ext_resource type="PackedScene" uid="uid://xsfmwuuxbm3h" path="res://scenes/spawners/bat_spawner.tscn" id="6_xgrp2"]
+[ext_resource type="PackedScene" uid="uid://dvqneq3eakg02" path="res://scenes/spawners/powerup_spawner.tscn" id="8_jw5bn"]
 
 [sub_resource type="GDScript" id="GDScript_81rl6"]
 script/source = "extends Node2D
@@ -34,9 +35,12 @@ z_as_relative = false
 position = Vector2(1343, 1669)
 scale = Vector2(1.4, 1.4)
 
+[node name="PowerUpSpawningZone" parent="Idiot_hero" instance=ExtResource("8_jw5bn")]
+position = Vector2(1878.57, -650)
+scale = Vector2(0.714286, 1.42857)
+
 [node name="SpawningZone" parent="Idiot_hero" instance=ExtResource("6_xgrp2")]
-position = Vector2(2208.57, -680)
-scale = Vector2(0.714286, 0.714286)
+position = Vector2(2007.14, -610.714)
 
 [node name="Camera2D" type="Camera2D" parent="Idiot_hero"]
 position = Vector2(404.285, -412.143)

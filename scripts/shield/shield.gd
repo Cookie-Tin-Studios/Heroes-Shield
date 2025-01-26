@@ -4,12 +4,14 @@ extends CharacterBody2D
 @export var max_health: int = 3
 @onready var health_bar = $HealthBar
 var current_health: int = max_health
+@export var isInvincible: bool = false
 
 # --- Movement variables ---
 @export var acceleration: float = 4000
 @export var deceleration: float = 4000
 @export var friction: float = 0.8
 @export var speed: float = 800
+@export var speed_multiplier: float = 1.0
 
 # Reference to a "hero" node (for movement/flipping), but NOT used for parry direction
 @export var idiot_hero: Node
@@ -31,29 +33,11 @@ func _ready() -> void:
 	if idiot_hero == null:
 		print("Shield: Hero path is not set!")
 
-func update_health_bar() -> void:
-	health_bar.update_health(current_health)
-
-func take_damage(amount: int) -> void:
-	current_health -= amount
-	update_health_bar()
-	if current_health <= 0:
-		die()
-
-func die() -> void:
-	print("Character has died!")
-	queue_free()
 
 func _process(delta: float) -> void:
 	var input_dir = Vector2.ZERO
 
-	# If you still want to anchor movement logic around the hero’s velocity, do so;
-	# otherwise, remove references to idiot_hero if not needed.
-	if not is_instance_valid(idiot_hero):
-		print("Shield: Cannot find the hero node!")
-		return
-
-	# --- Basic movement inputs ---
+	# --- same input logic as before ---
 	if Input.is_action_pressed("ui_up"):
 		input_dir.y -= 1
 	if Input.is_action_pressed("ui_down"):
@@ -65,12 +49,13 @@ func _process(delta: float) -> void:
 
 	input_dir = input_dir.normalized()
 
+	# Use speed_multiplier
+	var final_speed = speed * speed_multiplier
 	var target_velocity: Vector2
 	if input_dir == Vector2.ZERO:
-		# If no direct input, maybe match hero velocity or keep shield still.
 		target_velocity = idiot_hero.velocity
 	else:
-		target_velocity = input_dir * speed
+		target_velocity = input_dir * final_speed
 
 	velocity = velocity.move_toward(target_velocity, acceleration * delta)
 
@@ -97,6 +82,82 @@ func _process(delta: float) -> void:
 	# If you still want to face away from hero, keep the next lines:
 	var direction_to_hero = global_position - idiot_hero.global_position
 	rotation = direction_to_hero.angle()
+ 
+
+########################################################################
+# HEALTH MANAGEMENT
+########################################################################
+
+func update_health_bar() -> void:
+	health_bar.update_health(current_health)
+
+func take_damage(amount: int) -> void:
+	if isInvincible:
+		return
+		
+	current_health -= amount
+	update_health_bar()
+	if current_health <= 0:
+		die()
+
+func die() -> void:
+	print("Character has died!")
+	queue_free()
+	
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.is_in_group("projectiles"):
+		take_damage(1)
+		body.queue_free()  # Destroy the projectile
+	
+########################################################################
+# SPEED BOOST
+########################################################################
+	
+func apply_speed_boost(boost_factor: float, duration: float) -> void:
+	speed_multiplier *= boost_factor
+	
+	var timer := Timer.new()
+	timer.wait_time = duration
+	timer.one_shot = true
+	add_child(timer)
+	timer.start()
+
+	# Create a Callable for the revert_speed_boost method, binding the boost_factor.
+	var revert_callable = Callable(self, "revert_speed_boost").bind(boost_factor)
+
+	# Connect the timeout signal to that Callable
+	timer.timeout.connect(revert_callable)
+
+func revert_speed_boost(boost_factor: float) -> void:
+	speed_multiplier /= boost_factor
+	
+	
+########################################################################
+# Invincibility
+########################################################################
+	
+func apply_invincibility(duration: float) -> void:	
+	var timer := Timer.new()
+	timer.wait_time = duration
+	timer.one_shot = true
+	add_child(timer)
+	timer.start()
+	isInvincible = true
+
+	# Create a Callable for the revert_speed_boost method, binding the boost_factor.
+	var revert_callable = Callable(self, "revert_invincibility")
+
+	# Connect the timeout signal to that Callable
+	timer.timeout.connect(revert_callable)
+	
+
+func revert_invincibility() -> void:
+	isInvincible = false
+
+
+########################################################################
+# MOVEMENT
+########################################################################
 
 func restrict_to_camera() -> void:
 	var camera = get_viewport().get_camera_2d()
@@ -111,13 +172,10 @@ func restrict_to_camera() -> void:
 	position.x = clamp(position.x, camera_rect.position.x, camera_rect.position.x + camera_rect.size.x)
 	position.y = clamp(position.y, camera_rect.position.y, camera_rect.position.y + camera_rect.size.y)
 
-# --- Main collision shape events ---
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("projectiles"):
-		take_damage(1)
-		body.queue_free()  # Destroy the projectile
+########################################################################
+# PARRY
+########################################################################
 
-# --- Parry area callbacks ---
 func _on_parry_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("projectiles") and body is RigidBody2D:
 		projectiles_in_range.append(body)
@@ -131,7 +189,6 @@ func _on_parry_area_body_exited(body: Node2D) -> void:
 			body.take_damage(1)
 			print("Parried! Dealt 1 damage to ", body.name)
 
-# --- Parry logic ---
 func attempt_parry() -> void:
 	if projectiles_in_range.size() == 0:
 		return
