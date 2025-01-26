@@ -61,4 +61,3 @@ offset_bottom = 40.0
 
 [node name="boss1-part2" parent="." instance=ExtResource("7_cpj5h")]
 position = Vector2(2603, 621)
-health_bar_offset = Vector2(-100, 200)
