@@ -34,5 +34,5 @@ animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.889135
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["damage-box"]]
 shape = SubResource("RectangleShape2D_74d3d")

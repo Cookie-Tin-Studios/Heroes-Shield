@@ -85,11 +85,15 @@ animations = [{
 [node name="Mob_base" groups=["mobs"] instance=ExtResource("1_0eyf7")]
 script = ExtResource("2_lds8s")
 chase_speed = 250.0
+shield_range = 500.0
+melee_range = 1.0
 attack_damage = 1
 attack_cooldown = 1.0
 parry_window_duration = 0.5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
+light_mask = 4
+visibility_layer = 4
 position = Vector2(0.99968, 5.00031)
 scale = Vector2(2.35937, 2.51563)
 sprite_frames = SubResource("SpriteFrames_ns1xs")
@@ -102,12 +106,16 @@ position = Vector2(1.74968, -0.87468)
 shape = SubResource("RectangleShape2D_gxrgf")
 disabled = true
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="." index="2"]
+[node name="attackbox" type="CollisionShape2D" parent="." index="2"]
+light_mask = 4
+visibility_layer = 4
 position = Vector2(-97.0003, -31.9997)
 shape = SubResource("CapsuleShape2D_bk8i5")
 one_way_collision = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D2" index="0"]
+[node name="parry_flare" type="AnimatedSprite2D" parent="attackbox" index="0"]
+light_mask = 4
+visibility_layer = 4
 sprite_frames = SubResource("SpriteFrames_gijdg")
 animation = &"parry flare"
 
