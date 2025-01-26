@@ -7,6 +7,10 @@ extends "res://scripts/mobs/mob_base.gd"
 # Variable for referencing idiot node
 var idiot_hero: Node
 
+# Defines a scene to be used for the rails.
+var rail_scene = preload("res://scenes/bosses/rail.tscn")
+
+
 # Requried for modifying active animation in functions.
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -22,6 +26,7 @@ func _ready() -> void:
 	coins_dropped = 1
 	# Connect the global tick signal so the bat shoots projectiles periodically.
 	global_tick.timeout.connect(_on_tick)
+	spawn_rails()
 
 func _physics_process(delta: float) -> void:
 	# This is for making the boss follow the velocity of the idiot, so it stays in a static location.
@@ -55,33 +60,15 @@ func die() -> void:
 	Globals.add_coins(coins_dropped) # Give the player however COINZ.
 	queue_free()  # Remove mob from the scene
 
-# Note that this overloads the parent die function. This is so that we can play the on-death animation for a second before dying.
+func spawn_rails() -> void:
 
-func shoot_projectile() -> void:
-	# If no target is explicitly assigned, attempt to find a node named "Idiot_hero" in the current scene.
-	if not target:
-		var idiot = get_tree().get_current_scene().get_node("Idiot_hero")
-		if idiot and idiot is CharacterBody2D:
-			target = idiot
-		else:
-			print("No valid 'Idiot_hero' node found in the scene.")
+	var top_rail = rail_scene.instantiate()
+	top_rail.start_pos = Vector2(0,200)
+	top_rail.end_pos = Vector2(10000, 1000)
+	get_tree().get_current_scene().add_child(top_rail)
+	print("Top rail added")
 
-	# Create a new instance of the projectile
-	var projectile = projectile_scene.instantiate()
-	
-	# Keep track of the shooter (bat)
-	projectile.shooter = self
-	
-	# Position the projectile where the bat currently is.
-	projectile.global_position = global_position
-
-	# Determine the direction from the bat to the target.
-	var direction = (target.global_position - global_position).normalized()
-
-	# If the projectile is a RigidBody2D, give it a velocity in the calculated direction.
-	if projectile is RigidBody2D:
-		projectile.linear_velocity = direction * shooting_speed + target.velocity
-
-	# Add the new projectile to the active scene so it appears in the game.
-	get_tree().get_current_scene().add_child(projectile)
-	print("Projectile shot at target!")
+	#var bottom_rail = rail_scene.instantiate()
+	#bottom_rail.start_pos = Vector2(-300, 600)
+	#bottom_rail.end_pos = Vector2(300, 600)
+	#get_tree().get_current_scene().add_child(bottom_rail)
