@@ -35,6 +35,7 @@ func update_health_bar() -> void:
 	else:
 		print("Health bar not found!")
 
+# Note that this function is overloaded in some child scripts (ex: boss1).
 func die() -> void:
 	print("Mob has died!")
 	coin_explosion()
