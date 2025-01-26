@@ -1,13 +1,13 @@
 [gd_scene load_steps=2 format=3 uid="uid://cn3lii7exa78k"]
 
-[ext_resource type="Texture2D" uid="uid://ccnlg02iy2f2" path="res://assets/sprites/backgrounds/BG_Concept art.png" id="1_2siw2"]
+[ext_resource type="Texture2D" uid="uid://6tp3xb2ifse5" path="res://assets/sprites/backgrounds/dungeon_BG.png" id="1_flve7"]
 
 [node name="Background" type="ParallaxBackground"]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]
 position = Vector2(1, 0)
 motion_scale = Vector2(2, 2)
-motion_mirroring = Vector2(5400, 0)
+motion_mirroring = Vector2(1920, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
 texture_repeat = 2
@@ -16,4 +16,4 @@ texture_repeat = 2
 offset_left = -0.666667
 offset_right = 366.333
 offset_bottom = 137.0
-texture = ExtResource("1_2siw2")
+texture = ExtResource("1_flve7")
