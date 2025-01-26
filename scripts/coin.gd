@@ -17,6 +17,6 @@ func _physics_process(delta: float) -> void:
 	linear_velocity = linear_velocity.lerp(towards_target, .075)
 	#linear_velocity = linear_velocity.move_toward(target, delta * acceleration)
 	if position.distance_to(target) <= despawn_range:
-		print("despawning coin")
+		#print("despawning coin")
 		despawn.emit()
 		queue_free()
