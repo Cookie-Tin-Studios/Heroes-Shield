@@ -6,8 +6,7 @@ extends RigidBody2D
 var health: float = max_health  # Current health
 
 # Coin stuff.
-var coins_dropped: int = 10 # Variable for coins, can be overloaded in child scripts.
-@export var coin_texture: Texture2D = preload("res://assets/sprites/HIM.png")
+@export var coins_dropped: int = 3000 # Variable for coins, can be overloaded in child scripts.
 # End coin stuff.
 
 @onready var health_bar = $Node2D/TextureProgressBar
@@ -41,7 +40,7 @@ func die() -> void:
 	print("Mob has died!")
 	coin_explosion()
 	
-	Globals.add_coins(coins_dropped) # Give the player however COINZ.
+	#Globals.add_coins(coins_dropped) # Give the player however COINZ.
 	queue_free()  # Remove mob from the scene
 
 func _physics_process(delta: float) -> void:
@@ -62,25 +61,9 @@ func coin_explosion() -> void:
 		coin_sprite.global_position = $Node2D.global_position
 		
 		add_sibling(coin_sprite)
-
-		var random_direction := Vector2(1, 0).rotated(randf_range(0.0, TAU))
-		var random_distance := randf_range(75.0, 500.0)
-		var final_position: Vector2 = coin_sprite.position + random_direction * random_distance
-
-		var tween := get_tree().create_tween().set_parallel(true)
-		# tween.chain() makes all tweens prior to it run before anything after it
-		# Move from current position to final_position over 0.5s
-		tween.tween_property(coin_sprite, "position", final_position, 0.1)
-		tween.chain()
-		# hold the coin in place for a bit, then move it to the label position
-		tween.tween_property(coin_sprite, "position", final_position, 0.3)
-		tween.chain()
-		# Move coin to the coin label
-		tween.tween_property(coin_sprite, "position", Globals.coins_label_position, 3.5)
-		# Fade alpha from 1.0 to 0.0 over 0.5s
-		tween.tween_property(coin_sprite, "modulate:a", 0.0, 3.5).from(1.0)
-		tween.chain()
-		tween.tween_callback(coin_sprite.queue_free)
+		# give some initial velocity in a random direction to make it "explode"
+		coin_sprite.linear_velocity = Vector2(8000, 0).rotated(randf_range(0.0, TAU))
+		coin_sprite.despawn.connect(func(): Globals.add_coins(1))
 	
 
 func remon_on_camera_exit() -> void:

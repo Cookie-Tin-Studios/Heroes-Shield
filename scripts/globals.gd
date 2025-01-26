@@ -8,7 +8,11 @@ var _coins: int = 0
 var _level_progress: int = 0
 var _max_level_progress: int = 10000
 
-var coins_label_position: Vector2 = Vector2(0, 0)
+# this is set in HUD._ready
+var _camera_init: Vector2 = Vector2.ZERO
+var camera_offset: Vector2 = Vector2.ZERO
+
+var coins_label_position: Vector2 = Vector2.ZERO
 var coins: int:
 	get:
 		return _coins
@@ -31,8 +35,14 @@ var max_level_progress: int:
 		emit_signal("max_level_progress_changed", _max_level_progress)
 
 func _ready() -> void:
-	print("Globals script initialized. Starting with coins =", _coins)
+	print("Globals script initialized. Starting with coins = ", _coins)
 
+	
+func _process(_delta) -> void:
+	var camera = get_viewport().get_camera_2d()
+	if is_instance_valid(camera):
+		camera_offset = (camera.global_position - _camera_init)
+	
 func add_coins(amount: int) -> void:
 	coins += amount
 

@@ -1,6 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://dlnhx2jn3y2ky"]
+[gd_scene load_steps=25 format=3 uid="uid://dlnhx2jn3y2ky"]
 
 [ext_resource type="Texture2D" uid="uid://d1r4qjtpe4nkx" path="res://assets/sprites/coin_sprite.png" id="1_07d46"]
+[ext_resource type="Script" path="res://scripts/coin.gd" id="1_r371l"]
 [ext_resource type="Script" path="res://scripts/effects/coin_trail.gd" id="2_vhohw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3g2b7"]
@@ -40,10 +41,6 @@ atlas = ExtResource("1_07d46")
 region = Rect2(800, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ix7f0"]
-atlas = ExtResource("1_07d46")
-region = Rect2(900, 0, 100, 100)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nv3mb"]
 atlas = ExtResource("1_07d46")
 region = Rect2(900, 0, 100, 100)
 
@@ -113,9 +110,6 @@ animations = [{
 "texture": SubResource("AtlasTexture_ix7f0")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nv3mb")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_ty554")
 }, {
 "duration": 1.0,
@@ -148,18 +142,22 @@ animations = [{
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="Coin" type="Node2D"]
+[sub_resource type="Gradient" id="Gradient_j8g6f"]
+colors = PackedColorArray(0, 0.5635, 0.69, 1, 1, 1, 1, 0)
+
+[node name="Coin" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_r371l")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fgico")
 autoplay = "default"
-frame = 10
-frame_progress = 0.183521
+frame_progress = 0.647812
 
 [node name="trail" type="Line2D" parent="."]
 top_level = true
+points = PackedVector2Array(25, 5)
 width = 20.0
 width_curve = SubResource("Curve_la1gm")
-default_color = Color(1, 1, 0, 1)
+gradient = SubResource("Gradient_j8g6f")
 script = ExtResource("2_vhohw")
-MAX_LENGTH = 50
