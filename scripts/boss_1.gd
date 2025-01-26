@@ -1,7 +1,7 @@
 extends "res://scripts/mobs/mob_base.gd"
 
 # Determines how far above (or below) the collision shape the health bar should appear.
-@export var health_bar_offset: Vector2 = Vector2(0, 200)
+@export var health_bar_offset: Vector2 = Vector2(-100, 200)
 @export var health_bar_follow_collision: bool = true
 
 # Variable for referencing idiot node
@@ -14,7 +14,9 @@ var idiot_hero: Node
 @onready var global_tick = get_node("/root/Tick")
 
 func _ready() -> void:
+	# Use the parent script's ready function.
 	super._ready()
+	# Change mob-specific variables from mob_base.
 	health = 5
 	max_health = 5
 	coins_dropped = 1
@@ -45,11 +47,41 @@ func hurt_animation() -> void:
 
 # Note that this overloads the parent die function. This is so that we can play the on-death animation for a second before dying.
 func die() -> void:
-	print("This is a die() function within the boss_1.gd script.")
+	print("This is the die() function within the boss_1.gd script.")
 	animated_sprite.play("on-kill")
 	await get_tree().create_timer(1.0).timeout
 	coin_explosion()
 	
 	Globals.add_coins(coins_dropped) # Give the player however COINZ.
 	queue_free()  # Remove mob from the scene
+
+# Note that this overloads the parent die function. This is so that we can play the on-death animation for a second before dying.
+
+func shoot_projectile() -> void:
+	# If no target is explicitly assigned, attempt to find a node named "Idiot_hero" in the current scene.
+	if not target:
+		var idiot = get_tree().get_current_scene().get_node("Idiot_hero")
+		if idiot and idiot is CharacterBody2D:
+			target = idiot
+		else:
+			print("No valid 'Idiot_hero' node found in the scene.")
+
+	# Create a new instance of the projectile
+	var projectile = projectile_scene.instantiate()
 	
+	# Keep track of the shooter (bat)
+	projectile.shooter = self
+	
+	# Position the projectile where the bat currently is.
+	projectile.global_position = global_position
+
+	# Determine the direction from the bat to the target.
+	var direction = (target.global_position - global_position).normalized()
+
+	# If the projectile is a RigidBody2D, give it a velocity in the calculated direction.
+	if projectile is RigidBody2D:
+		projectile.linear_velocity = direction * shooting_speed + target.velocity
+
+	# Add the new projectile to the active scene so it appears in the game.
+	get_tree().get_current_scene().add_child(projectile)
+	print("Projectile shot at target!")
