@@ -6,8 +6,7 @@ extends RigidBody2D
 var health: float = max_health  # Current health
 
 # Coin stuff.
-var coins_dropped: int = 10 # Variable for coins, can be overloaded in child scripts.
-@export var coin_texture: Texture2D = preload("res://assets/sprites/HIM.png")
+@export var coins_dropped: int = 3000 # Variable for coins, can be overloaded in child scripts.
 # End coin stuff.
 
 @onready var health_bar = $Node2D/TextureProgressBar
@@ -41,7 +40,7 @@ func die() -> void:
 	print("Mob has died!")
 	coin_explosion()
 	
-	Globals.add_coins(coins_dropped) # Give the player however COINZ.
+	#Globals.add_coins(coins_dropped) # Give the player however COINZ.
 	queue_free()  # Remove mob from the scene
 
 func _physics_process(delta: float) -> void:
@@ -58,28 +57,13 @@ func _physics_process(delta: float) -> void:
 
 func coin_explosion() -> void:
 	for i in range(coins_dropped):
-		var coin_sprite := Sprite2D.new()
-		coin_sprite.texture = coin_texture
+		var coin_sprite := preload("res://scenes/coin.tscn").instantiate()
 		coin_sprite.global_position = $Node2D.global_position
 		
 		add_sibling(coin_sprite)
-
-		var random_direction := Vector2(1, 0).rotated(randf_range(0.0, TAU))
-		var random_distance := randf_range(75.0, 500.0)
-		var final_position := coin_sprite.position + random_direction * random_distance
-
-		var tween := get_tree().create_tween()
-
-		# Move from current position to final_position over 0.5s
-		tween.tween_property(coin_sprite, "position", final_position, 0.1)
-
-		# Fade alpha from 1.0 to 0.0 over 0.5s
-		tween.tween_property(coin_sprite, "modulate:a", 0.0, 0.5).from(1.0)
-
-		# Connect the finished signal with an inline function
-		tween.finished.connect(func():
-			coin_sprite.queue_free()
-		)
+		# give some initial velocity in a random direction to make it "explode"
+		coin_sprite.linear_velocity = Vector2(8000, 0).rotated(randf_range(0.0, TAU))
+		coin_sprite.despawn.connect(func(): Globals.add_coins(1))
 	
 
 func remon_on_camera_exit() -> void:

@@ -4,6 +4,8 @@ extends CanvasLayer
 @onready var progress_bar: ProgressBar = $Control/ProgressBar
 @onready var progress_icon: Sprite2D = $Control/ProgressBar/ProgressIcon
 
+var _camera_start_position: Vector2 = Vector2.ZERO
+
 func _ready() -> void:
 	# Connect coin signals (already done in your snippet).
 	Globals.connect("coins_changed", Callable(self, "_on_coins_changed"))
@@ -14,6 +16,10 @@ func _ready() -> void:
 
 	# Initialize label text
 	coins_label.text = "Coins: " + str(Globals.coins)
+	Globals.coins_label_position = coins_label.global_position + Vector2(0, 100)
+
+	var camera = get_viewport().get_camera_2d()
+	Globals._camera_init = camera.global_position
 
 	# Initialize progress bar with current values
 	progress_bar.max_value = Globals.max_level_progress
@@ -21,7 +27,7 @@ func _ready() -> void:
 	
 	# Optionally, update the icon position (if you want it to appear in the correct spot at start).
 	_update_progress_icon()
-
+	
 func _on_coins_changed(new_amount: int) -> void:
 	coins_label.text = "Coins: " + str(new_amount)
 

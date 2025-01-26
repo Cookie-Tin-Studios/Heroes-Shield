@@ -1,0 +1,163 @@
+[gd_scene load_steps=25 format=3 uid="uid://dlnhx2jn3y2ky"]
+
+[ext_resource type="Texture2D" uid="uid://d1r4qjtpe4nkx" path="res://assets/sprites/coin_sprite.png" id="1_07d46"]
+[ext_resource type="Script" path="res://scripts/coin.gd" id="1_r371l"]
+[ext_resource type="Script" path="res://scripts/effects/coin_trail.gd" id="2_vhohw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3g2b7"]
+atlas = ExtResource("1_07d46")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4kwpr"]
+atlas = ExtResource("1_07d46")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wlkkx"]
+atlas = ExtResource("1_07d46")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xob3d"]
+atlas = ExtResource("1_07d46")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8uo4"]
+atlas = ExtResource("1_07d46")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nkdhr"]
+atlas = ExtResource("1_07d46")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_avjoe"]
+atlas = ExtResource("1_07d46")
+region = Rect2(600, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m2r4t"]
+atlas = ExtResource("1_07d46")
+region = Rect2(700, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3xcn"]
+atlas = ExtResource("1_07d46")
+region = Rect2(800, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ix7f0"]
+atlas = ExtResource("1_07d46")
+region = Rect2(900, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ty554"]
+atlas = ExtResource("1_07d46")
+region = Rect2(800, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfp8b"]
+atlas = ExtResource("1_07d46")
+region = Rect2(700, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6gjt4"]
+atlas = ExtResource("1_07d46")
+region = Rect2(600, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ck8am"]
+atlas = ExtResource("1_07d46")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6r2n"]
+atlas = ExtResource("1_07d46")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3dgr"]
+atlas = ExtResource("1_07d46")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dri6a"]
+atlas = ExtResource("1_07d46")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vq1hm"]
+atlas = ExtResource("1_07d46")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fgico"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3g2b7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4kwpr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wlkkx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xob3d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t8uo4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nkdhr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_avjoe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m2r4t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g3xcn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ix7f0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ty554")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dfp8b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6gjt4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ck8am")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t6r2n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3dgr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dri6a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vq1hm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="Curve" id="Curve_la1gm"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_j8g6f"]
+colors = PackedColorArray(0, 0.5635, 0.69, 1, 1, 1, 1, 0)
+
+[node name="Coin" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_r371l")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_fgico")
+autoplay = "default"
+frame_progress = 0.647812
+
+[node name="trail" type="Line2D" parent="."]
+top_level = true
+points = PackedVector2Array(25, 5)
+width = 20.0
+width_curve = SubResource("Curve_la1gm")
+gradient = SubResource("Gradient_j8g6f")
+script = ExtResource("2_vhohw")
