@@ -17,8 +17,8 @@ func _ready() -> void:
 	# Use the parent script's ready function.
 	super._ready()
 	# Change mob-specific variables from mob_base.
-	health = 50 
-	max_health = 50
+	health = 5
+	max_health = 5
 	coins_dropped = 1
 	# Connect the global tick signal so the bat shoots projectiles periodically.
 	global_tick.timeout.connect(_on_tick)
