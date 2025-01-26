@@ -36,6 +36,12 @@ func _on_body_entered(body: Node) -> void:
 		if body.has_method("take_damage"):
 			body.take_damage(damage)
 			print("Projectile hit ", body.name, " for ", damage, " damage.")
+			
+		if body.has_method("hurt_animation"):
+			body.hurt_animation()  # Apply damage to the target.
+			print("Hurt animation played.")
+		
+		# Remove the projectile after it hits any target.
 		queue_free()
 
 

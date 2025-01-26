@@ -16,7 +16,8 @@ func _ready() -> void:
 
 func _on_tick() -> void:
 	# Trigger a projectile shot every time the global tick fires.
-	shoot_projectile()
+	if health != 0:
+		shoot_projectile()
 
 func shoot_projectile() -> void:
 	# If no target is explicitly assigned, attempt to find a node named "Idiot_hero" in the current scene.
