@@ -8,7 +8,7 @@ var current_health: int = max_health
 
 # --- Movement variables ---
 @export var acceleration: float = 4000
-@export var deceleration: float = 4000
+@export var deceleration: float = 6000
 @export var friction: float = 0.8
 @export var speed: float = 800
 @export var speed_multiplier: float = 1.0
@@ -23,6 +23,16 @@ var current_health: int = max_health
 # parry variables
 var projectiles_in_range: Array[RigidBody2D] = []
 @onready var parry_sound_player = $ParrySoundPlayer  
+
+# dash variables
+@export var dash_speed: float = 3000.0
+@export var dash_duration: float = 0.5
+@export var dash_cooldown: float = 1.0
+
+var is_dashing: bool = false
+var can_dash: bool = true
+var dash_timer: float = 0.0
+
 
 func _ready() -> void:
 	# Initialize health
@@ -66,6 +76,27 @@ func _process(delta: float) -> void:
 		target_velocity = input_dir * final_speed
 
 	velocity = velocity.move_toward(target_velocity, acceleration * delta)
+
+	# Dash mechanics
+	#########################
+	# Check if currently dashing
+	if is_dashing:
+		dash_timer -= delta
+		if dash_timer <= 0.0:
+			is_dashing = false
+			# Start a cooldown timer
+			var cooldown_timer := Timer.new()
+			cooldown_timer.one_shot = true
+			cooldown_timer.wait_time = dash_cooldown
+			add_child(cooldown_timer)
+			cooldown_timer.start()
+			cooldown_timer.timeout.connect(Callable(self, "_on_dash_cooldown_finished"))
+	else:
+		# Only allow dash if not already dashing and not on cooldown
+		if can_dash and Input.is_action_just_pressed("shield_dash"):
+			# Check if you have unlocked the dash upgrade
+			if Globals.movementSpeed3 in Globals.unlocked_upgrades[Globals.movementCategory]:
+				dash()
 
 	# Friction if no movement input
 	if input_dir == Vector2.ZERO:
@@ -230,3 +261,20 @@ func deflect_projectile(projectile: RigidBody2D) -> void:
 	# Play the parry sound effect
 	if parry_sound_player and parry_sound_player.stream:
 		parry_sound_player.play()
+
+########################################################################
+# DASH
+########################################################################
+
+func dash() -> void:
+	is_dashing = true
+	can_dash = false
+	dash_timer = dash_duration
+
+	if velocity.length() < 10.0:
+		pass
+
+	velocity = velocity.normalized() * dash_speed
+	
+func _on_dash_cooldown_finished() -> void:
+	can_dash = true
