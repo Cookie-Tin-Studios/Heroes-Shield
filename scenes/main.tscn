@@ -26,6 +26,9 @@ func _process(_delta: float) -> void:
 [node name="Node2D" type="Node2D"]
 script = SubResource("GDScript_81rl6")
 
+[node name="boss1-part2" parent="." instance=ExtResource("7_cpj5h")]
+position = Vector2(2603, 621)
+
 [node name="Shield" parent="." instance=ExtResource("2_w3671")]
 position = Vector2(1552, 1299)
 
@@ -63,6 +66,3 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="boss1-part2" parent="." instance=ExtResource("7_cpj5h")]
-position = Vector2(2603, 621)
