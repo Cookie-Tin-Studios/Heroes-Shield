@@ -33,6 +33,7 @@ func take_damage(amount: float) -> void:
 
 func update_health_bar() -> void:
 	if health_bar:
+		health_bar.max_value = max_health
 		health_bar.value = health
 	else:
 		print("Health bar not found!")
