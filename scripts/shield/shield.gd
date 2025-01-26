@@ -22,7 +22,12 @@ var current_health: int = max_health
 
 # parry variables
 var projectiles_in_range: Array[RigidBody2D] = []
+var mobs_in_range: Array[RigidBody2D] = []
+# parry sounds
 @onready var parry_sound_player = $ParrySoundPlayer  
+
+# Damage given to Mobs 
+@export var attack_damage: float = 1.0
 
 func _ready() -> void:
 	# Initialize health
@@ -77,6 +82,7 @@ func _process(delta: float) -> void:
 	# Attempt parry if parry input is just pressed
 	if Input.is_action_just_pressed("parry"):
 		attempt_parry()
+		attempt_melee_parry()
 
 	# Optional: Flip the shield based on relative position to the hero
 	if global_position.x > idiot_hero.global_position.x:
@@ -187,15 +193,18 @@ func restrict_to_camera() -> void:
 func _on_parry_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("projectiles") and body is RigidBody2D:
 		projectiles_in_range.append(body)
+	
+	if body.is_in_group("mobs") and body is RigidBody2D:
+		mobs_in_range.append(body)
+		print("Mob in parry range, Mob Name:", body)
 
 func _on_parry_area_body_exited(body: Node2D) -> void:
 	if body in projectiles_in_range:
 		projectiles_in_range.erase(body)
-
-	if body.is_in_group("mobs"):  # e.g. if you also want parry to affect mobs
-		if body.has_method("take_damage"):
-			body.take_damage(1)
-			print("Parried! Dealt 1 damage to ", body.name)
+	
+	if body in mobs_in_range:
+		mobs_in_range.erase(body)
+		print("Mob leaving parry range, Mob Name:", body) 
 
 func attempt_parry() -> void:
 	if projectiles_in_range.size() == 0:
@@ -203,6 +212,18 @@ func attempt_parry() -> void:
 
 	for projectile in projectiles_in_range:
 		deflect_projectile(projectile)
+		
+# --- Melee Parry Logic ---
+func attempt_melee_parry() -> void:
+	if mobs_in_range.size() == 0:
+		return
+
+	for mob in mobs_in_range:
+		if mob and mob.has_method("parry"):
+			mob.parry(attack_damage)
+			print("Parry ", mob.name, " for ", attack_damage, " damage!")
+		else:
+			print("No 'parry()' method found on: ", mob)
 
 func deflect_projectile(projectile: RigidBody2D) -> void:
 	projectile.parried = true

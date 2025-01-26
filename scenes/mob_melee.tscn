@@ -85,12 +85,9 @@ animations = [{
 [node name="Mob_base" groups=["mobs"] instance=ExtResource("1_0eyf7")]
 script = ExtResource("2_lds8s")
 chase_speed = 250.0
-shield_range = 500.0
-melee_range = 100.0
 attack_damage = 1
 attack_cooldown = 1.0
-parry_window_duration = 1.0
-attack_animation_delay = 0.5
+parry_window_duration = 0.5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
 position = Vector2(0.99968, 5.00031)
