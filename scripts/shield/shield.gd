@@ -28,6 +28,7 @@ var projectiles_in_range: Array[RigidBody2D] = []
 @export var dash_speed: float = 3000.0
 @export var dash_duration: float = 0.5
 @export var dash_cooldown: float = 1.0
+@export var dash_damage: int = 1
 
 var is_dashing: bool = false
 var can_dash: bool = true
@@ -222,10 +223,10 @@ func _on_parry_area_body_entered(body: Node2D) -> void:
 			# Immediately parry the projectile (instead of waiting for user to press parry).
 			deflect_projectile(body)
 		elif body.is_in_group("mobs"):
-			# OPTIONAL: Deal 1 damage if you want dash to also hurt mobs.
+			# Apply dash_damage
 			if body.has_method("take_damage"):
-				body.take_damage(1)
-				print("Dash hit! Dealt 1 damage to", body.name)
+				body.take_damage(dash_damage)
+				print("Dash hit! Dealt %s damage to %s" % [dash_damage, body.name])
 			
 			# Apply a knockback impulse if the mob is a RigidBody2D:
 			if body is RigidBody2D:
