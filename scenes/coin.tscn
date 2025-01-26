@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dlnhx2jn3y2ky"]
+[gd_scene load_steps=25 format=3 uid="uid://dmuvd5efll6s3"]
 
 [ext_resource type="Texture2D" uid="uid://d1r4qjtpe4nkx" path="res://assets/sprites/coin_sprite.png" id="1_07d46"]
 [ext_resource type="Script" path="res://scripts/coin.gd" id="1_r371l"]
@@ -150,6 +150,7 @@ gravity_scale = 0.0
 script = ExtResource("1_r371l")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_fgico")
 autoplay = "default"
 frame_progress = 0.647812
