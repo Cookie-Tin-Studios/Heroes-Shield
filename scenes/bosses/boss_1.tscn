@@ -34,8 +34,7 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_p4m7u"]
-radius = 173.104
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ixdv"]
 
 [node name="boss1-part2" instance=ExtResource("1_dnpcy")]
 collision_layer = 4
@@ -56,4 +55,4 @@ autoplay = "idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 light_mask = 4
 visibility_layer = 4
-shape = SubResource("CircleShape2D_p4m7u")
+shape = SubResource("RectangleShape2D_7ixdv")
