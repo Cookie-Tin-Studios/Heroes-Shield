@@ -39,6 +39,7 @@ func shoot_projectile() -> void:
 	# Position the projectile where the bat currently is.
 	projectile.global_position = global_position
 
+
 	# Determine the direction from the bat to the target.
 	var direction = (target.global_position - global_position).normalized()
 
@@ -50,7 +51,6 @@ func shoot_projectile() -> void:
 		attacks_sound_player.play()
 	# Add the new projectile to the active scene so it appears in the game.
 	get_tree().get_current_scene().add_child(projectile)
-	print("Projectile shot at target!")
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
