@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dtj2jcj8eeq22" path="res://scenes/HUD.tscn" id="5_scp5s"]
 [ext_resource type="PackedScene" uid="uid://ei3etn0w5se4" path="res://scenes/menu/pause_menu.tscn" id="5_yooe3"]
 [ext_resource type="PackedScene" uid="uid://xsfmwuuxbm3h" path="res://scenes/spawners/bat_spawner.tscn" id="6_xgrp2"]
-[ext_resource type="PackedScene" uid="uid://3npy5eb5sst5" path="res://scenes/bosses/boss_1.tscn" id="8_b5jot"]
 [ext_resource type="PackedScene" uid="uid://dvqneq3eakg02" path="res://scenes/spawners/powerup_spawner.tscn" id="8_jw5bn"]
+[ext_resource type="PackedScene" uid="uid://3npy5eb5sst5" path="res://scenes/bosses/boss_1.tscn" id="7_cpj5h"]
 
 [sub_resource type="GDScript" id="GDScript_81rl6"]
 script/source = "extends Node2D
@@ -25,6 +25,9 @@ func _process(_delta: float) -> void:
 
 [node name="Node2D" type="Node2D"]
 script = SubResource("GDScript_81rl6")
+
+[node name="boss1-part2" parent="." instance=ExtResource("7_cpj5h")]
+position = Vector2(2603, 621)
 
 [node name="Shield" parent="." instance=ExtResource("2_w3671")]
 position = Vector2(1552, 1299)
