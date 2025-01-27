@@ -21,9 +21,11 @@ func _ready() -> void:
 	# Use the parent script's ready function.
 	super._ready()
 	# Change mob-specific variables from mob_base.
-	health = 5
-	max_health = 5
-	coins_dropped = 1
+	health = 10
+	max_health = 10
+	coins_dropped = 10
+	# These variables are specific to this boss, for when to spawn the rails.
+	
 	# Connect the global tick signal so the bat shoots projectiles periodically.
 	global_tick.timeout.connect(_on_tick)
 	spawn_rails()
@@ -46,9 +48,9 @@ func _on_tick() -> void:
 		shoot_projectile()
 		animated_sprite.play("idle")
 
-func hurt_animation() -> void:
+func when_hit() -> void:
 	if health != 0:
-		animated_sprite.play("on-hit")
+		animated_sprite.play("on-hit")d
 
 # Note that this overloads the parent die function. This is so that we can play the on-death animation for a second before dying.
 func die() -> void:
@@ -62,13 +64,27 @@ func die() -> void:
 
 func spawn_rails() -> void:
 
+	# Haha bottom rail, me when the femboys are out be like
+	var bottom_rail = rail_scene.instantiate()
+	bottom_rail.start_pos = Vector2(-5000, 1000)
+	bottom_rail.end_pos = Vector2(1000, 1000)
+	add_child(bottom_rail)
+	print("Top rail added")
+	
+	# Haha rear rail if you know what I mean homies
+	var rear_rail = rail_scene.instantiate()
+	rear_rail.start_pos = Vector2(-3500, 2000)
+	rear_rail.end_pos = Vector2(-3500, -2000)
+	add_child(rear_rail)
+	print("Rear rail added")
+	
+	# You thought the other ones were funny didn't you, you sick fuck
 	var top_rail = rail_scene.instantiate()
 	top_rail.start_pos = Vector2(-5000,-1000)
 	top_rail.end_pos = Vector2(1000, -1000)
 	add_child(top_rail)
 	print("Top rail added")
-
-	#var bottom_rail = rail_scene.instantiate()
-	#bottom_rail.start_pos = Vector2(-300, 600)
-	#bottom_rail.end_pos = Vector2(300, 600)
-	#get_tree().get_current_scene().add_child(bottom_rail)
+	
+	
+	
+	

@@ -261,8 +261,8 @@ func deflect_projectile(projectile: RigidBody2D) -> void:
 	projectile.parried = true
 
 	# Collision layers
-	projectile.set_collision_layer_value(1, false)
-	projectile.set_collision_mask_value(1, false)
+	#projectile.set_collision_layer_value(1, false)
+	#projectile.set_collision_mask_value(1, false)
 	projectile.set_collision_layer_value(3, true)
 	projectile.set_collision_mask_value(3, true)
 
