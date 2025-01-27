@@ -36,9 +36,9 @@ position = Vector2(176, -7)
 position = Vector2(-133, 10)
 shape = SubResource("CircleShape2D_awwms")
 
-[node name="DamageArea" type="Area2D" parent="FlipContainer"]
+[node name="DamageArea" type="Area2D" parent="FlipContainer" groups=["damage-box"]]
 
-[node name="DamageZoneCollision" type="CollisionShape2D" parent="FlipContainer/DamageArea"]
+[node name="DamageZoneCollision" type="CollisionShape2D" parent="FlipContainer/DamageArea" groups=["damage-box"]]
 position = Vector2(4, 7)
 shape = SubResource("CapsuleShape2D_1kshu")
 

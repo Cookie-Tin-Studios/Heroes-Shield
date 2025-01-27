@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccpriy5aqd06l"
-path="res://.godot/imported/simple melee_0006.png-c6a53651a5bba95ab9b9bee8dccc2084.ctex"
+uid="uid://bxhjyc3n6b3o0"
+path="res://.godot/imported/simple melee_0005.png-9f63c5dec565835571f7a005ae11601d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/mobs/simple melee_0006.png"
-dest_files=["res://.godot/imported/simple melee_0006.png-c6a53651a5bba95ab9b9bee8dccc2084.ctex"]
+source_file="res://assets/sprites/mobs/melee/simple melee_0005.png"
+dest_files=["res://.godot/imported/simple melee_0005.png-9f63c5dec565835571f7a005ae11601d.ctex"]
 
 [params]
 
