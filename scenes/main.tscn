@@ -32,19 +32,19 @@ position = Vector2(1552, 1299)
 
 [node name="Idiot_hero" parent="." instance=ExtResource("2_jn0l8")]
 z_as_relative = false
-position = Vector2(1343, 1669)
-scale = Vector2(1.4, 1.4)
+position = Vector2(1656, 1732)
 
 [node name="PowerUpSpawningZone" parent="Idiot_hero" instance=ExtResource("8_jw5bn")]
-position = Vector2(1878.57, -650)
-scale = Vector2(0.714286, 1.42857)
+position = Vector2(2317, -973)
+scale = Vector2(1, 2)
 
 [node name="SpawningZone" parent="Idiot_hero" instance=ExtResource("6_xgrp2")]
-position = Vector2(2007.14, -610.714)
+position = Vector2(2497, -918)
+scale = Vector2(1.4, 1.4)
 
 [node name="Camera2D" type="Camera2D" parent="Idiot_hero"]
-position = Vector2(404.285, -412.143)
-scale = Vector2(0.714286, 6.22857)
+position = Vector2(252.999, -640)
+scale = Vector2(1, 8.72)
 zoom = Vector2(0.5, 0.5)
 
 [node name="Background" parent="Idiot_hero/Camera2D" instance=ExtResource("3_3s816")]
