@@ -8,7 +8,7 @@ var current_health: int = max_health
 
 # --- Movement variables ---
 @export var acceleration: float = 4000
-@export var deceleration: float = 4000
+@export var deceleration: float = 6000
 @export var friction: float = 0.8
 @export var speed: float = 800
 @export var speed_multiplier: float = 1.0
@@ -28,6 +28,16 @@ var mobs_in_range: Array[RigidBody2D] = []
 
 # Damage given to Mobs 
 @export var attack_damage: float = 1.0
+# dash variables
+@export var dash_speed: float = 3000.0
+@export var dash_duration: float = 0.5
+@export var dash_cooldown: float = 1.0
+@export var dash_damage: int = 1
+
+var is_dashing: bool = false
+var can_dash: bool = true
+var dash_timer: float = 0.0
+
 
 func _ready() -> void:
 	# Initialize health
@@ -71,6 +81,27 @@ func _process(delta: float) -> void:
 		target_velocity = input_dir * final_speed
 
 	velocity = velocity.move_toward(target_velocity, acceleration * delta)
+
+	# Dash mechanics
+	#########################
+	# Check if currently dashing
+	if is_dashing:
+		dash_timer -= delta
+		if dash_timer <= 0.0:
+			is_dashing = false
+			# Start a cooldown timer
+			var cooldown_timer := Timer.new()
+			cooldown_timer.one_shot = true
+			cooldown_timer.wait_time = dash_cooldown
+			add_child(cooldown_timer)
+			cooldown_timer.start()
+			cooldown_timer.timeout.connect(Callable(self, "_on_dash_cooldown_finished"))
+	else:
+		# Only allow dash if not already dashing and not on cooldown
+		if can_dash and Input.is_action_just_pressed("shield_dash"):
+			# Check if you have unlocked the dash upgrade
+			if Globals.movementSpeed3 in Globals.unlocked_upgrades[Globals.movementCategory]:
+				dash()
 
 	# Friction if no movement input
 	if input_dir == Vector2.ZERO:
@@ -191,17 +222,37 @@ func restrict_to_camera() -> void:
 ########################################################################
 
 func _on_parry_area_body_entered(body: Node2D) -> void:
-	if body.is_in_group("projectiles") and body is RigidBody2D:
-		projectiles_in_range.append(body)
-	elif body.is_in_group("mobs") and body is RigidBody2D:
-		mobs_in_range.append(body)
-
+	# If we are currently dashing:
+	if is_dashing:
+		if body.is_in_group("projectiles") and body is RigidBody2D:
+			# Immediately parry the projectile (instead of waiting for user to press parry).
+			deflect_projectile(body)
+		elif body.is_in_group("mobs"):
+			# Apply dash_damage
+			if body.has_method("take_damage"):
+				body.take_damage(dash_damage)
+				print("Dash hit! Dealt %s damage to %s" % [dash_damage, body.name])
+			
+			# Apply a knockback impulse if the mob is a RigidBody2D:
+			if body is RigidBody2D:
+				var knockback_dir = (body.global_position - global_position).normalized()
+				# Tweak the strength as needed:
+				body.apply_central_impulse(knockback_dir * 1000)
+	
+	else:
+		# If we are NOT dashing, fall back to normal parry behavior
+		# (append projectiles to projectiles_in_range if they are in group "projectiles")
+		if body.is_in_group("projectiles") and body is RigidBody2D:
+			projectiles_in_range.append(body)
+		elif body.is_in_group("mobs") and body is RigidBody2D:
+			mobs_in_range.append(body)
 
 func _on_parry_area_body_exited(body: Node2D) -> void:
 	if body in projectiles_in_range:
 		projectiles_in_range.erase(body)
 	elif body in mobs_in_range:
 		mobs_in_range.erase(body)
+
 
 func attempt_parry() -> void:
 	if projectiles_in_range.size() == 0:
@@ -245,3 +296,20 @@ func deflect_projectile(projectile: RigidBody2D) -> void:
 	# Play the parry sound effect
 	if parry_sound_player and parry_sound_player.stream:
 		parry_sound_player.play()
+
+########################################################################
+# DASH
+########################################################################
+
+func dash() -> void:
+	is_dashing = true
+	can_dash = false
+	dash_timer = dash_duration
+	
+	if velocity.length() < 10.0:
+		pass  # Optional: Decide how to handle near-zero velocity
+	
+	velocity = velocity.normalized() * dash_speed
+	
+func _on_dash_cooldown_finished() -> void:
+	can_dash = true

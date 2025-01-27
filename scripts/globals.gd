@@ -52,6 +52,7 @@ func add_progress(amount: int) -> void:
 const movementCategory = "Movement"
 const movementSpeed1 = "Speed 1"
 const movementSpeed2 = "Speed 2"
+const movementSpeed3 = "Dash"
 
 
 # Define the upgrade categories and their upgrades
@@ -59,6 +60,7 @@ var all_upgrades: Array = [
 	UpgradeCategory.new(movementCategory, [
 		Upgrade.new(movementSpeed1, "You move faster, what did you expect", 1),
 		Upgrade.new(movementSpeed2, "You move faster, electric boogaloo", 2),
+		Upgrade.new(movementSpeed3, "Adds a dash", 0),
 	]),
 	UpgradeCategory.new("Category 2", [
 		Upgrade.new("Upgrade 1", "Yeah it's an upgrade", 1),
