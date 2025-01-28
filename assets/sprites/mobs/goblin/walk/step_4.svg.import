@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ps7h88qxrxj2"
-path="res://.godot/imported/HIM.png-64bff734590a6a7418378e85ef3b59ee.ctex"
+uid="uid://bkg7posowdkvh"
+path="res://.godot/imported/step_4.svg-c922682d73c54eb6407c7ccaac1bf854.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/HIM.png"
-dest_files=["res://.godot/imported/HIM.png-64bff734590a6a7418378e85ef3b59ee.ctex"]
+source_file="res://assets/sprites/mobs/goblin/walk/step_4.svg"
+dest_files=["res://.godot/imported/step_4.svg-c922682d73c54eb6407c7ccaac1bf854.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

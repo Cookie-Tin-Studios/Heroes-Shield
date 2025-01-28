@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlnhv62cgw1sr"
-path="res://.godot/imported/placeholder_idiot_walk_1.png-42342b03f658bd51029e15483636a0f0.ctex"
+uid="uid://bty4wbglprd3j"
+path="res://.godot/imported/attack_2.svg-71099698f2152def7812335baccfbb43.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/placeholder_idiot_walk_1.png"
-dest_files=["res://.godot/imported/placeholder_idiot_walk_1.png-42342b03f658bd51029e15483636a0f0.ctex"]
+source_file="res://assets/sprites/mobs/goblin/attack/attack_2.svg"
+dest_files=["res://.godot/imported/attack_2.svg-71099698f2152def7812335baccfbb43.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

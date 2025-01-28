@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dk41cisdtdonq"]
+[gd_scene load_steps=11 format=3 uid="uid://dk41cisdtdonq"]
 
 [ext_resource type="Script" path="res://scripts/idiot/idiot.gd" id="1_cdcv3"]
 [ext_resource type="Texture2D" uid="uid://bipi2c1lbs35h" path="res://assets/sprites/idiot_hero/step_1.svg" id="2_31jnp"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://bc4mr1rw0oty6" path="res://assets/sprites/idiot_hero/step_5.svg" id="6_k3r5c"]
 [ext_resource type="Texture2D" uid="uid://cuxpmpqqtg26i" path="res://assets/sprites/idiot_hero/step_6.svg" id="7_4pxuy"]
 [ext_resource type="Texture2D" uid="uid://cboqvxxfkkk1b" path="res://assets/sprites/idiot_hero/step_7.svg" id="8_7dulj"]
-[ext_resource type="Texture2D" uid="uid://bfi1ralp566bi" path="res://assets/sprites/idiot_hero/step_8.svg" id="9_ln4qy"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ar3yn"]
 animations = [{
@@ -33,19 +32,16 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("8_7dulj")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_ln4qy")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 7.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_74d3d"]
 size = Vector2(128, 433)
 
-[node name="Idiot_hero" type="CharacterBody2D"]
+[node name="Idiot_hero" type="CharacterBody2D" groups=["good_guys"]]
 z_index = 10
 position = Vector2(0, -26)
 motion_mode = 1
