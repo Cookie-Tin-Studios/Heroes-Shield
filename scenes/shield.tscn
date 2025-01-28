@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bumwv0mx5w6aq"]
+[gd_scene load_steps=11 format=3 uid="uid://bumwv0mx5w6aq"]
 
 [ext_resource type="Script" path="res://scripts/shield/shield.gd" id="1_xflaf"]
 [ext_resource type="Texture2D" uid="uid://p5ced0yg4xrt" path="res://assets/sprites/shield/shield_Hero_main.png" id="2_guw5v"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://5niwyw3ix51d" path="res://assets/sprites/shield_health/full_shield.png" id="4_1bor1"]
 [ext_resource type="Texture2D" uid="uid://dwpkqpico3ci5" path="res://assets/sprites/shield_health/empty_shield.png" id="5_hynbo"]
 [ext_resource type="AudioStream" uid="uid://dtv0c84gafj5r" path="res://assets/audio/parry1.mp3" id="6_77avo"]
+[ext_resource type="PackedScene" uid="uid://chvwopk1tsrua" path="res://scenes/effects/shield_dash.tscn" id="7_tmf7j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_awwms"]
 radius = 241.002
@@ -54,6 +55,8 @@ empty_section_texture = ExtResource("5_hynbo")
 
 [node name="ParrySoundPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_77avo")
+
+[node name="ShieldDash" parent="." instance=ExtResource("7_tmf7j")]
 
 [connection signal="body_entered" from="FlipContainer/ParryArea" to="." method="_on_parry_area_body_entered"]
 [connection signal="body_exited" from="FlipContainer/ParryArea" to="." method="_on_parry_area_body_exited"]

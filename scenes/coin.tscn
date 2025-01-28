@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://d1r4qjtpe4nkx" path="res://assets/sprites/coin_sprite.png" id="1_07d46"]
 [ext_resource type="Script" path="res://scripts/coin.gd" id="1_r371l"]
-[ext_resource type="Script" path="res://scripts/effects/coin_trail.gd" id="2_vhohw"]
+[ext_resource type="Script" path="res://scripts/effects/trails/node_trail.gd" id="3_2h16l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3g2b7"]
 atlas = ExtResource("1_07d46")
@@ -161,4 +161,4 @@ points = PackedVector2Array(25, 5)
 width = 20.0
 width_curve = SubResource("Curve_la1gm")
 gradient = SubResource("Gradient_j8g6f")
-script = ExtResource("2_vhohw")
+script = ExtResource("3_2h16l")

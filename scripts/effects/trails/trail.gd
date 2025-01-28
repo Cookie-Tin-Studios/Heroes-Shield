@@ -2,17 +2,13 @@ extends Line2D
 class_name Trail
 
 var queue: Array
-@export var MAX_LENGTH: int = 30
-@export var trail_width: float = 2.0 
-
-func _ready() -> void:
-	self.width = trail_width
+@export var max_length: int = 30
 
 func _process(_delta) -> void:
 	var pos = _get_position()
 	queue.push_front(pos)
 	
-	if queue.size() > MAX_LENGTH:
+	if queue.size() > max_length:
 		queue.pop_back()
 
 	clear_points()
