@@ -1,13 +1,19 @@
 extends MarginContainer
 
 var playback:AudioStreamPlayback
-@onready var start: Button = $HBoxContainer/VBoxContainer/Start
+@onready var start: Button = $HBoxContainer/main_buttons/Start
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# deferred call makes it more reliable i'm told
-	start.grab_focus.call_deferred()
+	start.grab_focus()
+	for node in $HBoxContainer/main_buttons.get_children():
+		if node is Button:
+			# If the added node is a button we connect to its mouse_entered and pressed signals
+			# and play a sound
+			node.mouse_entered.connect(_play_hover)
+			node.focus_entered.connect(_play_hover)
+			node.pressed.connect(_play_pressed)
 	
 func _process(_delta) -> void:
 	#TODO: figure out how to do this without exiting straight from upgrade_menu
@@ -41,12 +47,7 @@ func _enter_tree() -> void:
 
 
 func _on_node_added(node:Node) -> void:
-	if node is Button:
-		# If the added node is a button we connect to its mouse_entered and pressed signals
-		# and play a sound
-		node.mouse_entered.connect(_play_hover)
-		node.focus_entered.connect(_play_hover)
-		node.pressed.connect(_play_pressed)
+	pass
 
 
 func _play_hover() -> void:
