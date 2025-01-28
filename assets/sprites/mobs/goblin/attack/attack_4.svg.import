@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhjbfm3c6trve"
-path="res://.godot/imported/simple melee_0003.png-1b5585cdec8d2454d57c484bf9c17810.ctex"
+uid="uid://c4hmfgetqiyxa"
+path="res://.godot/imported/attack_4.svg-33fbfc0c9bfa091d88ec96c8cc1f25ab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/mobs/simple melee_0003.png"
-dest_files=["res://.godot/imported/simple melee_0003.png-1b5585cdec8d2454d57c484bf9c17810.ctex"]
+source_file="res://assets/sprites/mobs/goblin/attack/attack_4.svg"
+dest_files=["res://.godot/imported/attack_4.svg-33fbfc0c9bfa091d88ec96c8cc1f25ab.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

@@ -34,11 +34,9 @@ var is_dashing: bool = false
 var can_dash: bool = true
 var dash_timer: float = 0.0
 
-
 func _ready() -> void:
 	# Initialize health
 	current_health = max_health
-	call_deferred("create_health_sections")
 
 	# Ensure the hero node is accessible (only used for movement/position checks, not reflection)
 	idiot_hero = get_node("../Idiot_hero")
@@ -244,18 +242,20 @@ func _on_parry_area_body_exited(body: Node2D) -> void:
 	if body in projectiles_in_range:
 		projectiles_in_range.erase(body)
 
-	if body.is_in_group("mobs"):
-		if body.has_method("take_damage"):
-			body.take_damage(1)
-			print("Parried! Dealt 1 damage to ", body.name)
-
-
 func attempt_parry() -> void:
+	# Check for goblins in range and parry kill them
+	var parry_area = $FlipContainer/ParryArea
+	for body in parry_area.get_overlapping_bodies():
+		if body.has_method("die") && body.is_in_group("melee") && body.is_attacking:
+			body.die()
+			
 	if projectiles_in_range.size() == 0:
 		return
 
 	for projectile in projectiles_in_range:
 		deflect_projectile(projectile)
+
+	
 
 func deflect_projectile(projectile: RigidBody2D) -> void:
 	projectile.parried = true
