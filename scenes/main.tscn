@@ -67,4 +67,4 @@ offset_bottom = 40.0
 
 [node name="boss1-part2" parent="." instance=ExtResource("7_cpj5h")]
 position = Vector2(3604, 1094)
-fire_interval = 2
+fire_interval = 1

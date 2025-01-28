@@ -42,10 +42,6 @@ func _on_body_entered(body: Node) -> void:
 			body.when_hit()  # Apply damage to the target.
 			print("when_hit function ran.")
 			queue_free()
-		
-		# Remove the projectile after it hits any target.
-		queue_free()
-
 
 func apply_homing(delta: float) -> void:
 	print("homing applied")

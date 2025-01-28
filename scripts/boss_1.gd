@@ -18,7 +18,7 @@ var shoot_stage_1_health: int
 var shoot_stage_2_health: int
 # Controls fire rate for this scene
 var shots_until_fire = 0             # Internal counter
-@export var fire_interval = 2        # How many ticks to wait before firing again (tweak as needed)
+@export var fire_interval = 1        # How many ticks to wait before firing again (tweak as needed)
 
 
 # Requried for modifying active animation in functions.
@@ -60,7 +60,9 @@ func _on_tick() -> void:
 	# Trigger a projectile shot every time the global tick fires.
 	if health != 0:
 		animated_sprite.play("idle")
-		
+	
+	# We use this to slow down the firing in the later stages.
+	# Otherwise it's BONKERS HARD to beat it.
 	shots_until_fire += 1
 	
 	if shots_until_fire >= fire_interval:
@@ -73,10 +75,12 @@ func _on_tick() -> void:
 		# If health below stage 1 but above stage 2, run stage 1
 		if health <= shoot_stage_1_health and health > shoot_stage_2_health:
 			shoot_stage_1()
+			fire_interval = 2 # Slows down firing.
 			
 		# If health equal or below stage 2, run stage 2.
 		if health <= shoot_stage_2_health:
-			shoot_stage_2()		
+			shoot_stage_2()
+			fire_interval = 3 # Slows down firing even more.
 
 func when_hit() -> void:
 	if health != 0:
