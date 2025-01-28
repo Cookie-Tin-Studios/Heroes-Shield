@@ -272,13 +272,21 @@ func deflect_projectile(projectile: RigidBody2D) -> void:
 	# Weighted blend: e.g. 70% real reflection, 30% guaranteed radial outward
 	var radial_out = normal * 1000.0
 	var alpha = 0.7  # 70% reflection, 30% radial
-
 	var new_velocity = bounced_vel.lerp(radial_out, 1.0 - alpha)
 
-	# 5) Multiply the final velocity by 10 for that big "ping"
-	new_velocity *= 5.0
+	# Multiply the final velocity by 5 for a strong "ping"
+	new_velocity *= 2.0
 
 	projectile.linear_velocity = new_velocity
+	
+	projectile.initial_direction = new_velocity.normalized()
+	projectile.base_speed = new_velocity.length()
+	
+	if Globals.parryZigZag in Globals.unlocked_upgrades[Globals.parryCategory]:
+		projectile.zigzag_enabled = true
+
+	if Globals.parryHoming in Globals.unlocked_upgrades[Globals.parryCategory]:
+		projectile.homing_enabled = true
 	
 	# Play the parry sound effect
 	if parry_sound_player and parry_sound_player.stream:
