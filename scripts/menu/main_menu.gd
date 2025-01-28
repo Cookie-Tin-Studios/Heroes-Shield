@@ -6,7 +6,7 @@ var playback:AudioStreamPlayback
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	start.grab_focus()
+	#start.grab_focus()
 	for node in $HBoxContainer/main_buttons.get_children():
 		if node is Button:
 			# If the added node is a button we connect to its mouse_entered and pressed signals
