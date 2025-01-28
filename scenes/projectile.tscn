@@ -13,6 +13,9 @@ radius = 50.04
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hg1lb"]
 bounce = 1.0
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hg1lb"]
+bounce = 1.0
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_1hryt"]
 animations = [{
 "frames": [{
