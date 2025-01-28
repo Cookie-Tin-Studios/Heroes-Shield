@@ -18,6 +18,11 @@ var zigzag_angle: float = 0.0
 @export var homing_speed: float = 500.0      # Base speed for homing
 @export var homing_strength: float = 0.1     # Interpolation factor for turning toward target
 
+# Ziggin parameters
+var zig_side = 1
+var zig_period = 0.25  # seconds per flip
+var timer = 0.0
+
 func _ready() -> void:
 	pass
 
@@ -35,7 +40,6 @@ func _on_body_entered(body: Node) -> void:
 	if body is CharacterBody2D or body is RigidBody2D:
 		if body.has_method("take_damage"):
 			body.take_damage(damage)
-			print("Projectile hit ", body.name, " for ", damage, " damage.")
 		queue_free()
 
 
@@ -50,10 +54,6 @@ func apply_homing(delta: float) -> void:
 	var desired_velocity = direction * homing_speed
 	# Lerp from current velocity to the new desired velocity, to get a smooth turn
 	linear_velocity = linear_velocity.lerp(desired_velocity, homing_strength)
-
-var zig_side = 1
-var zig_period = 0.25  # seconds per flip
-var timer = 0.0
 
 func apply_zigzag(delta: float) -> void:
 	timer += delta
