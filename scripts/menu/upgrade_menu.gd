@@ -11,6 +11,10 @@ func _ready():
 	generate_upgrades_menu()
 	main_menu_button.pressed.connect(go_to_main_menu)
 
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("ui_previous_menu"):
+		go_to_main_menu()
+
 func clear_container(container: Control) -> void:
 	for child in container.get_children():
 		child.queue_free()
