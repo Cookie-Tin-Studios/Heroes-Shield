@@ -1,12 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://ceebcmcnelnx4"]
+[gd_scene load_steps=4 format=3 uid="uid://ceebcmcnelnx4"]
 
+[ext_resource type="Theme" uid="uid://cuv37xi3kgiuk" path="res://scenes/menu/controls_theme.tres" id="1_1w8d3"]
 [ext_resource type="Script" path="res://scripts/menu/main_menu.gd" id="1_j6ytl"]
-[ext_resource type="Texture2D" uid="uid://cs0a5v3bfdhuc" path="res://assets/sprites/menu/shield.PNG" id="2_oec8k"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_lffdr"]
-font_size = 48
-
-[sub_resource type="Theme" id="Theme_wxyta"]
+[ext_resource type="Texture2D" uid="uid://bgvu6sj0fksr2" path="res://assets/sprites/menu/start menu.png" id="3_k5d0m"]
 
 [node name="MainMenu" type="MarginContainer"]
 anchors_preset = 15
@@ -14,69 +10,57 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_1w8d3")
 theme_override_constants/margin_left = 120
 theme_override_constants/margin_top = 80
 theme_override_constants/margin_right = 120
 theme_override_constants/margin_bottom = 80
 script = ExtResource("1_j6ytl")
 
+[node name="background" type="Sprite2D" parent="."]
+texture = ExtResource("3_k5d0m")
+centered = false
+
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="GameTitle" type="Label" parent="HBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "Heroes Shield"
-label_settings = SubResource("LabelSettings_lffdr")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-alignment = 1
-
-[node name="Continue" type="Button" parent="HBoxContainer/VBoxContainer/VBoxContainer"]
-process_mode = 3
-layout_mode = 2
-theme = SubResource("Theme_wxyta")
-text = "Continue"
-
-[node name="New Game" type="Button" parent="HBoxContainer/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme = SubResource("Theme_wxyta")
-text = "New Game"
-
-[node name="Upgrades" type="Button" parent="HBoxContainer/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme = SubResource("Theme_wxyta")
-text = "Upgrades"
-
-[node name="Exit" type="Button" parent="HBoxContainer/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme = SubResource("Theme_wxyta")
-text = "Exit"
-
-[node name="Version" type="Label" parent="HBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "ver 0.0.1"
 
 [node name="spacer" type="CenterContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.28
 
-[node name="shield" type="TextureRect" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("2_oec8k")
-expand_mode = 3
-stretch_mode = 5
+size_flags_horizontal = 3
+size_flags_vertical = 4
 
-[connection signal="focus_entered" from="HBoxContainer/VBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_focus_entered"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
-[connection signal="focus_entered" from="HBoxContainer/VBoxContainer/VBoxContainer/New Game" to="." method="_on_new_game_focus_entered"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/VBoxContainer/New Game" to="." method="_on_new_game_pressed"]
-[connection signal="focus_entered" from="HBoxContainer/VBoxContainer/VBoxContainer/Upgrades" to="." method="_on_new_game_focus_entered"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/VBoxContainer/Upgrades" to="." method="_on_upgrades_pressed"]
-[connection signal="focus_entered" from="HBoxContainer/VBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_focus_entered"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[node name="spacer" type="CenterContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Start" type="Button" parent="HBoxContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Start"
+
+[node name="Upgrades" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_1w8d3")
+text = "Upgrades"
+
+[node name="Exit" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_1w8d3")
+text = "Exit"
+
+[node name="spacer2" type="CenterContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.4
+
+[connection signal="focus_entered" from="HBoxContainer/VBoxContainer/Start" to="." method="_on_start_focus_entered"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="focus_entered" from="HBoxContainer/VBoxContainer/Upgrades" to="." method="_on_new_game_focus_entered"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Upgrades" to="." method="_on_upgrades_pressed"]
+[connection signal="focus_entered" from="HBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_focus_entered"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

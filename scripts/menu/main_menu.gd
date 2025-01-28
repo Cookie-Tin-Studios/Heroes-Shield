@@ -1,12 +1,13 @@
 extends MarginContainer
 
-@onready var version = $HBoxContainer/VBoxContainer/Version
 var playback:AudioStreamPlayback
+@onready var start: Button = $HBoxContainer/VBoxContainer/Start
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	version.text = "Your Mother v1.1"
-	$HBoxContainer/VBoxContainer/VBoxContainer/Continue.grab_focus()
+	# deferred call makes it more reliable i'm told
+	start.grab_focus.call_deferred()
 	
 func _process(_delta) -> void:
 	#TODO: figure out how to do this without exiting straight from upgrade_menu
@@ -14,10 +15,7 @@ func _process(_delta) -> void:
 		#_on_exit_pressed()
 	pass
 
-func _on_continue_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/main.tscn")
-
-func _on_new_game_pressed() -> void:
+func _on_start_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
 
 func _on_upgrades_pressed() -> void:
