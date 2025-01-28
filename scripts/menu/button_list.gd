@@ -1,9 +1,11 @@
 extends Node
 
-var control_focused: bool = false
+# true if there is already a control that has been focused
+var control_focused: Control = null
 
 func _process(delta: float) -> void:
-	if control_focused:
+	# don't change focus to first/last button if there already is focus
+	if control_focused != null:
 		return
 
 	if Input.is_action_just_pressed("ui_down"):
@@ -20,11 +22,20 @@ func _process(delta: float) -> void:
 
 func _ready() -> void:
 	get_viewport().gui_focus_changed.connect(_on_focus_changed)
+	#get_viewport().gui
 
 func _on_focus_changed(control: Control) -> void:
-	control_focused = control != null
-	
-func _get_child_buttons(nodes: Array[Node]) -> Array[Button]:
+	if control == null:
+		return
+	control_focused = control
+	control.focus_exited.connect(_control_lost_focus)
+
+func _control_lost_focus():
+	control_focused.focus_exited.disconnect(_control_lost_focus)
+	control_focused = null
+
+# Recursively get all child buttons of the provided node array
+static func _get_child_buttons(nodes: Array[Node]) -> Array[Button]:
 	var buttons: Array[Button] = []
 	
 	for child in nodes:
