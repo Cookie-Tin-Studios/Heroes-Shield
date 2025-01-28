@@ -36,7 +36,12 @@ func _on_body_entered(body: Node) -> void:
 		if body.has_method("take_damage"):
 			body.take_damage(damage)
 			print("Projectile hit ", body.name, " for ", damage, " damage.")
-		queue_free()
+			queue_free()
+			
+		if body.has_method("when_hit"):
+			body.when_hit()  # Apply damage to the target.
+			print("when_hit function ran.")
+			queue_free()
 
 
 func apply_homing(delta: float) -> void:
