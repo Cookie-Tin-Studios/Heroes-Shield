@@ -43,12 +43,6 @@ func die() -> void:
 	queue_free()  # Remove mob from the scene
 
 func _physics_process(delta: float) -> void:
-	# Ensure the health bar follows the collision shape's position if available
-	if collision_shape:
-		$Node2D.position = collision_shape.global_position + Vector2(0, -20)  # Adjust offset as needed
-	else:
-		print("CollisionShape2D not found!")
-
 	# Update position based on movement speed
 	position.x += movement_speed * delta
 

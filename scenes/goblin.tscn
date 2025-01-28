@@ -1,0 +1,127 @@
+[gd_scene load_steps=18 format=3 uid="uid://b3p0nbdq3s74p"]
+
+[ext_resource type="Script" path="res://scripts/goblin.gd" id="1_83l0j"]
+[ext_resource type="Texture2D" uid="uid://fbd6kg8o06p4" path="res://assets/sprites/mobs/goblin/attack/attack_1&5.svg" id="2_holow"]
+[ext_resource type="Texture2D" uid="uid://bty4wbglprd3j" path="res://assets/sprites/mobs/goblin/attack/attack_2.svg" id="3_jspn2"]
+[ext_resource type="Texture2D" uid="uid://uqeyyfwxibfs" path="res://assets/sprites/mobs/goblin/attack/attack_3.svg" id="4_8ncam"]
+[ext_resource type="Texture2D" uid="uid://c4hmfgetqiyxa" path="res://assets/sprites/mobs/goblin/attack/attack_4.svg" id="5_cpyqu"]
+[ext_resource type="Texture2D" uid="uid://dr5wbp02jwauk" path="res://assets/sprites/mobs/goblin/idle/idle.svg" id="6_5p115"]
+[ext_resource type="Texture2D" uid="uid://c5nn2883c8m3i" path="res://assets/sprites/mobs/goblin/walk/step_1&6.svg" id="6_veob0"]
+[ext_resource type="Texture2D" uid="uid://emtj05yl3kj6" path="res://assets/sprites/mobs/goblin/walk/step_2.svg" id="7_ub5nh"]
+[ext_resource type="Texture2D" uid="uid://b84w3yihef6o0" path="res://assets/sprites/mobs/goblin/walk/step_3.svg" id="8_fyaky"]
+[ext_resource type="Texture2D" uid="uid://bkg7posowdkvh" path="res://assets/sprites/mobs/goblin/walk/step_4.svg" id="9_5sbpj"]
+[ext_resource type="Texture2D" uid="uid://dujmwwicynw23" path="res://assets/sprites/mobs/goblin/walk/step_5.svg" id="10_l48lh"]
+[ext_resource type="Texture2D" uid="uid://bbxw5ybkf8ef3" path="res://assets/sprites/ui/mob/Mob-hp-Bar-Background.png" id="11_cu8q7"]
+[ext_resource type="Texture2D" uid="uid://cgj2hec5pfg0b" path="res://assets/sprites/ui/mob/Mob-hp-bar-frame.png" id="12_vn58h"]
+[ext_resource type="Texture2D" uid="uid://citrdsgy3anye" path="res://assets/sprites/ui/mob/mob-hp-bar.png" id="13_730wo"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q4gnv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_holow")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_jspn2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_8ncam")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_cpyqu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_holow")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_5p115")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_veob0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ub5nh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_fyaky")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_5sbpj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_l48lh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_veob0")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ji4l5"]
+size = Vector2(203, 358)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ifxl4"]
+size = Vector2(214, 349)
+
+[node name="Goblin" type="RigidBody2D" groups=["melee", "mobs"]]
+light_mask = 7
+collision_layer = 4
+collision_mask = 4
+gravity_scale = 0.0
+script = ExtResource("1_83l0j")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_q4gnv")
+animation = &"idle"
+autoplay = "walk"
+frame_progress = 0.705084
+
+[node name="AttackArea" type="Area2D" parent="."]
+light_mask = 7
+visibility_layer = 7
+position = Vector2(-173, 11)
+collision_layer = 4
+collision_mask = 7
+
+[node name="attackareacollision" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(-4, -4)
+shape = SubResource("RectangleShape2D_ji4l5")
+
+[node name="ParryTimer" type="Timer" parent="."]
+
+[node name="AttackTimer" type="Timer" parent="."]
+
+[node name="physical" type="CollisionShape2D" parent="."]
+position = Vector2(37, 12)
+shape = SubResource("RectangleShape2D_ifxl4")
+
+[node name="HealthBar" type="Node2D" parent="."]
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="HealthBar"]
+light_mask = 8
+visibility_layer = 8
+offset_left = -90.0
+offset_top = -219.0
+offset_right = 110.0
+offset_bottom = -179.0
+max_value = 3.0
+value = 3.0
+texture_under = ExtResource("11_cu8q7")
+texture_over = ExtResource("12_vn58h")
+texture_progress = ExtResource("13_730wo")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]

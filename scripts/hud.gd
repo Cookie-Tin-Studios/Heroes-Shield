@@ -4,8 +4,6 @@ extends CanvasLayer
 @onready var progress_bar: ProgressBar = $Control/ProgressBar
 @onready var progress_icon: Sprite2D = $Control/ProgressBar/ProgressIcon
 
-var _camera_start_position: Vector2 = Vector2.ZERO
-
 func _ready() -> void:
 	# Connect coin signals (already done in your snippet).
 	Globals.connect("coins_changed", Callable(self, "_on_coins_changed"))

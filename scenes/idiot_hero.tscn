@@ -45,7 +45,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_74d3d"]
 size = Vector2(128, 433)
 
-[node name="Idiot_hero" type="CharacterBody2D"]
+[node name="Idiot_hero" type="CharacterBody2D" groups=["good_guys"]]
 z_index = 10
 position = Vector2(0, -26)
 motion_mode = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvqneq3eakg02"]
+[gd_scene load_steps=3 format=3 uid="uid://pcn3k1gpfcik"]
 
 [ext_resource type="Script" path="res://scripts/spawners/powerup_spawner.gd" id="1_35mru"]
 

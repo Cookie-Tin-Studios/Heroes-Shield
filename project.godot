@@ -35,6 +35,8 @@ project/assembly_name="heroes shield"
 
 projectiles=""
 mobs="base group for mobs"
+good_guys=""
+melee=""
 
 [input]
 

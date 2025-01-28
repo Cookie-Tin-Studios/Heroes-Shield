@@ -14,13 +14,14 @@ radius = 241.002
 radius = 74.0
 height = 270.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6ih55"]
-radius = 60.0
-height = 250.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ljrec"]
+size = Vector2(168, 238)
 
-[node name="Shield" type="CharacterBody2D"]
+[node name="Shield" type="CharacterBody2D" groups=["good_guys"]]
 z_index = 10
 position = Vector2(10, 2)
+collision_mask = 4
+motion_mode = 1
 script = ExtResource("1_xflaf")
 
 [node name="FlipContainer" type="Node2D" parent="."]
@@ -30,21 +31,20 @@ scale = Vector2(0.313477, 0.300293)
 texture = ExtResource("2_guw5v")
 
 [node name="ParryArea" type="Area2D" parent="FlipContainer"]
-position = Vector2(176, -7)
+show_behind_parent = true
+position = Vector2(2, 8)
+collision_mask = 5
 
 [node name="ParryZoneCollision" type="CollisionShape2D" parent="FlipContainer/ParryArea"]
-position = Vector2(-133, 10)
+position = Vector2(2, -5)
 shape = SubResource("CircleShape2D_awwms")
 
 [node name="DamageArea" type="Area2D" parent="FlipContainer"]
+show_behind_parent = true
 
 [node name="DamageZoneCollision" type="CollisionShape2D" parent="FlipContainer/DamageArea"]
 position = Vector2(4, 7)
 shape = SubResource("CapsuleShape2D_1kshu")
-
-[node name="Physical CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(8, 8)
-shape = SubResource("CapsuleShape2D_6ih55")
 
 [node name="HealthBar" type="Node2D" parent="."]
 position = Vector2(-11, -172)
@@ -54,6 +54,10 @@ empty_section_texture = ExtResource("5_hynbo")
 
 [node name="ParrySoundPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_77avo")
+
+[node name="Physical" type="CollisionShape2D" parent="."]
+position = Vector2(3, 9)
+shape = SubResource("RectangleShape2D_ljrec")
 
 [connection signal="body_entered" from="FlipContainer/ParryArea" to="." method="_on_parry_area_body_entered"]
 [connection signal="body_exited" from="FlipContainer/ParryArea" to="." method="_on_parry_area_body_exited"]

@@ -1,31 +1,40 @@
-[gd_scene load_steps=15 format=3 uid="uid://dtcvtr24mkkft"]
+[gd_scene load_steps=15 format=3 uid="uid://c83aygw678um0"]
 
 [ext_resource type="PackedScene" uid="uid://ca3rytbyuxw8h" path="res://scenes/mob_base.tscn" id="1_0eyf7"]
 [ext_resource type="Script" path="res://scripts/mobs/mob_melee.gd" id="2_lds8s"]
-[ext_resource type="Texture2D" uid="uid://dkbkla1kcfdhl" path="res://assets/sprites/mobs/simple melee_0007.png" id="3_63l2r"]
-[ext_resource type="Texture2D" uid="uid://dd0xckcj107ho" path="res://assets/sprites/mobs/simple melee_0008.png" id="4_kfjq2"]
-[ext_resource type="Texture2D" uid="uid://s2mv1p6gln3m" path="res://assets/sprites/mobs/simple melee_0009.png" id="5_bus3n"]
-[ext_resource type="Texture2D" uid="uid://dm6txt0d5j7ee" path="res://assets/sprites/mobs/simple melee_0001.png" id="6_vtuyw"]
-[ext_resource type="Texture2D" uid="uid://dhhs04j7gs54d" path="res://assets/sprites/mobs/simple melee_0002.png" id="7_gy72l"]
-[ext_resource type="Texture2D" uid="uid://dhjbfm3c6trve" path="res://assets/sprites/mobs/simple melee_0003.png" id="8_d51on"]
-[ext_resource type="Texture2D" uid="uid://bv6i8b04kowq2" path="res://assets/sprites/mobs/simple melee_0004.png" id="9_p1h8l"]
-[ext_resource type="Texture2D" uid="uid://bxhjyc3n6b3o0" path="res://assets/sprites/mobs/simple melee_0005.png" id="10_5yidq"]
-[ext_resource type="Texture2D" uid="uid://ccpriy5aqd06l" path="res://assets/sprites/mobs/simple melee_0006.png" id="11_52fw1"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_we0y3"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ga4t0"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_e5474"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_22t3v"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jxcd3"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1v0ee"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_i0eyt"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0ni06"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tljf3"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ns1xs"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("11_52fw1")
+"texture": SubResource("CompressedTexture2D_we0y3")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_63l2r")
+"texture": SubResource("CompressedTexture2D_ga4t0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_kfjq2")
+"texture": SubResource("CompressedTexture2D_e5474")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_bus3n")
+"texture": SubResource("CompressedTexture2D_22t3v")
 }],
 "loop": true,
 "name": &"attack",
@@ -33,22 +42,22 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_vtuyw")
+"texture": SubResource("CompressedTexture2D_jxcd3")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_gy72l")
+"texture": SubResource("CompressedTexture2D_1v0ee")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_p1h8l")
+"texture": SubResource("CompressedTexture2D_i0eyt")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_d51on")
+"texture": SubResource("CompressedTexture2D_0ni06")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_5yidq")
+"texture": SubResource("CompressedTexture2D_tljf3")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_52fw1")
+"texture": SubResource("CompressedTexture2D_we0y3")
 }],
 "loop": true,
 "name": &"walk",
