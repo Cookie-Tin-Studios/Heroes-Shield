@@ -38,11 +38,16 @@ func _ready() -> void:
 	# Initialize health
 	current_health = max_health
 
+	# Movement Upgrades
+	if Globals.movementSpeed1 in Globals.unlocked_upgrades[Globals.movementCategory]:
+		speed *= 1.1
+	if Globals.movementSpeed2 in Globals.unlocked_upgrades[Globals.movementCategory]:
+		speed *= 1.2
+
 	# Ensure the hero node is accessible (only used for movement/position checks, not reflection)
 	idiot_hero = get_node("../Idiot_hero")
 	if idiot_hero == null:
 		print("Shield: Hero path is not set!")
-
 
 func _process(delta: float) -> void:
 	var input_dir = Vector2.ZERO
@@ -59,15 +64,9 @@ func _process(delta: float) -> void:
 
 	input_dir = input_dir.normalized()
 
-	# Movement Upgrades
 	var final_speed = speed
-	if Globals.movementSpeed1 in Globals.unlocked_upgrades[Globals.movementCategory]:
-		final_speed *= 1.1
-	if Globals.movementSpeed2 in Globals.unlocked_upgrades[Globals.movementCategory]:
-		final_speed *= 1.2
-		
 	# Use speed_multiplier
-	final_speed = final_speed * speed_multiplier
+	final_speed *= speed_multiplier
 	var target_velocity: Vector2
 	if input_dir == Vector2.ZERO:
 		target_velocity = idiot_hero.velocity
@@ -75,6 +74,13 @@ func _process(delta: float) -> void:
 		target_velocity = input_dir * final_speed
 
 	velocity = velocity.move_toward(target_velocity, acceleration * delta)
+	
+	if velocity.length() <= speed and $ShieldDash.has_effect:
+		print("removing speed effect")
+		$ShieldDash.remove_effect()
+	elif velocity.length() > speed and not $ShieldDash.has_effect:
+		print("granting speed effect")
+		$ShieldDash.add_effect()
 
 	# Dash mechanics
 	#########################
@@ -120,6 +126,9 @@ func _process(delta: float) -> void:
 	# If you still want to face away from hero, keep the next lines:
 	var direction_to_hero = global_position - idiot_hero.global_position
 	rotation = direction_to_hero.angle()
+	# needed for the effect to show up
+	$ShieldDash.position = global_position
+	$ShieldDash.rotation = rotation
  
 
 ########################################################################
@@ -306,7 +315,7 @@ func dash() -> void:
 	
 	if velocity.length() < 10.0:
 		pass  # Optional: Decide how to handle near-zero velocity
-	
+
 	velocity = velocity.normalized() * dash_speed
 	
 func _on_dash_cooldown_finished() -> void:
