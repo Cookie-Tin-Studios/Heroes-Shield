@@ -31,10 +31,18 @@ window/stretch/mode="viewport"
 
 project/assembly_name="heroes shield"
 
+[file_customization]
+
+folder_colors={
+"res://scenes/bosses/": "red"
+}
+
 [global_group]
 
 projectiles=""
 mobs="base group for mobs"
+good_guys=""
+melee=""
 
 [input]
 

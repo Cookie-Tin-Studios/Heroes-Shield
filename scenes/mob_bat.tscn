@@ -49,10 +49,10 @@ rotation = -0.581329
 shape = SubResource("CapsuleShape2D_ttcby")
 
 [node name="TextureProgressBar" parent="Node2D" index="0"]
-offset_left = -97.0
-offset_top = -19.0
-offset_right = 103.0
-offset_bottom = 11.0
+offset_left = -117.0
+offset_top = -75.0
+offset_right = 83.0
+offset_bottom = -45.0
 metadata/_edit_use_anchors_ = true
 
 [node name="AttackPlayer" type="AudioStreamPlayer2D" parent="." index="3"]

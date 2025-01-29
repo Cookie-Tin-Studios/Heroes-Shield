@@ -1,27 +1,47 @@
-[gd_scene load_steps=6 format=3 uid="uid://dk41cisdtdonq"]
+[gd_scene load_steps=11 format=3 uid="uid://dk41cisdtdonq"]
 
-[ext_resource type="Texture2D" uid="uid://dlnhv62cgw1sr" path="res://assets/sprites/placeholder_idiot_walk_1.png" id="1_8yu7l"]
 [ext_resource type="Script" path="res://scripts/idiot/idiot.gd" id="1_cdcv3"]
-[ext_resource type="Texture2D" uid="uid://hearydvci51k" path="res://assets/sprites/placeholder_idiot_walk_2.png" id="2_w3scq"]
+[ext_resource type="Texture2D" uid="uid://bipi2c1lbs35h" path="res://assets/sprites/idiot_hero/step_1.svg" id="2_31jnp"]
+[ext_resource type="Texture2D" uid="uid://c1t45xgjjmosf" path="res://assets/sprites/idiot_hero/step_2.svg" id="3_04t17"]
+[ext_resource type="Texture2D" uid="uid://d1ql0n823q22u" path="res://assets/sprites/idiot_hero/step_3.svg" id="4_1ey3o"]
+[ext_resource type="Texture2D" uid="uid://cy35c1ba513pp" path="res://assets/sprites/idiot_hero/step_4.svg" id="5_1lgq4"]
+[ext_resource type="Texture2D" uid="uid://bc4mr1rw0oty6" path="res://assets/sprites/idiot_hero/step_5.svg" id="6_k3r5c"]
+[ext_resource type="Texture2D" uid="uid://cuxpmpqqtg26i" path="res://assets/sprites/idiot_hero/step_6.svg" id="7_4pxuy"]
+[ext_resource type="Texture2D" uid="uid://cboqvxxfkkk1b" path="res://assets/sprites/idiot_hero/step_7.svg" id="8_7dulj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ar3yn"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_8yu7l")
+"texture": ExtResource("2_31jnp")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_w3scq")
+"texture": ExtResource("3_04t17")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1ey3o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_1lgq4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_k3r5c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_4pxuy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_7dulj")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 7.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_74d3d"]
-size = Vector2(128, 178)
+size = Vector2(128, 433)
 
-[node name="Idiot_hero" type="CharacterBody2D"]
+[node name="Idiot_hero" type="CharacterBody2D" groups=["good_guys"]]
 z_index = 10
 position = Vector2(0, -26)
 motion_mode = 1
@@ -32,7 +52,8 @@ scale = Vector2(1.122, 1)
 sprite_frames = SubResource("SpriteFrames_ar3yn")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.889135
+frame_progress = 0.285331
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4.5)
 shape = SubResource("RectangleShape2D_74d3d")

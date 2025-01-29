@@ -34,11 +34,9 @@ var is_dashing: bool = false
 var can_dash: bool = true
 var dash_timer: float = 0.0
 
-
 func _ready() -> void:
 	# Initialize health
 	current_health = max_health
-	call_deferred("create_health_sections")
 
 	# Movement Upgrades
 	if Globals.movementSpeed1 in Globals.unlocked_upgrades[Globals.movementCategory]:
@@ -253,25 +251,30 @@ func _on_parry_area_body_exited(body: Node2D) -> void:
 	if body in projectiles_in_range:
 		projectiles_in_range.erase(body)
 
-	if body.is_in_group("mobs"):
-		if body.has_method("take_damage"):
-			body.take_damage(1)
-			print("Parried! Dealt 1 damage to ", body.name)
-
-
 func attempt_parry() -> void:
+	# Check for goblins in range and parry kill them
+	var parry_area = $FlipContainer/ParryArea
+	for body in parry_area.get_overlapping_bodies():
+		if body.has_method("die") && body.is_in_group("melee") && body.is_attacking:
+			body.die()
+			
 	if projectiles_in_range.size() == 0:
 		return
 
 	for projectile in projectiles_in_range:
 		deflect_projectile(projectile)
 
+	
+
 func deflect_projectile(projectile: RigidBody2D) -> void:
 	projectile.parried = true
 
 	# Collision layers
-	projectile.set_collision_layer_value(1, false)
-	projectile.set_collision_mask_value(1, false)
+	# Commenting these out so parried projectiles can...
+	# - Hit eachother
+	# - Be parried a 2nd time (important for boss mechanics)
+	#projectile.set_collision_layer_value(1, false)
+	#projectile.set_collision_mask_value(1, false)
 	projectile.set_collision_layer_value(3, true)
 	projectile.set_collision_mask_value(3, true)
 
@@ -281,13 +284,21 @@ func deflect_projectile(projectile: RigidBody2D) -> void:
 	# Weighted blend: e.g. 70% real reflection, 30% guaranteed radial outward
 	var radial_out = normal * 1000.0
 	var alpha = 0.7  # 70% reflection, 30% radial
-
 	var new_velocity = bounced_vel.lerp(radial_out, 1.0 - alpha)
 
-	# 5) Multiply the final velocity by 10 for that big "ping"
-	new_velocity *= 5.0
+	# Multiply the final velocity by 5 for a strong "ping"
+	new_velocity *= 2.0
 
 	projectile.linear_velocity = new_velocity
+	
+	projectile.initial_direction = new_velocity.normalized()
+	projectile.base_speed = new_velocity.length()
+	
+	if Globals.parryZigZag in Globals.unlocked_upgrades[Globals.parryCategory]:
+		projectile.zigzag_enabled = true
+
+	if Globals.parryHoming in Globals.unlocked_upgrades[Globals.parryCategory]:
+		projectile.homing_enabled = true
 	
 	# Play the parry sound effect
 	if parry_sound_player and parry_sound_player.stream:

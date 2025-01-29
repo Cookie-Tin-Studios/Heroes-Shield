@@ -54,6 +54,9 @@ const movementSpeed1 = "Speed 1"
 const movementSpeed2 = "Speed 2"
 const movementSpeed3 = "Dash"
 
+const parryCategory = "Parry Upgrades"
+const parryZigZag = "ZigZagParry"
+const parryHoming = "HomingParry"
 
 # Define the upgrade categories and their upgrades
 var all_upgrades: Array = [
@@ -62,18 +65,13 @@ var all_upgrades: Array = [
 		Upgrade.new(movementSpeed2, "You move faster, electric boogaloo", 2),
 		Upgrade.new(movementSpeed3, "Adds a dash", 0),
 	]),
-	UpgradeCategory.new("Category 2", [
-		Upgrade.new("Upgrade 1", "Yeah it's an upgrade", 1),
-		Upgrade.new("Upgrade 2", "Yeah it's an upgrade", 2),
-	]),
-	UpgradeCategory.new("Category 3", [
-		Upgrade.new("Upgrade 3", "Yeah it's an upgrade", 1),
-		Upgrade.new("Upgrade 4", "Yeah it's an upgrade", 2),
+	UpgradeCategory.new(parryCategory, [
+		Upgrade.new(parryZigZag, "Parries projectiles away in a zig zag pattern", 0),
+		Upgrade.new(parryHoming, "Parries projectiles into the nearest enemy", 0),
 	]),
 ]
 
 var unlocked_upgrades: Dictionary = {
 	movementCategory: [],
-	"Category 2": [],
-	"Category 3": []
+	parryCategory: [],
 }
