@@ -5,7 +5,7 @@ var all_upgrades = Globals.all_upgrades
 @onready var categories_container: HBoxContainer = $MarginContainer/ScrollContainer/CategoriesContainer
 @onready var main_menu_button: Button = $MainMenuButton
 @onready var coins_label: Label = $Panel/CoinsLabel
-@onready var menu_sounds: AudioStreamPlayer2D = $MenuSounds
+@onready var menu_sounds: AudioStreamPlayer = $MenuSounds
 func _ready():
 	coins_label.text = "Coins: " + str(Globals.coins)
 	generate_upgrades_menu()

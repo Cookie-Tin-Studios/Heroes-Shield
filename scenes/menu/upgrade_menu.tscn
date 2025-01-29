@@ -55,6 +55,5 @@ offset_right = 1897.0
 offset_bottom = 1060.0
 text = "Main Menu"
 
-[node name="MenuSounds" type="AudioStreamPlayer2D" parent="."]
+[node name="MenuSounds" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_s6lkk")
-volume_db = 15.0
