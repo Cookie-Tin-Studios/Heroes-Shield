@@ -4,3 +4,4 @@
 *.exe
 *.tmp
 .DS_Store
+exports
