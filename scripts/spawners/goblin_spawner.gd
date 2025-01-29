@@ -2,7 +2,6 @@ extends Area2D
 
 @export var mob_scene: PackedScene = preload("res://scenes/goblin.tscn")
 @export var spawn_interval: float = 2.0
-@export var max_mobs: int = 1
 
 var spawned_mobs: Array = []
 
@@ -18,7 +17,7 @@ func spawn_mob() -> void:
 	if not mob_scene:
 		push_warning("No mob_scene assigned in spawner.")
 		return
-	if spawned_mobs.size() >= max_mobs:
+	if spawned_mobs.size() >= Globals.goblin_max_mobs:
 		return
 
 	var mob_instance = mob_scene.instantiate()

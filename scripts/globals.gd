@@ -4,9 +4,15 @@ signal coins_changed(new_amount)
 signal level_progress_changed(new_amount)
 signal max_level_progress_changed(new_amount)
 
+var level_1_boss_defeated: bool = false
+
+# Default spawn rates
+var bat_max_mobs: int = 3
+var goblin_max_mobs: int = 1
+
 var _coins: int = 0
 var _level_progress: int = 0
-var _max_level_progress: int = 10000
+var _max_level_progress: int = 10000 # 10000 is 1m 4s. I stopwatched it. You're welcome.
 
 # this is set in HUD._ready
 var _camera_init: Vector2 = Vector2.ZERO

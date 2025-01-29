@@ -41,6 +41,10 @@ position = Vector2(1656, 1732)
 position = Vector2(2407, -43)
 spawn_interval = 100.0
 
+[node name="GoblinSpawner" parent="Idiot_hero/GoblinSpawner" instance=ExtResource("4_y6hyy")]
+position = Vector2(2407, -43)
+spawn_interval = 100.0
+
 [node name="PowerUpSpawningZone" parent="Idiot_hero" instance=ExtResource("8_jw5bn")]
 position = Vector2(2317, -973)
 scale = Vector2(1, 2)
@@ -66,4 +70,3 @@ offset_bottom = 40.0
 
 [node name="boss1-part2" parent="." instance=ExtResource("8_31t57")]
 position = Vector2(3486, 1071)
-fire_interval = 1
