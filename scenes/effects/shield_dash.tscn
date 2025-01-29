@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://chvwopk1tsrua"]
+
+[ext_resource type="Script" path="res://scripts/effects/shield_dash.gd" id="1_sda05"]
+
+[node name="ShieldDash" type="Node2D"]
+script = ExtResource("1_sda05")

@@ -40,7 +40,11 @@ func _on_body_entered(body: Node) -> void:
 	if body is CharacterBody2D or body is RigidBody2D:
 		if body.has_method("take_damage"):
 			body.take_damage(damage)
-		queue_free()
+			queue_free()
+
+		if body.has_method("when_hit"):
+			body.when_hit()  # Apply damage to the target.
+			queue_free()
 
 
 func apply_homing(delta: float) -> void:
@@ -81,5 +85,5 @@ func find_nearest_enemy() -> Node2D:
 		if dist < nearest_dist:
 			nearest_dist = dist
 			nearest_enemy = enemy
-	
+
 	return nearest_enemy

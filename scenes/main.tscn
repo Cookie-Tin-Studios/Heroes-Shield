@@ -1,12 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://i70ovs7ns5pg"]
+[gd_scene load_steps=10 format=3 uid="uid://i70ovs7ns5pg"]
 
 [ext_resource type="PackedScene" uid="uid://dk41cisdtdonq" path="res://scenes/idiot_hero.tscn" id="2_jn0l8"]
 [ext_resource type="PackedScene" uid="uid://bumwv0mx5w6aq" path="res://scenes/shield.tscn" id="2_w3671"]
 [ext_resource type="PackedScene" uid="uid://cn3lii7exa78k" path="res://scenes/background.tscn" id="3_3s816"]
+[ext_resource type="PackedScene" path="res://scenes/spawners/goblin_spawner.tscn" id="4_y6hyy"]
 [ext_resource type="PackedScene" uid="uid://dtj2jcj8eeq22" path="res://scenes/HUD.tscn" id="5_scp5s"]
 [ext_resource type="PackedScene" uid="uid://ei3etn0w5se4" path="res://scenes/menu/pause_menu.tscn" id="5_yooe3"]
-[ext_resource type="PackedScene" uid="uid://xsfmwuuxbm3h" path="res://scenes/spawners/bat_spawner.tscn" id="6_xgrp2"]
-[ext_resource type="PackedScene" path="res://scenes/spawners/powerup_spawner.tscn" id="8_jw5bn"]
+[ext_resource type="PackedScene" uid="uid://3npy5eb5sst5" path="res://scenes/bosses/boss1.tscn" id="8_31t57"]
+[ext_resource type="PackedScene" uid="uid://dvqneq3eakg02" path="res://scenes/spawners/powerup_spawner.tscn" id="8_jw5bn"]
 
 [sub_resource type="GDScript" id="GDScript_81rl6"]
 script/source = "extends Node2D
@@ -36,13 +37,13 @@ z_index = 11
 z_as_relative = false
 position = Vector2(1656, 1732)
 
+[node name="GoblinSpawner" parent="Idiot_hero" instance=ExtResource("4_y6hyy")]
+position = Vector2(2407, -43)
+spawn_interval = 100.0
+
 [node name="PowerUpSpawningZone" parent="Idiot_hero" instance=ExtResource("8_jw5bn")]
 position = Vector2(2317, -973)
 scale = Vector2(1, 2)
-
-[node name="SpawningZone" parent="Idiot_hero" instance=ExtResource("6_xgrp2")]
-position = Vector2(2497, -918)
-scale = Vector2(1.4, 1.4)
 
 [node name="Camera2D" type="Camera2D" parent="Idiot_hero"]
 position = Vector2(252.999, -640)
@@ -62,3 +63,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="boss1-part2" parent="." instance=ExtResource("8_31t57")]
+position = Vector2(3486, 1071)
+fire_interval = 1

@@ -34,17 +34,20 @@ var is_dashing: bool = false
 var can_dash: bool = true
 var dash_timer: float = 0.0
 
-
 func _ready() -> void:
 	# Initialize health
 	current_health = max_health
-	call_deferred("create_health_sections")
+
+	# Movement Upgrades
+	if Globals.movementSpeed1 in Globals.unlocked_upgrades[Globals.movementCategory]:
+		speed *= 1.1
+	if Globals.movementSpeed2 in Globals.unlocked_upgrades[Globals.movementCategory]:
+		speed *= 1.2
 
 	# Ensure the hero node is accessible (only used for movement/position checks, not reflection)
 	idiot_hero = get_node("../Idiot_hero")
 	if idiot_hero == null:
 		print("Shield: Hero path is not set!")
-
 
 func _process(delta: float) -> void:
 	var input_dir = Vector2.ZERO
@@ -61,15 +64,9 @@ func _process(delta: float) -> void:
 
 	input_dir = input_dir.normalized()
 
-	# Movement Upgrades
 	var final_speed = speed
-	if Globals.movementSpeed1 in Globals.unlocked_upgrades[Globals.movementCategory]:
-		final_speed *= 1.1
-	if Globals.movementSpeed2 in Globals.unlocked_upgrades[Globals.movementCategory]:
-		final_speed *= 1.2
-		
 	# Use speed_multiplier
-	final_speed = final_speed * speed_multiplier
+	final_speed *= speed_multiplier
 	var target_velocity: Vector2
 	if input_dir == Vector2.ZERO:
 		target_velocity = idiot_hero.velocity
@@ -77,6 +74,13 @@ func _process(delta: float) -> void:
 		target_velocity = input_dir * final_speed
 
 	velocity = velocity.move_toward(target_velocity, acceleration * delta)
+	
+	if velocity.length() <= speed and $ShieldDash.has_effect:
+		print("removing speed effect")
+		$ShieldDash.remove_effect()
+	elif velocity.length() > speed and not $ShieldDash.has_effect:
+		print("granting speed effect")
+		$ShieldDash.add_effect()
 
 	# Dash mechanics
 	#########################
@@ -122,6 +126,9 @@ func _process(delta: float) -> void:
 	# If you still want to face away from hero, keep the next lines:
 	var direction_to_hero = global_position - idiot_hero.global_position
 	rotation = direction_to_hero.angle()
+	# needed for the effect to show up
+	$ShieldDash.position = global_position
+	$ShieldDash.rotation = rotation
  
 
 ########################################################################
@@ -244,25 +251,30 @@ func _on_parry_area_body_exited(body: Node2D) -> void:
 	if body in projectiles_in_range:
 		projectiles_in_range.erase(body)
 
-	if body.is_in_group("mobs"):
-		if body.has_method("take_damage"):
-			body.take_damage(1)
-			print("Parried! Dealt 1 damage to ", body.name)
-
-
 func attempt_parry() -> void:
+	# Check for goblins in range and parry kill them
+	var parry_area = $FlipContainer/ParryArea
+	for body in parry_area.get_overlapping_bodies():
+		if body.has_method("die") && body.is_in_group("melee") && body.is_attacking:
+			body.die()
+			
 	if projectiles_in_range.size() == 0:
 		return
 
 	for projectile in projectiles_in_range:
 		deflect_projectile(projectile)
 
+	
+
 func deflect_projectile(projectile: RigidBody2D) -> void:
 	projectile.parried = true
 
 	# Collision layers
-	projectile.set_collision_layer_value(1, false)
-	projectile.set_collision_mask_value(1, false)
+	# Commenting these out so parried projectiles can...
+	# - Hit eachother
+	# - Be parried a 2nd time (important for boss mechanics)
+	#projectile.set_collision_layer_value(1, false)
+	#projectile.set_collision_mask_value(1, false)
 	projectile.set_collision_layer_value(3, true)
 	projectile.set_collision_mask_value(3, true)
 
@@ -303,7 +315,7 @@ func dash() -> void:
 	
 	if velocity.length() < 10.0:
 		pass  # Optional: Decide how to handle near-zero velocity
-	
+
 	velocity = velocity.normalized() * dash_speed
 	
 func _on_dash_cooldown_finished() -> void:
