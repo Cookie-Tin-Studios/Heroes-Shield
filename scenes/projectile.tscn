@@ -1,32 +1,25 @@
-[gd_scene load_steps=8 format=3 uid="uid://dmxf6gcphgjg5"]
+[gd_scene load_steps=7 format=3 uid="uid://dmxf6gcphgjg5"]
 
 [ext_resource type="Script" path="res://scripts/projectile.gd" id="1_wf0ix"]
-[ext_resource type="Texture2D" uid="uid://dkft7ngvvftf7" path="res://assets/sprites/projectile_1.png" id="2_tkcaq"]
-[ext_resource type="Texture2D" uid="uid://bfy4iyh5k85tm" path="res://assets/sprites/projectile_2.png" id="3_t46ee"]
-[ext_resource type="Texture2D" uid="uid://c4nm7vmrf5dbs" path="res://assets/sprites/projectile_3.png" id="4_21qjv"]
+[ext_resource type="Texture2D" uid="uid://dsq5p7rv3ynsq" path="res://assets/sprites/projectile.png" id="2_sk4y5"]
+[ext_resource type="Script" path="res://scripts/explosion_drawer.gd" id="3_d1sf4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hg1lb"]
 bounce = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3b7u6"]
+radius = 50.04
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1hryt"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_tkcaq")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_t46ee")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_21qjv")
+"texture": ExtResource("2_sk4y5")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_3b7u6"]
-radius = 50.04
 
 [node name="Projectile" type="RigidBody2D" groups=["projectiles"]]
 mass = 0.001
@@ -36,13 +29,18 @@ contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_wf0ix")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3b7u6")
+one_way_collision_margin = 0.0
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2, -3)
+scale = Vector2(0.227778, 0.225653)
 sprite_frames = SubResource("SpriteFrames_1hryt")
 autoplay = "default"
 frame_progress = 0.00269623
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_3b7u6")
-one_way_collision_margin = 0.0
+[node name="ExplosionDrawer" type="Node2D" parent="."]
+script = ExtResource("3_d1sf4")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

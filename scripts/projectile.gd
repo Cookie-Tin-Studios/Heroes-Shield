@@ -22,9 +22,21 @@ var zigzag_angle: float = 0.0
 var zig_side = 1
 var zig_period = 0.25  # seconds per flip
 var timer = 0.0
+# Explosion parameters
+var exploding: bool = false
+var explosion_lines: int = 12  # Number of lines to draw for the explosion
+var explosion_length: float = 50.0  # Length of the explosion lines
+var explosion_duration: float = 0.2  # Duration of the explosion effect
+var explosion_timer: float = 0.0
+
+@onready var main_sprite: AnimatedSprite2D = $AnimatedSprite2D
+
+# Reference to the child Node2D for drawing
+@onready var explosion_drawer: Node2D = $ExplosionDrawer
 
 func _ready() -> void:
-	pass
+	# Ensure the explosion drawer is initially hidden
+	explosion_drawer.visible = false
 
 func _physics_process(delta: float) -> void:
 	if parried:
@@ -36,16 +48,30 @@ func _physics_process(delta: float) -> void:
 		if zigzag_enabled:
 			apply_zigzag(delta)
 
+	# Handle explosion timer
+	if exploding:
+		explosion_timer -= delta
+		if explosion_timer <= 0:
+			queue_free()  # Remove the projectile after the explosion is done
+		explosion_drawer.queue_redraw()  # Redraw the explosion lines
+
 func _on_body_entered(body: Node) -> void:
 	if body is CharacterBody2D or body is RigidBody2D:
 		if body.has_method("take_damage"):
 			body.take_damage(damage)
-			queue_free()
-
+			print("Projectile hit ", body.name, " for ", damage, " damage.")
+			explode()
+			
 		if body.has_method("when_hit"):
 			body.when_hit()  # Apply damage to the target.
-			queue_free()
+			print("when_hit function ran.")
+			explode()
 
+	# Check if the collided body is a parried projectile
+	if body is RigidBody2D and body.has_method("is_parried") and body.is_parried():
+		explode()
+		if body.has_method("explode"):
+			body.explode()
 
 func apply_homing(delta: float) -> void:
 	print("homing applied")
@@ -71,7 +97,6 @@ func apply_zigzag(delta: float) -> void:
 	# amplitude is how far we move sideways
 	linear_velocity = forward_dir * base_speed + perpendicular_dir * (zig_side * zigzag_amplitude)
 
-
 func find_nearest_enemy() -> Node2D:
 	var nearest_dist = INF
 	var nearest_enemy: Node2D = null
@@ -87,3 +112,14 @@ func find_nearest_enemy() -> Node2D:
 			nearest_enemy = enemy
 
 	return nearest_enemy
+
+func is_parried() -> bool:
+	return parried
+
+func explode() -> void:
+	if not exploding:  # Ensure explosion only happens once
+		exploding = true
+		explosion_timer = explosion_duration
+		main_sprite.visible = false  # Hide the main sprite
+		explosion_drawer.visible = true  # Make the explosion drawer visible
+		explosion_drawer.queue_redraw()  # Trigger the drawing of explosion lines
