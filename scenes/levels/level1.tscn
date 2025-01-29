@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bumwv0mx5w6aq" path="res://scenes/shield.tscn" id="1_mxbng"]
 [ext_resource type="PackedScene" uid="uid://ei3etn0w5se4" path="res://scenes/menu/pause_menu.tscn" id="2_02mv8"]
 [ext_resource type="PackedScene" uid="uid://dk41cisdtdonq" path="res://scenes/idiot_hero.tscn" id="3_iifgl"]
-[ext_resource type="PackedScene" path="res://scenes/spawners/goblin_spawner.tscn" id="4_ens06"]
+[ext_resource type="PackedScene" uid="uid://dv662bdgy8pa7" path="res://scenes/spawners/goblin_spawner.tscn" id="4_ens06"]
 [ext_resource type="PackedScene" uid="uid://dvqneq3eakg02" path="res://scenes/spawners/powerup_spawner.tscn" id="5_u454n"]
 [ext_resource type="PackedScene" uid="uid://xsfmwuuxbm3h" path="res://scenes/spawners/bat_spawner.tscn" id="6_nvnt7"]
 [ext_resource type="PackedScene" uid="uid://cn3lii7exa78k" path="res://scenes/background.tscn" id="6_q475b"]
@@ -25,10 +25,12 @@ z_as_relative = false
 position = Vector2(1656, 1732)
 
 [node name="GoblinSpawner" parent="Idiot_hero" instance=ExtResource("4_ens06")]
-position = Vector2(2407, -43)
+position = Vector2(2404, 105)
+spawn_interval = 7.0
 
 [node name="BatSpawner" parent="Idiot_hero" instance=ExtResource("6_nvnt7")]
 position = Vector2(2394, -1175)
+spawn_interval = 5.0
 
 [node name="PowerUpSpawningZone" parent="Idiot_hero" instance=ExtResource("5_u454n")]
 position = Vector2(2317, -973)

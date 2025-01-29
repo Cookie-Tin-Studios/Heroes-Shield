@@ -13,10 +13,10 @@ func _process(_delta: float) -> void:
 	if 0 <= percent_level_progress and percent_level_progress <= 10:
 		Globals.bat_max_mobs = 1
 		Globals.goblin_max_mobs = 0
-	elif 11 <= percent_level_progress and percent_level_progress <= 30:
+	elif 11 <= percent_level_progress and percent_level_progress <= 20:
 		Globals.bat_max_mobs = 0
 		Globals.goblin_max_mobs = 1
-	elif 31 <= percent_level_progress and percent_level_progress <= 40:
+	elif 21 <= percent_level_progress and percent_level_progress <= 70:
 		Globals.bat_max_mobs = 1
 		Globals.goblin_max_mobs = 1
 	

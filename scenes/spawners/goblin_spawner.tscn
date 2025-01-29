@@ -1,14 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://bn37sgau5rce4"]
+[gd_scene load_steps=3 format=3 uid="uid://dv662bdgy8pa7"]
 
 [ext_resource type="Script" path="res://scripts/spawners/goblin_spawner.gd" id="1_8ni14"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bapfj"]
-size = Vector2(150.083, 224)
+size = Vector2(150.083, 157)
 
 [node name="GoblinSpawner" type="Area2D"]
 script = ExtResource("1_8ni14")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-5, -2)
+position = Vector2(0, 7.62939e-06)
 scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_bapfj")
