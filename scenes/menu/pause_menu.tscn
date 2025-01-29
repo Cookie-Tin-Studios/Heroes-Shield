@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://ei3etn0w5se4"]
+[gd_scene load_steps=7 format=3 uid="uid://ei3etn0w5se4"]
 
 [ext_resource type="Script" path="res://scripts/menu/pause_menu.gd" id="1_hsjdw"]
+[ext_resource type="Theme" uid="uid://cuv37xi3kgiuk" path="res://scenes/menu/controls_theme.tres" id="1_klgtf"]
+[ext_resource type="Script" path="res://scripts/menu/button_list.gd" id="3_ldwfy"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lffdr"]
 font_size = 48
@@ -19,6 +21,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_klgtf")
 theme_override_constants/margin_left = 120
 theme_override_constants/margin_top = 80
 theme_override_constants/margin_right = 120
@@ -59,6 +62,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 alignment = 1
+script = ExtResource("3_ldwfy")
 
 [node name="resume" type="Button" parent="pause_menu/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -68,12 +72,12 @@ text = "Resume"
 [node name="settings" type="Button" parent="pause_menu/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_wxyta")
-text = "Settings"
+text = "Exit to menu"
 
 [node name="exit" type="Button" parent="pause_menu/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_wxyta")
-text = "Exit"
+text = "Exit to desktop"
 
 [node name="Spacer2" type="BoxContainer" parent="pause_menu/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2

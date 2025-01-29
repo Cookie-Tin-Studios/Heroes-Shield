@@ -5,11 +5,15 @@ var all_upgrades = Globals.all_upgrades
 @onready var categories_container: HBoxContainer = $MarginContainer/ScrollContainer/CategoriesContainer
 @onready var main_menu_button: Button = $MainMenuButton
 @onready var coins_label: Label = $Panel/CoinsLabel
-
+@onready var menu_sounds: AudioStreamPlayer = $MenuSounds
 func _ready():
 	coins_label.text = "Coins: " + str(Globals.coins)
 	generate_upgrades_menu()
 	main_menu_button.pressed.connect(go_to_main_menu)
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("ui_previous_menu"):
+		go_to_main_menu()
 
 func clear_container(container: Control) -> void:
 	for child in container.get_children():
@@ -70,6 +74,8 @@ func generate_upgrades_menu():
 			# Connect button action if not locked
 			if not buy_button.disabled:
 				buy_button.connect("pressed", Callable(self, "_on_buy_pressed").bind(category_name, upgrade_name, cost))
+				buy_button.connect("mouse_entered", Callable(self, "_on_buy_button_hovered"))  
+				buy_button.connect("mouse_entered", Callable(self, "_on_buy_button_hovered"))  
 
 			upgrade_container.add_child(buy_button)
 
@@ -92,6 +98,7 @@ func _on_buy_pressed(category_name: String, upgrade_name: String, cost: int) -> 
 			Globals.unlocked_upgrades[category_name].append(upgrade_name)
 			print("Unlocked upgrade: ", upgrade_name, " in category: ", category_name)
 
+		menu_sounds.play()
 		# Regenerate the upgrades menu to reflect the updated state
 		generate_upgrades_menu()
 	else:
@@ -102,3 +109,6 @@ func update_coins_label() -> void:
 
 func go_to_main_menu() -> void:
 	get_tree().change_scene_to_file("res://scenes/menu/main_menu.tscn")
+
+func _on_buy_button_hovered() -> void:
+	menu_sounds.play()

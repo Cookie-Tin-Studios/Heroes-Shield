@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://doe5vvgxitcme"]
+[gd_scene load_steps=5 format=3 uid="uid://doe5vvgxitcme"]
 
+[ext_resource type="Theme" uid="uid://cuv37xi3kgiuk" path="res://scenes/menu/controls_theme.tres" id="1_06e3c"]
 [ext_resource type="Script" path="res://scripts/menu/upgrade_menu.gd" id="1_p3ykw"]
+[ext_resource type="Script" path="res://scripts/menu/button_list.gd" id="3_1epq4"]
+[ext_resource type="AudioStream" uid="uid://7v5l6k4w28rh" path="res://assets/audio/menu.ogg" id="4_s6lkk"]
 
 [node name="UpgradesMenu" type="Control"]
 layout_direction = 1
@@ -10,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_06e3c")
 script = ExtResource("1_p3ykw")
 
 [node name="Panel" type="Panel" parent="."]
@@ -41,6 +45,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
+script = ExtResource("3_1epq4")
 
 [node name="MainMenuButton" type="Button" parent="."]
 layout_mode = 0
@@ -49,3 +54,6 @@ offset_top = 1017.0
 offset_right = 1897.0
 offset_bottom = 1060.0
 text = "Main Menu"
+
+[node name="MenuSounds" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_s6lkk")
