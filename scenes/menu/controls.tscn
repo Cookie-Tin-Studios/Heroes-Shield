@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://d2f3uccoflwbh"]
+[gd_scene load_steps=5 format=3 uid="uid://dro7nbhgiypml"]
 
-[ext_resource type="Theme" uid="uid://cuv37xi3kgiuk" path="res://scenes/menu/controls_theme.tres" id="1_x4hng"]
-[ext_resource type="Script" path="res://scenes/menu/controls.gd" id="2_7irnj"]
+[ext_resource type="Theme" uid="uid://bl51drp0tx8ee" path="res://scenes/menu/controls_theme.tres" id="1_x4hng"]
+[ext_resource type="Script" path="res://scripts/menu/controls.gd" id="2_7irnj"]
 [ext_resource type="Texture2D" uid="uid://bgvu6sj0fksr2" path="res://assets/sprites/menu/start menu.png" id="3_0nu5f"]
 [ext_resource type="Script" path="res://scripts/menu/button_list.gd" id="4_n6bf4"]
 
@@ -36,14 +36,24 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 script = ExtResource("4_n6bf4")
 
+[node name="spacer2" type="CenterContainer" parent="HBoxContainer/main_buttons"]
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.28
+
 [node name="controls" type="Button" parent="HBoxContainer/main_buttons"]
 process_mode = 3
 layout_mode = 2
 disabled = true
-text = "Controls:
+text = "=== Controls ===
 Movement: WASD
 Parry: Click
-Dash: Space"
+Dash: Space
+=== Gamepad ===
+Movement: Left Joystick
+Parry: A
+Dash: X"
 
 [node name="spacer" type="CenterContainer" parent="HBoxContainer/main_buttons"]
 layout_mode = 2
