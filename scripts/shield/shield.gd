@@ -201,6 +201,14 @@ func apply_invincibility(duration: float) -> void:
 func revert_invincibility() -> void:
 	isInvincible = false
 
+########################################################################
+# HEALING
+########################################################################
+	
+func apply_healing(amount: int) -> void:
+	var old_health = current_health
+	current_health = min(current_health + amount, max_health)
+	update_health_bar()
 
 ########################################################################
 # MOVEMENT
@@ -218,6 +226,7 @@ func restrict_to_camera() -> void:
 
 	position.x = clamp(position.x, camera_rect.position.x, camera_rect.position.x + camera_rect.size.x)
 	position.y = clamp(position.y, camera_rect.position.y, camera_rect.position.y + camera_rect.size.y)
+
 
 ########################################################################
 # PARRY
