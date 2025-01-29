@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dmxf6gcphgjg5"]
+[gd_scene load_steps=7 format=3 uid="uid://dmxf6gcphgjg5"]
 
 [ext_resource type="Script" path="res://scripts/projectile.gd" id="1_wf0ix"]
 [ext_resource type="Texture2D" uid="uid://dsq5p7rv3ynsq" path="res://assets/sprites/projectile.png" id="2_sk4y5"]
@@ -9,12 +9,6 @@ bounce = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3b7u6"]
 radius = 50.04
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hg1lb"]
-bounce = 1.0
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hg1lb"]
-bounce = 1.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1hryt"]
 animations = [{
