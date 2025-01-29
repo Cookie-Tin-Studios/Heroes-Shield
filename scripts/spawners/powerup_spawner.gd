@@ -2,6 +2,7 @@ extends Area2D
 
 @export var invincibilityPowerUp: PackedScene = preload("res://scenes/powerups/invincibility_power_up.tscn")
 @export var speedPowerUp: PackedScene = preload("res://scenes/powerups/movement_power_up.tscn")
+@export var healthPowerUp: PackedScene = preload("res://scenes/powerups/health_power_up.tscn")
 @export var spawn_interval: float = 10.0
 @export var max_power_ups: int = 2
 
@@ -13,7 +14,7 @@ func _ready() -> void:
 func spawn_mob_timer() -> void:
 	while true:
 		await get_tree().create_timer(spawn_interval).timeout
-		var powerUpNum = randi_range(0,1)
+		var powerUpNum = randi_range(0,2)
 		spawn_mob(powerUpNum)
 
 func spawn_mob(powerUpNum: int) -> void:
@@ -22,6 +23,10 @@ func spawn_mob(powerUpNum: int) -> void:
 		return
 		
 	if not invincibilityPowerUp:
+		push_warning("No mob_scene assigned in spawner.")
+		return
+		
+	if not healthPowerUp:
 		push_warning("No mob_scene assigned in spawner.")
 		return
 		
@@ -35,6 +40,8 @@ func spawn_mob(powerUpNum: int) -> void:
 			power_up_instance = invincibilityPowerUp.instantiate()
 		1:
 			power_up_instance = speedPowerUp.instantiate()
+		2:
+			power_up_instance = healthPowerUp.instantiate()
 	
 	# Instead of 'add_child', add to the main scene:
 	var main_scene = get_tree().get_current_scene()
