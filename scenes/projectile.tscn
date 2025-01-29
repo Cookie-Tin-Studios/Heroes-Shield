@@ -29,6 +29,7 @@ animations = [{
 radius = 50.04
 
 [node name="Projectile" type="RigidBody2D" groups=["projectiles"]]
+mass = 0.001
 physics_material_override = SubResource("PhysicsMaterial_hg1lb")
 gravity_scale = 0.0
 contact_monitor = true

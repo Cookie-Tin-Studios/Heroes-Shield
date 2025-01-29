@@ -46,6 +46,7 @@ freeze_mode = 1
 script = ExtResource("2_twwc3")
 health_bar_offset = Vector2(-100, 200)
 health_bar_follow_collision = true
+fire_interval = 1
 projectile_scene = ExtResource("3_bces4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
