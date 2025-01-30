@@ -52,6 +52,11 @@ layout_mode = 2
 theme = ExtResource("1_1w8d3")
 text = "Controls"
 
+[node name="Credits" type="Button" parent="HBoxContainer/main_buttons"]
+layout_mode = 2
+theme = ExtResource("1_1w8d3")
+text = "Credits"
+
 [node name="Exit" type="Button" parent="HBoxContainer/main_buttons"]
 layout_mode = 2
 theme = ExtResource("1_1w8d3")
@@ -68,5 +73,6 @@ size_flags_stretch_ratio = 1.4
 [connection signal="pressed" from="HBoxContainer/main_buttons/Upgrades" to="." method="_on_upgrades_pressed"]
 [connection signal="focus_entered" from="HBoxContainer/main_buttons/Controls" to="." method="_on_exit_focus_entered"]
 [connection signal="pressed" from="HBoxContainer/main_buttons/Controls" to="." method="_on_controls_pressed"]
+[connection signal="pressed" from="HBoxContainer/main_buttons/Credits" to="." method="_on_credits_pressed"]
 [connection signal="focus_entered" from="HBoxContainer/main_buttons/Exit" to="." method="_on_exit_focus_entered"]
 [connection signal="pressed" from="HBoxContainer/main_buttons/Exit" to="." method="_on_exit_pressed"]
