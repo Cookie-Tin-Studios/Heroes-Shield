@@ -1,6 +1,5 @@
 extends MarginContainer
 
-	
 func _process(_delta) -> void:
 	if Input.is_action_just_pressed("ui_previous_menu"):
 		get_tree().quit()
