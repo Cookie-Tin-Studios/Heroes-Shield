@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgh7j5hjc5mjn"
-path="res://.godot/imported/explosion.png-15d41141f395886916336505d1b05005.ctex"
+uid="uid://lsljaf1o2ne7"
+path="res://.godot/imported/Boss_wings down.svg-f3b8a23c42c7991ed4ff11d8db396007.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/boss1/explosion.png"
-dest_files=["res://.godot/imported/explosion.png-15d41141f395886916336505d1b05005.ctex"]
+source_file="res://assets/sprites/boss1/Boss_wings down.svg"
+dest_files=["res://.godot/imported/Boss_wings down.svg-f3b8a23c42c7991ed4ff11d8db396007.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

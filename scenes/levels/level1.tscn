@@ -16,17 +16,6 @@ script = ExtResource("1_airvd")
 [node name="Shield" parent="." instance=ExtResource("1_mxbng")]
 z_index = 12
 position = Vector2(1937, 1595)
-max_health = 3
-isInvincible = false
-acceleration = 4000.0
-deceleration = 6000.0
-friction = 0.8
-speed = 800.0
-speed_multiplier = 1.0
-dash_speed = 3000.0
-dash_duration = 0.5
-dash_cooldown = 1.0
-dash_damage = 1
 
 [node name="pause_menu" parent="." instance=ExtResource("2_02mv8")]
 

@@ -67,13 +67,13 @@ const parryHoming = "HomingParry"
 # Define the upgrade categories and their upgrades
 var all_upgrades: Array = [
 	UpgradeCategory.new(movementCategory, [
-		Upgrade.new(movementSpeed1, "You move faster, what did you expect", 1),
-		Upgrade.new(movementSpeed2, "You move faster, electric boogaloo", 2),
-		Upgrade.new(movementSpeed3, "Adds a dash", 0),
+		Upgrade.new(movementSpeed1, "You move faster, what did you expect", 10),
+		Upgrade.new(movementSpeed2, "You move faster, electric boogaloo", 10),
+		Upgrade.new(movementSpeed3, "Adds a dash", 10),
 	]),
 	UpgradeCategory.new(parryCategory, [
-		Upgrade.new(parryZigZag, "Parries projectiles away in a zig zag pattern", 0),
-		Upgrade.new(parryHoming, "Parries projectiles into the nearest enemy", 0),
+		Upgrade.new(parryZigZag, "Parries projectiles away in a zig zag pattern", 10),
+		Upgrade.new(parryHoming, "Parries projectiles into the nearest enemy", 10),
 	]),
 ]
 
