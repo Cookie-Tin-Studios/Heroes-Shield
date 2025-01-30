@@ -2,8 +2,8 @@ extends RigidBody2D
 
 @export var attack_damage: int = 1
 @export var attack_range: float = 100.0
-@export var attack_cooldown: float = 2.5
-@export var parry_window: float = 2.0
+@export var attack_cooldown: float = 1.0
+@export var parry_window: float = 1.0
 
 var is_attacking = false
 var is_parried = false

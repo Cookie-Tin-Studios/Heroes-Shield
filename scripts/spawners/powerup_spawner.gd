@@ -9,6 +9,7 @@ extends Area2D
 var spawned_power_ups: Array = []
 
 func _ready() -> void:
+	randomize()
 	spawn_mob_timer()
 
 func spawn_mob_timer() -> void:

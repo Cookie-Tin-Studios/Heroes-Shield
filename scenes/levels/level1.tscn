@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ei3etn0w5se4" path="res://scenes/menu/pause_menu.tscn" id="2_02mv8"]
 [ext_resource type="PackedScene" uid="uid://dk41cisdtdonq" path="res://scenes/idiot_hero.tscn" id="3_iifgl"]
 [ext_resource type="PackedScene" uid="uid://dv662bdgy8pa7" path="res://scenes/spawners/goblin_spawner.tscn" id="4_ens06"]
-[ext_resource type="PackedScene" uid="uid://dvqneq3eakg02" path="res://scenes/spawners/powerup_spawner.tscn" id="5_u454n"]
+[ext_resource type="PackedScene" uid="uid://pcn3k1gpfcik" path="res://scenes/spawners/powerup_spawner.tscn" id="5_u454n"]
 [ext_resource type="PackedScene" uid="uid://xsfmwuuxbm3h" path="res://scenes/spawners/bat_spawner.tscn" id="6_nvnt7"]
 [ext_resource type="PackedScene" uid="uid://cn3lii7exa78k" path="res://scenes/background.tscn" id="6_q475b"]
 [ext_resource type="PackedScene" uid="uid://dtj2jcj8eeq22" path="res://scenes/HUD.tscn" id="7_o4vra"]
@@ -16,6 +16,17 @@ script = ExtResource("1_airvd")
 [node name="Shield" parent="." instance=ExtResource("1_mxbng")]
 z_index = 12
 position = Vector2(1937, 1595)
+max_health = 3
+isInvincible = false
+acceleration = 4000.0
+deceleration = 6000.0
+friction = 0.8
+speed = 800.0
+speed_multiplier = 1.0
+dash_speed = 3000.0
+dash_duration = 0.5
+dash_cooldown = 1.0
+dash_damage = 1
 
 [node name="pause_menu" parent="." instance=ExtResource("2_02mv8")]
 
@@ -25,15 +36,16 @@ z_as_relative = false
 position = Vector2(1656, 1732)
 
 [node name="GoblinSpawner" parent="Idiot_hero" instance=ExtResource("4_ens06")]
-position = Vector2(2404, 105)
+position = Vector2(2405, 87)
 spawn_interval = 5.0
 
 [node name="BatSpawner" parent="Idiot_hero" instance=ExtResource("6_nvnt7")]
-position = Vector2(2394, -1175)
+position = Vector2(2407, -980)
+scale = Vector2(1, 1.5)
 spawn_interval = 3.0
 
 [node name="PowerUpSpawningZone" parent="Idiot_hero" instance=ExtResource("5_u454n")]
-position = Vector2(2317, -973)
+position = Vector2(2330, -730)
 scale = Vector2(1, 2)
 
 [node name="Camera2D" type="Camera2D" parent="Idiot_hero"]
