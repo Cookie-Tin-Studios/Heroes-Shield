@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dk41cisdtdonq"]
+[gd_scene load_steps=11 format=3 uid="uid://dk41cisdtdonq"]
 
 [ext_resource type="Script" path="res://scripts/idiot/idiot.gd" id="1_cdcv3"]
 [ext_resource type="Texture2D" uid="uid://c5lsnh3xyhxwa" path="res://assets/sprites/idiot_hero/step_1.svg" id="2_31jnp"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://bjxj6g6faix8g" path="res://assets/sprites/idiot_hero/step_5.svg" id="6_k3r5c"]
 [ext_resource type="Texture2D" uid="uid://dx7gi6qrx0e4p" path="res://assets/sprites/idiot_hero/step_6.svg" id="7_4pxuy"]
 [ext_resource type="Texture2D" uid="uid://cg1pxh7rnfsdu" path="res://assets/sprites/idiot_hero/step_7.svg" id="8_7dulj"]
-[ext_resource type="Texture2D" uid="uid://djuinchlmv4n8" path="res://assets/sprites/idiot_hero/standing.svg" id="9_im3k4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ar3yn"]
 animations = [{
@@ -33,13 +32,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("8_7dulj")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_im3k4")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 7.0
+"speed": 6.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_74d3d"]
@@ -56,7 +52,7 @@ scale = Vector2(1.122, 1)
 sprite_frames = SubResource("SpriteFrames_ar3yn")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.795382
+frame_progress = 0.913022
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4.5)
