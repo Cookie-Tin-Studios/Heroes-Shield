@@ -118,6 +118,7 @@ func is_parried() -> bool:
 
 func explode() -> void:
 	if not exploding:  # Ensure explosion only happens once
+		$CollisionShape2D.queue_free()
 		exploding = true
 		explosion_timer = explosion_duration
 		main_sprite.visible = false  # Hide the main sprite

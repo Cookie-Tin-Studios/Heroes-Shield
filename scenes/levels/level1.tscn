@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cpqorerb7kfsr"]
+[gd_scene load_steps=10 format=3 uid="uid://btvk5k8h8g6yh"]
 
 [ext_resource type="Script" path="res://scripts/levels/level1.tres.gd" id="1_airvd"]
 [ext_resource type="PackedScene" uid="uid://bumwv0mx5w6aq" path="res://scenes/shield.tscn" id="1_mxbng"]
@@ -26,11 +26,11 @@ position = Vector2(1656, 1732)
 
 [node name="GoblinSpawner" parent="Idiot_hero" instance=ExtResource("4_ens06")]
 position = Vector2(2404, 105)
-spawn_interval = 7.0
+spawn_interval = 5.0
 
 [node name="BatSpawner" parent="Idiot_hero" instance=ExtResource("6_nvnt7")]
 position = Vector2(2394, -1175)
-spawn_interval = 5.0
+spawn_interval = 3.0
 
 [node name="PowerUpSpawningZone" parent="Idiot_hero" instance=ExtResource("5_u454n")]
 position = Vector2(2317, -973)
