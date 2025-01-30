@@ -8,13 +8,8 @@ func _ready() -> void:
 	visible = false
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
-	
 func _input(_event): 
-	if Input.is_action_pressed("Pause"):
+	if Input.is_action_just_pressed("Pause"):
 		if not get_tree().paused:
 			timePaused = Time.get_ticks_msec()
 			pause_game()
@@ -25,6 +20,7 @@ func _on_resume_pressed() -> void:
 	resume_game()
 
 func _on_settings_pressed() -> void:
+	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/menu/main_menu.tscn")
 
 func _on_exit_pressed() -> void:
