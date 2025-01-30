@@ -12,6 +12,7 @@ var current_health: int = max_health
 @export var friction: float = 0.8
 @export var speed: float = 800
 @export var speed_multiplier: float = 1.0
+var original_friction = friction
 
 # Reference to a "hero" node (for movement/flipping), but NOT used for parry direction
 @export var idiot_hero: Node
@@ -34,9 +35,11 @@ var is_dashing: bool = false
 var can_dash: bool = true
 var dash_timer: float = 0.0
 
+
 func _ready() -> void:
 	# Initialize health
 	current_health = max_health
+	original_friction = friction
 
 	# Movement Upgrades
 	if Globals.movementSpeed1 in Globals.unlocked_upgrades[Globals.movementCategory]:
@@ -151,33 +154,28 @@ func die() -> void:
 	print("Character has died!")
 	queue_free()
 	
-#func _on_area_2d_body_entered(body: Node2D) -> void:
-	#if body.is_in_group("projectiles"):
-		#take_damage(1)
-		#body.queue_free()  # Destroy the projectile
-	
 ########################################################################
 # SPEED BOOST
 ########################################################################
 	
 func apply_speed_boost(boost_factor: float, duration: float) -> void:
 	speed_multiplier *= boost_factor
-	
+	original_friction = friction
+	friction *= 1.5 # Increase friction to reduce floatiness
+
 	var timer := Timer.new()
 	timer.wait_time = duration
 	timer.one_shot = true
 	add_child(timer)
 	timer.start()
 
-	# Create a Callable for the revert_speed_boost method, binding the boost_factor.
 	var revert_callable = Callable(self, "revert_speed_boost").bind(boost_factor)
-
-	# Connect the timeout signal to that Callable
 	timer.timeout.connect(revert_callable)
 
 func revert_speed_boost(boost_factor: float) -> void:
 	speed_multiplier /= boost_factor
-	
+	friction = original_friction  # Restore friction
+
 	
 ########################################################################
 # Invincibility

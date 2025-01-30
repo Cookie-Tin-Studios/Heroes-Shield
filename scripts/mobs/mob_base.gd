@@ -55,7 +55,7 @@ func _physics_process(delta: float) -> void:
 	# Update position based on movement speed
 	position.x += movement_speed * delta
 
-	remon_on_camera_exit()
+	remove_on_camera_exit()
 
 func coin_explosion() -> void:
 	for i in range(coins_dropped):
@@ -67,7 +67,7 @@ func coin_explosion() -> void:
 		coin_sprite.linear_velocity = Vector2(8000, 0).rotated(randf_range(0.0, TAU))
 		coin_sprite.despawn.connect(func(): Globals.add_coins(1))
 
-func remon_on_camera_exit() -> void:
+func remove_on_camera_exit() -> void:
 	# Get the active Camera2D
 	var camera = get_viewport().get_camera_2d()
 	if not camera:
