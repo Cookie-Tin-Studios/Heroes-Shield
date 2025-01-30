@@ -1,25 +1,40 @@
-[gd_scene load_steps=9 format=3 uid="uid://3npy5eb5sst5"]
+[gd_scene load_steps=12 format=3 uid="uid://3npy5eb5sst5"]
 
 [ext_resource type="PackedScene" uid="uid://ca3rytbyuxw8h" path="res://scenes/mob_base.tscn" id="1_dnpcy"]
 [ext_resource type="Script" path="res://scripts/boss1/boss1.gd" id="2_twwc3"]
 [ext_resource type="PackedScene" uid="uid://dmxf6gcphgjg5" path="res://scenes/projectile.tscn" id="3_bces4"]
-[ext_resource type="Texture2D" uid="uid://bi23rih1cl5km" path="res://assets/sprites/boss1/idle.png" id="4_mhkk6"]
-[ext_resource type="Texture2D" uid="uid://blfbto0aj17fo" path="res://assets/sprites/boss1/on-hit.png" id="5_vglww"]
-[ext_resource type="Texture2D" uid="uid://dm4gm4ur7wntp" path="res://assets/sprites/boss1/on-kill.png" id="6_jpuub"]
+[ext_resource type="Texture2D" uid="uid://lsljaf1o2ne7" path="res://assets/sprites/boss1/Boss_wings down.svg" id="4_4cxuy"]
+[ext_resource type="Texture2D" path="res://assets/sprites/boss1/wing_up.svg" id="4_xm661"]
+[ext_resource type="Texture2D" path="res://assets/sprites/boss1/Boss_eyes Closed.svg" id="5_7pcow"]
+[ext_resource type="Texture2D" uid="uid://8j3phlw80mof" path="res://assets/sprites/boss1/Boss_wings up.svg" id="5_ybf8m"]
+[ext_resource type="Texture2D" uid="uid://gh34we5fsax0" path="res://assets/sprites/boss1/Full boss.svg" id="6_4smcv"]
+[ext_resource type="Texture2D" path="res://assets/sprites/boss1/on-kill.png" id="6_jpuub"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xgraa"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_mhkk6")
+"texture": ExtResource("4_4cxuy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ybf8m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_4smcv")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 1.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_vglww")
+"texture": ExtResource("4_xm661")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_4smcv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_7pcow")
 }],
 "loop": true,
 "name": &"on-hit",
@@ -34,8 +49,8 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_qc86s"]
-radius = 149.121
+[sub_resource type="CircleShape2D" id="CircleShape2D_wig06"]
+radius = 245.801
 
 [node name="boss1-part2" instance=ExtResource("1_dnpcy")]
 collision_layer = 4
@@ -51,10 +66,19 @@ projectile_scene = ExtResource("3_bces4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_xgraa")
-animation = &"on-hit"
+animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.0660046
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 light_mask = 4
 visibility_layer = 4
-shape = SubResource("CircleShape2D_qc86s")
+position = Vector2(7, -3)
+shape = SubResource("CircleShape2D_wig06")
+
+[node name="TextureProgressBar" parent="Node2D" index="0"]
+offset_left = -104.0
+offset_top = -287.0
+offset_right = 96.0
+offset_bottom = -247.0
+metadata/_edit_use_anchors_ = true
