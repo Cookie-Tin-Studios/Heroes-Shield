@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3lk3o1uckax0"
-path="res://.godot/imported/skill_issue_sprite_sheet.png-c71c36cd7adb1c5bffa542687ed42d45.ctex"
+uid="uid://dxbcttyg00hti"
+path="res://.godot/imported/win screen.png-7513b79f1f09a0d311aa9fe36c0f2c02.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/skill_issue_sprite_sheet.png"
-dest_files=["res://.godot/imported/skill_issue_sprite_sheet.png-c71c36cd7adb1c5bffa542687ed42d45.ctex"]
+source_file="res://assets/sprites/menu/win screen.png"
+dest_files=["res://.godot/imported/win screen.png-7513b79f1f09a0d311aa9fe36c0f2c02.ctex"]
 
 [params]
 

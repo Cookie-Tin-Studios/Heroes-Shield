@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://7v5l6k4w28rh" path="res://assets/audio/menu.ogg" id="4_s6lkk"]
 
 [node name="UpgradesMenu" type="Control"]
+process_mode = 3
 layout_direction = 1
 layout_mode = 3
 anchors_preset = 15
