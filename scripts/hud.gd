@@ -34,7 +34,7 @@ func _on_level_progress_changed(new_progress: int) -> void:
 	_update_progress_icon()
 	
 	# Check if we've reached or exceeded max progress
-	if new_progress >= Globals.max_level_progress:
+	if new_progress >= Globals.max_level_progress and Globals.level_1_boss_defeated == true:
 		# Switch to another scene. Modify path as needed.
 		get_tree().change_scene_to_file("res://scenes/menu/main_menu.tscn")
 

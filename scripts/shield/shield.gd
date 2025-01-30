@@ -151,10 +151,10 @@ func die() -> void:
 	print("Character has died!")
 	queue_free()
 	
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("projectiles"):
-		take_damage(1)
-		body.queue_free()  # Destroy the projectile
+#func _on_area_2d_body_entered(body: Node2D) -> void:
+	#if body.is_in_group("projectiles"):
+		#take_damage(1)
+		#body.queue_free()  # Destroy the projectile
 	
 ########################################################################
 # SPEED BOOST

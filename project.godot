@@ -34,7 +34,9 @@ project/assembly_name="heroes shield"
 [file_customization]
 
 folder_colors={
-"res://scenes/bosses/": "red"
+"res://scenes/bosses/": "red",
+"res://scenes/levels/": "green",
+"res://scenes/menu/": "purple"
 }
 
 [global_group]

@@ -66,7 +66,6 @@ func coin_explosion() -> void:
 		# give some initial velocity in a random direction to make it "explode"
 		coin_sprite.linear_velocity = Vector2(8000, 0).rotated(randf_range(0.0, TAU))
 		coin_sprite.despawn.connect(func(): Globals.add_coins(1))
-	
 
 func remon_on_camera_exit() -> void:
 	# Get the active Camera2D
